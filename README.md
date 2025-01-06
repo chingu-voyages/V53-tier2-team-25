@@ -35,7 +35,7 @@ your repo access and to practice PR'ing with your team *before* you start
 coding!
 
 - Deborah Lyra: [GitHub](https://github.com/DeborahLyra) / [LinkedIn](https://www.linkedin.com/in/deborah-prado-lyra-developer/)
-- Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Zephyrus Koryami(Sokuen Ryan) [GitHub](https://github.com/sokuenryan) / [LinkedIn](https://www.linkedin.com/in/sokuenryan/)
 
    ...
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
