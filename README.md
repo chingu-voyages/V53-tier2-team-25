@@ -36,6 +36,7 @@ coding!
 
 - Deborah Lyra: [GitHub](https://github.com/DeborahLyra) / [LinkedIn](https://www.linkedin.com/in/deborah-prado-lyra-developer/)
 - Zephyrus Koryami(Sokuen Ryan) [GitHub](https://github.com/sokuenryan) / [LinkedIn](https://www.linkedin.com/in/sokuenryan/)
+- Brianna Duncan  - [GitHub](https://github.com/BriannaD23) / [LinkedIn](https://www.linkedin.com/in/briannaduncan/)
 
    ...
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
