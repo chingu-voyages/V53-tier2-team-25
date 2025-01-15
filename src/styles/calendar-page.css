@@ -1,0 +1,17 @@
+.react-calendar__tile.selected {
+    background-color: #528540 !important;
+    color: white !important;
+  }
+  
+  /* Days Off (Gray) */
+  .react-calendar__tile.day-off {
+    background-color: gray !important;
+    color: white !important;
+  }
+  
+  /* Days that are both selected and marked as day off (Gradient) */
+  .react-calendar__tile.day-off.selected {
+    background: linear-gradient(to bottom, gray 50%, orange 50%) !important;
+    color: white;
+  }
+  
