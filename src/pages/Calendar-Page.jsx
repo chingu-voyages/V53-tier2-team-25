@@ -119,25 +119,25 @@ const CalendarPage = ({ nextStep }) => {
   return (
     <div>
       <div className="display-flex align-center justify-center">
-        <h2 className="text-2xl font-semibold mb-4 text-center">
+        <h2 className="text-2xl raleway-font font-semibold mb-4 mt-20 text-center">
           Choose the menu week and deselect the days off
         </h2>
         <div className="mt-4 flex items-center justify-center">
-          <h3 className="text-xl font-semibold text-center mr-1">
+          <h3 className="text-xl  raleway-font  font-semibold text-center mr-1">
             Selected Week:
           </h3>
           {selectedWeek.length > 0 && (
             <div>
-              <p className="text-center">{getWeekRangeString()}</p>
+              <p className="text-center text-xl inter-font font-[200]">{getWeekRangeString()}</p>
             </div>
           )}
         </div>
 
         <div className="text-center flex align-center justify-center">
-          <h3 className="text-s font-semibold mr-1">Days Off:</h3>
+          <h3 className="text-s mt-2 raleway-font font-semibold mr-1">Days Off:</h3>
           <ul className=" flex">
             {daysOff.map((date, index) => (
-              <li key={index}>
+              <li className="text-center mt-2 inter-font font-[200]" key={index}>
                 {index > 0 && ", "}
                 {date.toLocaleDateString("en-US", { weekday: "long" })}
               </li>
@@ -166,11 +166,11 @@ const CalendarPage = ({ nextStep }) => {
             }}
           />
 
-          <div className="absolute top-8">
+          <div className="absolute bottom-3">
             {" "}
             <FontAwesomeIcon
               onClick={handleRefresh}
-              className="bg-gray-500  p-1 mt-1 p-1 rounded-full text-white cursor-pointer"
+              className="bg-[#528540]   p-1 mt-1 p-1 rounded-full text-white cursor-pointer"
               icon={faRotateRight}
               size="2"
             />
@@ -193,7 +193,7 @@ const CalendarPage = ({ nextStep }) => {
             selectedWeek.length > 0 && daysOff.length > 0
               ? "bg-orange-500"
               : "bg-gray-500"
-          } text-black font-semibold p-2 rounded px-20`}
+          } text-black font-semibold p-2 rounded-custom px-20`}
         >
           Continue
         </button>
