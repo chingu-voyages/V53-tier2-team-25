@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const plugin = require('tailwindcss/plugin'); 
 
 export default {
@@ -85,3 +86,15 @@ export default {
     xl: "1280px", // Large desktops start here
   },
 };
+=======
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [ "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+>>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)

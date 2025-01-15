@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+<<<<<<< HEAD
 @tailwind utilities;
 
 body {
@@ -18,3 +19,6 @@ body {
 .container {
   -ms-overflow-style: none;
 }
+=======
+@tailwind utilities;
+>>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)

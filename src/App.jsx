@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import CalendarPage from "./pages/Calendar-Page.jsx";
 import Header from "./components/header.jsx";
 import Footer from "./components/footer.jsx";
+<<<<<<< HEAD
 import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
@@ -10,10 +11,15 @@ import MenuCreationBlock from "./components/menu-creation-block.jsx";
 import DishSelect from "./components/day-on.jsx";
 
 import AllergyPage from "./pages/AllergyPage.jsx";
+=======
+
+
+>>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)
 
 const router = createBrowserRouter([
   {
     path: "/",
+<<<<<<< HEAD
     element: (
       <div className="min-h-screen flex flex-col">
         <Header />
@@ -65,6 +71,21 @@ const router = createBrowserRouter([
       </div>
     ),
   },
+=======
+  },
+  {
+    path: "/calendar-page",
+    element:(
+    <>
+    <Header />
+    <CalendarPage />,
+    < Footer/>
+    </>
+    )
+  },
+  
+   
+>>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)
 ]);
 
 function App() {

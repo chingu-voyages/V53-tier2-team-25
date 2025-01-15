@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .react-calendar {
   border: none;
   border-radius: 12px;
@@ -92,3 +93,22 @@
   background-color: #528540 !important; 
   color: white !important;
 }
+=======
+.react-calendar__tile.selected {
+    background-color: #528540 !important;
+    color: white !important;
+  }
+  
+  /* Days Off (Gray) */
+  .react-calendar__tile.day-off {
+    background-color: gray !important;
+    color: white !important;
+  }
+  
+  /* Days that are both selected and marked as day off (Gradient) */
+  .react-calendar__tile.day-off.selected {
+    background: linear-gradient(to bottom, gray 50%, orange 50%) !important;
+    color: white;
+  }
+  
+>>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)
