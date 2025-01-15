@@ -17,13 +17,14 @@ const router = createBrowserRouter([
     element:(
     <>
     <Header />
+    <MenuCreationBlock/>
+    <ProgressBar />
     <CalendarPage />,
     < Footer/>
     </>
     )
   },
   
-   
 ]);
 
 function App() {
