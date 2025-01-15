@@ -1,0 +1,89 @@
+
+import React, { useState } from "react";
+import CalendarPage from "../pages/Calendar-Page.jsx"; 
+
+const ProgressBar = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const nextStep = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  return (
+    <div className="p-4 mt-9">
+      {/* Progress Bar */}
+      <div className="flex items-center justify-center mb-6">
+        {/* Step 1 */}
+        <div className="flex items-center">
+          <div>
+            <div
+              className={`w-10 h-10 rounded-full border-8 ${
+                currentStep === 1
+                  ? "bg-white border-[#528540]"  // Step 1 (current step)
+                  : currentStep > 1
+                  ? "bg-[#528540] border-[#528540]"  // Step 1 (completed step)
+                  : "bg-white border-[#528540]"  // Step 1 (not started)
+              }`}
+              
+            ></div>
+            
+          </div>
+          <div
+            className={`h-1 ${
+              currentStep >= 2 ? "bg-[#528540]" : "bg-gray-300"
+            }`}
+            style={{
+              width: "13rem",
+            }}
+          ></div>
+          
+        </div>
+
+        {/* Step 2 */}
+        <div className="flex items-center">
+          <div
+            className={`w-10 h-10 rounded-full border-8 ${
+              currentStep === 2
+                ? "bg-white border-[#528540]"  // Step 2 (current step)
+                : currentStep > 2
+                ? "bg-[#528540] border-[#528540]" // Step 2 (completed step)
+                : "bg-white border-gray-300" // Step 2 (not started)
+             
+            }`}
+          ></div>
+          <div
+            className={`h-1 ${
+              currentStep >= 3 ? "bg-[#528540]" : "bg-gray-300"
+            }`}
+            style={{
+              width: "13rem",
+            }}
+          ></div>
+        </div>
+
+        {/* Step 3 */}
+        <div className="flex items-center">
+          <div
+            className={`w-10 h-10 rounded-full border-8 ${
+              currentStep === 3
+                ? "bg-[#528540] border-[#528540]" // Step 3 (current step)
+                : "bg-white border-gray-300"  // Step 3 (not started)
+            }`}
+          ></div>
+        </div>
+      </div>
+
+      {/* Display Calendar or other step content */}
+      <div>
+        {currentStep === 1 && <CalendarPage nextStep={nextStep} />}
+        {currentStep === 2 && <div>Step 2 Content</div>}
+        {currentStep === 3 && <div>Step 3 Content</div>}
+      </div>
+    </div>
+  );
+};
+
+export default ProgressBar;
+
