@@ -1,8 +1,35 @@
+# Plate Pal
+
+This project focuses on developing a menu scheduling application that allows managers to create and share weekly menus for staff workers. The application ensures employees have clear visibility of the planned meals while addressing specific dietary restrictions and allergies.
+
+## Features
+- Ability to choose week/ Date range
+- Ability to see the menu details
+- Ability to add Allergies if any
+- User can download the menu
+- API integration
+*TODO*
+-Running the project — How could someone else get your code working for them?
+-Dependencies — What are the main outside resources your project needs to run?
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+# voyage-tasks
+
+Your project's `readme` is as important to success as your code. For 
+this reason you should put as much care into its creation and maintenance
+as you would any other component of the application.
+
+If you are unsure of what should go into the `readme` let this article,
+written by an experienced Chingu, be your starting point - 
+[Keys to a well written README](https://tinyurl.com/yk3wubft).
 
 And before we go there's "one more thing"! Once you decide what to include
 in your `readme` feel free to replace the text we've provided here.
@@ -36,3 +63,5 @@ coding!
 
    ...
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+
+
