@@ -117,66 +117,70 @@ const CalendarPage = ({ nextStep }) => {
   };
 
   return (
-    <div>
-      <div className="display-flex align-center justify-center">
-        <h2 className="text-2xl raleway-font font-semibold mb-4 mt-20 text-center">
+    <div className="bg-[#fffbf1]">
+      <div className=" align-center justify-center">
+        <h2 className="lg:text-2xl   text-2xl raleway-font font-semibold mb-4 mt-20 text-center sm:px-4 md:px-6 lg:px-8">
           Choose the menu week and deselect the days off
         </h2>
-        <div className="mt-4 flex items-center justify-center">
-          <h3 className="text-xl  raleway-font  font-semibold text-center mr-1">
+        <div className="mt-4 flex flex-col sm:flex-row  items-center justify-center">
+          <h3 className="text-xl sm:text-lg  raleway-font  font-semibold text-center mr-1">
             Selected Week:
           </h3>
           {selectedWeek.length > 0 && (
             <div>
-              <p className="text-center text-xl inter-font font-[200]">{getWeekRangeString()}</p>
+              <p className="text-center text-xl inter-font font-[200]">
+                {getWeekRangeString()}
+              </p>
             </div>
           )}
         </div>
-
-        <div className="text-center flex align-center justify-center">
-          <h3 className="text-s mt-2 raleway-font font-semibold mr-1">Days Off:</h3>
-          <ul className=" flex">
+        <div className="mt-0 sm:mt-4 flex flex-col sm:flex-row items-center justify-center">
+          <h3 className="text-sm mt-1 sm:mt-0 raleway-font font-semibold mr-1">
+            Days Off:
+          </h3>
+          <ul className="flex flex-wrap">
             {daysOff.map((date, index) => (
-              <li className="text-center mt-2 inter-font font-[200]" key={index}>
+              <li
+                className="text-center mt-1 sm:mt-0 inter-font font-[200]"
+                key={index}
+              >
                 {index > 0 && ", "}
                 {date.toLocaleDateString("en-US", { weekday: "long" })}
               </li>
             ))}
           </ul>
         </div>
-
-        
       </div>
-        <div className="relative flex justify-center items-center mt-6">
-          <Calendar
-            onClickDay={handleDayClick}
-            tileClassName={({ date }) => {
-              const isSelected = selectedWeek.some((selectedDate) =>
-                isSameDay(selectedDate, date)
-              );
-              const isDayOff = daysOff.some((dayOff) => isSameDay(dayOff, date));
+      <div className="relative flex justify-center items-center mt-6">
+        <Calendar
+          onClickDay={handleDayClick}
+          tileClassName={({ date }) => {
+            const isSelected = selectedWeek.some((selectedDate) =>
+              isSameDay(selectedDate, date)
+            );
+            const isDayOff = daysOff.some((dayOff) => isSameDay(dayOff, date));
 
-              if (isDayOff) {
-                return "day-off"; 
-              }
-              if (isSelected) {
-                return "selected";
-              }
-              return "";
-            }}
+            if (isDayOff) {
+              return "day-off";
+            }
+            if (isSelected) {
+              return "selected";
+            }
+            return "";
+          }}
+        />
+
+        <div className="absolute bottom-3">
+          {" "}
+          <FontAwesomeIcon
+            onClick={handleRefresh}
+            className="bg-[#528540]   p-1 mt-1 p-1 rounded-full text-white cursor-pointer"
+            icon={faRotateRight}
+            size="2"
           />
-
-          <div className="absolute bottom-3">
-            {" "}
-            <FontAwesomeIcon
-              onClick={handleRefresh}
-              className="bg-[#528540]   p-1 mt-1 p-1 rounded-full text-white cursor-pointer"
-              icon={faRotateRight}
-              size="2"
-            />
-          </div>
         </div>
-{/* 
+      </div>
+      {/* 
       <div className="flex justify-center items-center mt-2">
         <FontAwesomeIcon
           onClick={handleRefresh}
