@@ -3,28 +3,26 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import CalendarPage from "./pages/Calendar-Page.jsx";
 import Header from "./components/header.jsx";
 import Footer from "./components/footer.jsx";
-import ProgressBar from "./components/Progress-Bar.jsx"; 
+import LandingPage from "./pages/LandingPage.jsx";
+import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
-
-
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LandingPage />,
   },
   {
     path: "/calendar-page",
-    element:(
-    <>
-    <Header />
-    <MenuCreationBlock/>
-    <ProgressBar />
-    <CalendarPage />,
-    < Footer/>
-    </>
-    )
+    element: (
+      <>
+        <Header />
+        <MenuCreationBlock />
+        <ProgressBar />
+        <Footer />
+      </>
+    ),
   },
-  
 ]);
 
 function App() {
