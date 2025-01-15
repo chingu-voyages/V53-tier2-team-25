@@ -3,6 +3,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import CalendarPage from "./pages/Calendar-Page.jsx";
 import Header from "./components/header.jsx";
 import Footer from "./components/footer.jsx";
+import ProgressBar from "./components/Progress-Bar.jsx"; 
+import MenuCreationBlock from "./components/menu-creation-block.jsx";
 
 
 
@@ -15,7 +17,8 @@ const router = createBrowserRouter([
     element:(
     <>
     <Header />
-    <CalendarPage />,
+    <MenuCreationBlock/>
+    <ProgressBar />
     < Footer/>
     </>
     )

@@ -1,17 +1,30 @@
+.react-calendar {
+    border: none; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    overflow: hidden;
+  }
+  
+
 .react-calendar__tile.selected {
     background-color: #528540 !important;
     color: white !important;
+    border-radius: 15%;
   }
   
-  /* Days Off (Gray) */
   .react-calendar__tile.day-off {
     background-color: gray !important;
     color: white !important;
+    border-radius: 15%;
   }
   
-  /* Days that are both selected and marked as day off (Gradient) */
   .react-calendar__tile.day-off.selected {
     background: linear-gradient(to bottom, gray 50%, orange 50%) !important;
     color: white;
+  }
+ 
+  
+  .react-calendar__month-view__days__day--weekend {
+    color: inherit; 
   }
   
