@@ -1,10 +1,16 @@
 .react-calendar {
-    border: none; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    overflow: hidden;
+  border: none; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); 
+  overflow: hidden;
+  padding-bottom: 40px;
+  background-color: #fffbf1;
+}
+
+  .react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none; /* Remove dotted underline */
+    font-weight:200;
   }
-  
 
 .react-calendar__tile.selected {
     background-color: #528540 !important;
