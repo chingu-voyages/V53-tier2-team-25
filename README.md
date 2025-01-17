@@ -14,6 +14,8 @@ This project focuses on developing a menu scheduling application that allows man
 
 # React + Vite
 
+😂😂😂😂😂😂😂😂
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
