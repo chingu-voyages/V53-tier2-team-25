@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../styles/calendar-page.css";
@@ -8,6 +8,13 @@ import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 const CalendarPage = ({ nextStep }) => {
   const [selectedWeek, setSelectedWeek] = useState([]);
   const [daysOff, setDaysOff] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  useEffect(() => {
+    setSelectedWeek([]);
+    setDaysOff([]);
+  }, []);
+  
 
   const isSameDay = (date1, date2) => {
     return (
@@ -80,6 +87,7 @@ const CalendarPage = ({ nextStep }) => {
   const handleRefresh = () => {
     setSelectedWeek([]);
     setDaysOff([]);
+    setRefreshKey((prevKey) => prevKey + 1);
   };
 
   const handleContinue = () => {
@@ -153,6 +161,7 @@ const CalendarPage = ({ nextStep }) => {
       </div>
       <div className="relative flex justify-center items-center mt-6">
         <Calendar
+          key={refreshKey}
           onClickDay={handleDayClick}
           tileClassName={({ date }) => {
             const isSelected = selectedWeek.some((selectedDate) =>
