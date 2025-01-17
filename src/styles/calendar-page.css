@@ -7,8 +7,36 @@
   background-color: #fffbf1;
 }
 
+.react-calendar__tile--now {
+  background-color: #ACD084;
+  color: #ffffff; 
+  border-radius: 15%;
+}
+
+.react-calendar__tile.react-calendar__tile--now:hover {
+  background-color: #b6ce9c;
+  border-radius: 15%;
+  background-color: #8cbb6e;
+}
+
+
+/* bg-orange-500 */
+/* .react-calendar__tile--now {
+  background-color: #f97316 ;
+  color: #ffffff; 
+  border-radius: 15%;
+} */
+
+.react-calendar__tile.react-calendar__tile--now:hover {
+  background-color: #b6ce9c;
+  border-radius: 15%;
+  background-color: #8cbb6e;
+}
+
+
+
   .react-calendar__month-view__weekdays__weekday abbr {
-    text-decoration: none; /* Remove dotted underline */
+    text-decoration: none; 
     font-weight:200;
   }
 
