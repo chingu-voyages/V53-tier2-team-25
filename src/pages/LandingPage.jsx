@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../components/header";
 import Footer from "../components/footer.jsx";
-import LandingPageBackground from "../../public/LandingPageBackground.png";
-import DesktopHeroImage from "../../public/DesktopHeroImage.png";
+import LandingPageBackground from "/LandingPageBackground.png";
+import DesktopHeroImage from "/DesktopHeroImage.png";
 
 const LandingPage = () => {
   return (
