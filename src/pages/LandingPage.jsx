@@ -43,17 +43,19 @@ const LandingPage = () => {
             src={Step1}
             className="m-3 border-primary max-w-xs font-raleway text-center font-bold text-primary"
           ></img>
+          <p>Step 1 Pick a Week</p>
           <img
             src={Step2}
             className="m-5 border-primary max-w-xs font-raleway text-center font-bold text-primary"
           ></img>
+          <p>Step 2 List Allergies</p>
           <img
             src={Step3}
             className="m-3 border-primary max-w-xs font-raleway text-center font-bold text-primary"
           ></img>
+          <p className="text-customBlack">Step 3 Select Dishes</p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
