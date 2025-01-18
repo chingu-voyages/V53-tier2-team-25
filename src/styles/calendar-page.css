@@ -8,15 +8,15 @@
 }
 
 .react-calendar__tile--now {
-  background-color: #8cbb6e;
-  color: #ffffff; 
   border-radius: 15%;
+  background-color:#eedfcf;
 }
 
 .react-calendar__tile.react-calendar__tile--now:hover {
-  background-color: #b6ce9c;
+  background-color: #EAB441;
   border-radius: 15%;
-  background-color: #ACD084;
+  border: none;
+
 }
 
 
