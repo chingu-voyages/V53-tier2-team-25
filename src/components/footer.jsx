@@ -5,8 +5,8 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons"; // Correct import
 const Footer = () => {
   return (
     <footer className="bg-[#262924] text-white p-4 mt-6">
-      <p>
-        <FontAwesomeIcon className="mr-4" icon={faGithub} /> Github Repo.
+      <p className="font-raleway">
+        <FontAwesomeIcon className="mr-4 " icon={faGithub} /> Github Repo.
       </p>
     </footer>
   );

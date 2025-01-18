@@ -11,7 +11,7 @@ const ProgressBar = () => {
   };
 
   return (
-    <div className="p-4 mt-9">
+    <div className="p-4 mt-9 font-raleway">
       {/* Progress Bar */}
       <div className="flex items-center justify-center mb-6">
         {/* Step 1 */}
@@ -20,7 +20,7 @@ const ProgressBar = () => {
             <div
               className={`w-10 h-10 rounded-full border-8 ${
                 currentStep === 1
-                  ? "bg-[#fffbf1] border-[#528540]" // Step 1 (current step)
+                  ? "bg-[#fffbf1]  border-[#528540]" // Step 1 (current step)
                   : currentStep > 1
                   ? "bg-[#528540] border-[#528540]" // Step 1 (completed step)
                   : "bg-white border-[#528540]" // Step 1 (not started)
@@ -30,7 +30,7 @@ const ProgressBar = () => {
             <div className="absolute mt-12 text-center">
               <p
                 className={`text-sm  ${
-                  currentStep === 1 ? "text-black" : "text-gray-400"
+                  currentStep === 1 ? "text-black font-bold" : "text-gray-400"
                 }`}
               >
                 Choose a week
@@ -60,7 +60,7 @@ const ProgressBar = () => {
             <div className="absolute mt-12 text-center">
               <p
                 className={`text-sm text-center  ${
-                  currentStep === 2 ? "text-black" : "text-gray-400"
+                  currentStep === 2 ? "text-black font-bold" : "text-gray-400"
                 }`}
               >
                 List Allergies
