@@ -28,7 +28,7 @@ const LandingPage = () => {
             <p className="text-[#f17528] text-5xl font-poppins text-center font-semibold text-accent">
               Building a menu just got easier!
             </p>
-            <p className="text-center">
+            <p className="text-center font-raleway">
               In 3 quick steps, we’ll make you a delicious, inclusive menu for
               your hungry staff.
             </p>
@@ -39,27 +39,36 @@ const LandingPage = () => {
             </Link>
           </div>
         </div>
-        <div className="flex justify-evenly mt-[60px]">
-          <div className="flex flex-col ">
+        <div className="flex justify-evenly my-[30px]">
+          <div className="flex flex-col items-center">
             <img
               src={Step1}
-              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+              className="mb-2 w-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
             ></img>
-            <p>Step 1 Pick a Week</p>
+            <div className=" flex flex-col font-raleway font-bold text-base items-center">
+              <p>Step 1</p>
+              <p>Pick a Week</p>
+            </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <img
               src={Step2}
-              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+              className="mb-2 w-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
             ></img>
-            <p>Step 2 List Allergies</p>
+            <div className=" flex flex-col font-raleway font-bold text-base items-center">
+              <p>Step 2</p>
+              <p>List Allergies</p>
+            </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <img
               src={Step3}
-              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+              className="mb-2 w-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
             ></img>
-            <p className="font-raleway font-bold ">Step 3 Select Dishes</p>
+            <div className=" flex flex-col font-raleway font-bold text-base items-center">
+              <p>Step 3</p>
+              <p>Select Dishes</p>
+            </div>
           </div>
         </div>
       </div>
