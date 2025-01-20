@@ -10,7 +10,13 @@ import MenuCreationBlock from "./components/menu-creation-block.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: (
+      <>
+        <Header />
+        <LandingPage />
+        <Footer />
+      </>
+    ),
   },
   {
     path: "/calendar-page",

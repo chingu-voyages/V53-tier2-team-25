@@ -11,13 +11,14 @@ import DesktopHeroImage from "/DesktopHeroImage.png";
 
 const LandingPage = () => {
   return (
-    <div className="relative">
-      <Header className="absolute" />
-      <img
-        src={LandingPageBackground}
-        className="absolute bg-cover bg-center "
-      ></img>
-      <div className="flex flex-col absolute">
+    <div
+      className="h-full bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style={{
+        backgroundImage:
+          "url('https://i.postimg.cc/Kj1zbMQN/Landing-Page-Background.png')",
+      }}
+    >
+      <div className="flex flex-col">
         <div className="flex flex-row ml-20 mt-10 justify-content-center ">
           <img
             className=" w-[673px] h-[348px] mr-2"
@@ -38,22 +39,28 @@ const LandingPage = () => {
             </Link>
           </div>
         </div>
-        <div className="flex justify-center mt-[60px]">
-          <img
-            src={Step1}
-            className="m-3 border-primary max-w-xs font-raleway text-center font-bold text-primary"
-          ></img>
-          <p>Step 1 Pick a Week</p>
-          <img
-            src={Step2}
-            className="m-5 border-primary max-w-xs font-raleway text-center font-bold text-primary"
-          ></img>
-          <p>Step 2 List Allergies</p>
-          <img
-            src={Step3}
-            className="m-3 border-primary max-w-xs font-raleway text-center font-bold text-primary"
-          ></img>
-          <p className="text-customBlack">Step 3 Select Dishes</p>
+        <div className="flex justify-evenly mt-[60px]">
+          <div className="flex flex-col ">
+            <img
+              src={Step1}
+              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+            ></img>
+            <p>Step 1 Pick a Week</p>
+          </div>
+          <div className="flex flex-col">
+            <img
+              src={Step2}
+              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+            ></img>
+            <p>Step 2 List Allergies</p>
+          </div>
+          <div className="flex flex-col">
+            <img
+              src={Step3}
+              className="mb-2 w-28 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+            ></img>
+            <p className="font-raleway font-bold ">Step 3 Select Dishes</p>
+          </div>
         </div>
       </div>
     </div>
