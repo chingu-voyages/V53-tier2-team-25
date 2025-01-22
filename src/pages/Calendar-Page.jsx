@@ -1,12 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../styles/calendar-page.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
-
-
+import { Link } from "react-router-dom";
 
 const CalendarPage = ({ nextStep }) => {
   const [selectedWeek, setSelectedWeek] = useState([]);
@@ -67,13 +65,12 @@ const CalendarPage = ({ nextStep }) => {
     if (selectedWeek.length === 0) {
       setSelectedWeek(weekRange);
     } else {
-     
       if (selectedWeek.some((selectedDate) => isSameDay(selectedDate, date))) {
         toggleDayOff(date);
       } else {
         setSelectedWeek([]);
-        setDaysOff([]); 
-        setRefreshKey((prevKey) => prevKey + 1); 
+        setDaysOff([]);
+        setRefreshKey((prevKey) => prevKey + 1);
         setMessage(
           "You can only select days off within the currently selected week."
         );
@@ -238,9 +235,11 @@ const CalendarPage = ({ nextStep }) => {
         </button>
       </div>
       <div className="text-center mt-3">
-        <a className="underline  raleway-font text-sm" href="">
-          Back to Home
-        </a>
+        <Link to="/">
+          <a className="underline  raleway-font text-sm" href="">
+            Back to Home
+          </a>
+        </Link>
       </div>
       {/* Modal */}
       {isModalOpen && (
@@ -260,8 +259,6 @@ const CalendarPage = ({ nextStep }) => {
         </div>
       )}
     </div>
-
-    
   );
 };
 
