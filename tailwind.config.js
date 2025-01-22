@@ -9,6 +9,9 @@ export default {
       colors: {
         textOrange: "#f17528",
       },
+      textShadow: {
+        white: '0 0 5px white, 0 0 10px white, 0 0 15px white',
+      },
       borderRadius: {
         custom: "12px", // Custom border radius
       },
@@ -39,9 +42,10 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow'),
+  ],
   screens: {
-    xs: "480px",
     sm: "640px", // Mobile devices start here
     md: "768px", // Tablets start here
     lg: "1024px", // Desktops start here

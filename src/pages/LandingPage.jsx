@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/header";
-import Footer from "../components/footer.jsx";
 import CalendarPage from "./Calendar-Page.jsx";
-import LandingPageBackground from "/LandingPageBackground.png";
-import background from "/MobileLandingPageBackground.png";
-import heroImage from "/MobileHeroImage.png";
-import Step1 from "/Step_1_Calendar.svg";
-import Step2 from "/Step_2_WorryFree.svg";
-import Step3 from "/Step_3_Dish.svg";
-import DesktopHeroImage from "/DesktopHeroImage.png";
+import background from "../assets/images/MobileLandingPageBackground.png";
+import heroImage from "../assets/images/MobileHeroImage.png";
+import tabletHeroImage from "../assets/images/TabletHeroImage.png";
+import Step1 from "../assets/images/Step_1_Calendar.svg";
+import Step2 from "../assets/images/Step_2_WorryFree.svg";
+import Step3 from "../assets/images/Step_3_Dish.svg";
+import DesktopHeroImage from "../assets/images/DesktopHeroImage.png";
 
 const LandingPage = () => {
   return (
@@ -88,7 +86,11 @@ const LandingPage = () => {
       <div className="block  lg:hidden">
         <img
           src={heroImage}
-          className="  sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover  lg:hidden"
+          className="  sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover md:hidden lg:hidden"
+        ></img>
+        <img
+          src={tabletHeroImage }
+          className="md:block sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover lg:hidden sm:hidden"
         ></img>
         <div className=" relative">
           <img
@@ -96,10 +98,10 @@ const LandingPage = () => {
             className="relative sm:size-15 sm:bg-cover md: lg:hidden"
           ></img>
           <div className="absolute  inset-0  flex flex-col  sm:bottom-40 md:bottom-20 items-center justify-center  lg:hidden">
-            <p className="block lg:hidden  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden ">
+            <p className="block lg:hidden  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
               Building a menu just got easier!
             </p>
-            <p className="block lg:hidden  text-center md:text-3xl  px-10  md:px-20 sm:text-center sm:font-raleway mt-6 sm:mt-[8px]   md:mt-9">
+            <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-6 sm:mt-[8px]   md:mt-9">
               In 3 quick steps, we’ll make you a delicious, inclusive menu for
               your hungry staff.
             </p>
