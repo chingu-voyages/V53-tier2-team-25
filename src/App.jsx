@@ -6,29 +6,32 @@ import Footer from "./components/footer.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
-import LandingPageMobile from "./pages/LandingPageMobile.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <LandingPage />
-        {/* <LandingPageMobile /> */}
+        <main className="flex-grow p-0 m-0">
+          <LandingPage />
+        </main>
         <Footer />
-      </>
+      </div>
     ),
   },
   {
     path: "/calendar-page",
-    element: (
-      <>
+    element: 
+    (
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <MenuCreationBlock />
-        <ProgressBar />
+        <main className="flex-grow">
+          <MenuCreationBlock />
+          <ProgressBar />
+        </main>
         <Footer />
-      </>
+      </div>
     ),
   },
 ]);
