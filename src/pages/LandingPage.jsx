@@ -11,6 +11,7 @@ import DesktopHeroImage from "/DesktopHeroImage.png";
 
 const LandingPage = () => {
   return (
+   <div className="h-[80vh]"> 
     <div
       className="h-full bg-cover bg-center bg-no-repeat flex items-center justify-center"
       style={{
@@ -73,6 +74,7 @@ const LandingPage = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
