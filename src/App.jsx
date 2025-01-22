@@ -6,6 +6,7 @@ import Footer from "./components/footer.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
+import LandingPageMobile from "./pages/LandingPageMobile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       <>
         <Header />
         <LandingPage />
+        {/* <LandingPageMobile /> */}
         <Footer />
       </>
     ),
