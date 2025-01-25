@@ -15,21 +15,22 @@ const LandingPage = () => {
       <div className="hidden  lg:block  ">
         <div
           //add hidden
-          className="hidden  lg:block  bg-cover  lg:bg-centerlg:bg-no-repeat lg:flex lg:items-center lg:justify-center   "
+          className="sm:hidden bg-cover  lg:bg-center lg:bg-no-repeat lg:flex lg:items-center lg:justify-center   "
           style={{
             backgroundImage:
               "url('https://i.postimg.cc/Kj1zbMQN/Landing-Page-Background.png')",
-            minHeight: "84vh",
+            minHeight: "90vh",
+            minWidth: "80vw",
           }}
         >
-          <div className=" lg:flex-col  px-20">
-            <div className="sm:hidden lg:flex lg:flex-row  lg:mt-10        lg:justify-content-center ">
+          <div className="lg:flex lg:flex-col lg:px-20 ">
+            <div className="hidden lg:flex lg:flex-row lg:justify-content-center ">
               <img
                 //remove sm:hidden
                 className="hidden lg:block lg:w-[673px]lg: h-[348px] "
                 src={DesktopHeroImage}
               ></img>
-              <div className="hidden lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
+              <div className=" lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
                 <p className="hidden lg:block lg:text-[#f17528] lg:text-5xl lg:font-poppins lg:text-center lg:font-semibold lg:text-accent">
                   Building a menu just got easier!
                 </p>
@@ -38,11 +39,11 @@ const LandingPage = () => {
                   for your hungry staff.
                 </p>
                 <div className="flex justify-center aligh-center">
-                <Link to="/calendar-page">
-                  <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:py-[16px] lg:px-[8px] lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
-                    Create weekly Menu
-                  </button>
-                </Link>
+                  <Link to="/calendar-page">
+                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:py-[16px] lg:px-[8px] lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
+                      Create weekly Menu
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -89,8 +90,8 @@ const LandingPage = () => {
           className="  sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover md:hidden lg:hidden"
         ></img>
         <img
-          src={tabletHeroImage }
-          className="md:block sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover lg:hidden sm:hidden"
+          src={tabletHeroImage}
+          className=" hidden md:block sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover "
         ></img>
         <div className=" relative">
           <img
@@ -98,7 +99,7 @@ const LandingPage = () => {
             className="relative sm:size-15 sm:bg-cover md: lg:hidden"
           ></img>
           <div className="absolute  inset-0  flex flex-col  sm:bottom-40 md:bottom-20 items-center justify-center  lg:hidden">
-            <p className="block lg:hidden  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
+            <p className="md:block hidden  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
               Building a menu just got easier!
             </p>
             <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-6 sm:mt-[8px]   md:mt-9">
@@ -112,7 +113,7 @@ const LandingPage = () => {
                 </button>
               </Link>
             </div>
-            <div className="hidden md:block  md:flex md:justify-evenly md:my-[30px] md:[mx-5px]">
+            <div className="hidden md:flex md:justify-evenly md:my-[30px] md:[mx-5px]">
               <div className="flex md:flex-col md:items-center ">
                 <img
                   src={Step1}
