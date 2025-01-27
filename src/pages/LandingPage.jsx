@@ -27,10 +27,10 @@ const LandingPage = () => {
             <div className="hidden lg:flex lg:flex-row lg:justify-content-center ">
               <img
                 //remove sm:hidden
-                className="hidden lg:block lg:w-[673px]lg: h-[348px] "
+                className=" lg:block lg:w-[673px]lg: h-[348px] "
                 src={DesktopHeroImage}
               ></img>
-              <div className=" lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
+              <div className="hidden lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
                 <p className="hidden lg:block lg:text-[#f17528] lg:text-5xl lg:font-poppins lg:text-center lg:font-semibold lg:text-accent">
                   Building a menu just got easier!
                 </p>
@@ -96,13 +96,13 @@ const LandingPage = () => {
         <div className=" relative">
           <img
             src={background}
-            className="relative sm:size-15 sm:bg-cover md: lg:hidden"
+            className="relative  sm:bg-cover md: lg:hidden"
           ></img>
           <div className="absolute  inset-0  flex flex-col  sm:bottom-40 md:bottom-20 items-center justify-center  lg:hidden">
-            <p className="md:block hidden  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
+            <p className="md:block   text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
               Building a menu just got easier!
             </p>
-            <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-6 sm:mt-[8px]   md:mt-9">
+            <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-3 sm:mt-[3px]   md:mt-9">
               In 3 quick steps, we’ll make you a delicious, inclusive menu for
               your hungry staff.
             </p>
@@ -113,35 +113,35 @@ const LandingPage = () => {
                 </button>
               </Link>
             </div>
-            <div className="hidden md:flex md:justify-evenly md:my-[30px] md:[mx-5px]">
-              <div className="flex md:flex-col md:items-center ">
+            <div className="flex justify-evenly mt-3 md:mt-8  ">
+              <div className="flex flex-col items-center ">
                 <img
                   src={Step1}
-                  className="md:mb-2 md:w-20 md:border-primary md:max-w-xs md:font-raleway md:text-center md:font-bold md:text-primary"
+                  className=" w-14 h-14 mb-0 md:mb-2 md:w-20  md:h-20  border-primary max-w-xs font-raleway text-center font-bold text-primary"
                 ></img>
-                <div className=" md:flex flex-col font-raleway font-bold text-base items-center">
-                  <p>Step 1</p>
-                  <p>Pick a Week</p>
+                <div className="flex flex-col font-raleway font-bold text-base items-center">
+                  <p className="text-sm md:text-lg ">Step 1</p>
+                  <p className="text-sm md:text-lg ">Pick a Week</p>
                 </div>
               </div>
-              <div className="flex flex-col items-center ml-7 mr-7">
+              <div className="flex flex-col items-center ml-7 mr-7  md:ml-20 md:mr-20">
                 <img
                   src={Step2}
-                  className="mb-2 w-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+                  className=" w-14 h-14  mb-0 md:mb-2 md:w-20  md:h-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
                 ></img>
                 <div className=" flex flex-col font-raleway font-bold text-base items-center">
-                  <p>Step 2</p>
-                  <p>List Allergies</p>
+                  <p className="text-sm md:text-lg ">Step 2</p>
+                  <p className="text-sm md:text-lg">List Allergies</p>
                 </div>
               </div>
               <div className="flex flex-col items-center">
                 <img
                   src={Step3}
-                  className="mb-2 w-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
+                  className=" w-14 h-14  mb-0 md:mb-2  md:w-20  md:h-20 border-primary max-w-xs font-raleway text-center font-bold text-primary"
                 ></img>
                 <div className=" flex flex-col font-raleway font-bold text-base items-center">
-                  <p>Step 3</p>
-                  <p>Select Dishes</p>
+                  <p className="text-sm md:text-lg ">Step 3</p>
+                  <p className="text-sm  md:text-lg">Select Dishes</p>
                 </div>
               </div>
             </div>
