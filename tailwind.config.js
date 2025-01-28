@@ -8,12 +8,29 @@ export default {
       },
       colors: {
         textOrange: "#f17528",
+        darkGreen: "#528540",
+        lightGreen: "#ACD084",
+        customBlack: "#262924",
+        borderOrange: "#FFFBF1",
+        lightYellow: "#FFD66F",
+        selectNoneRed: "#DB7157",
+        selectAllGreen: "#70AB27",
+        neutralLight: "#FFFBF1",
+        mediumGray: "#ADADAD",
+        alertColor: "#CE5C67",
       },
       textShadow: {
-        white: '0 0 5px white, 0 0 10px white, 0 0 15px white',
+        white: "0 0 5px white, 0 0 10px white, 0 0 15px white",
       },
       borderRadius: {
         custom: "12px", // Custom border radius
+        custom10: "10px",
+        custom22: "22px",
+        custom98: "98px",
+      },
+
+      borderWidth: {
+        custom5: "5px",
       },
       width: {
         16: "4rem",
@@ -42,9 +59,7 @@ export default {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-textshadow'),
-  ],
+  plugins: [require("tailwindcss-textshadow")],
   screens: {
     sm: "640px", // Mobile devices start here
     md: "768px", // Tablets start here
