@@ -50,7 +50,7 @@ export default function AllergyPage() {
   const [isAllOptionSelected, setIsAllOptionSelected] = useState(false);
 
   function selectAll() {
-    setIsAllOptionSelected((prev) => !prev);
+    setIsAllOptionSelected(true);
     setAllergyObjects((prev) =>
       prev.map((item) => {
         return {
@@ -87,8 +87,6 @@ export default function AllergyPage() {
           setIsAllOptionSelected={setIsAllOptionSelected}
         />
       </div>
-
-      
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import alerticon from "../../assets/images/alerticon.png";
 import { useEffect, useState } from "react";
 
-export default function CheckBoxContinue({ readyToSave, allergyObjects }) {
+export default function CheckBoxContinue({
+  readyToSave,
+  allergyObjects,
+  count,
+}) {
   const [isChecked, setIsChecked] = useState(false);
 
   const [isCheckboxDisabled, setIsCheckboxDisabled] = useState(true);
@@ -25,17 +29,66 @@ export default function CheckBoxContinue({ readyToSave, allergyObjects }) {
     checkboxStatus();
   }, [readyToSave]);
 
-  function continueStatus() {
-    if (isChecked) {
-      setIsContinueDisabled(false);
-    } else if (!isChecked) {
+  function checkIfCanContinue() {
+    if (isCheckboxDisabled) {
       setIsContinueDisabled(true);
+    } else if (!isCheckboxDisabled) {
+      setIsContinueDisabled(false);
     }
   }
 
   useEffect(() => {
-    continueStatus();
+    checkIfCanContinue();
+  }, [isCheckboxDisabled]);
+
+  const [useLocalStorage, setUseLocalStorage] = useState(false);
+  const [useSessionStorage, setUseSessionStorage] = useState(true);
+
+  function checkStorageType() {
+    if (!isChecked) {
+      setUseLocalStorage(false);
+      setUseSessionStorage(true);
+    } else if (isChecked) {
+      setUseLocalStorage(true);
+      setUseSessionStorage(false);
+    }
+  }
+
+  useEffect(() => {
+    checkStorageType();
   }, [isChecked]);
+
+  function setLocalStorage() {
+    if (useLocalStorage) {
+      localStorage.setItem("allergies", JSON.stringify(allergyObjects));
+    } else if (!useLocalStorage) {
+      localStorage.removeItem("allergies");
+    }
+  }
+
+  useEffect(() => {
+    setLocalStorage();
+  }, [useLocalStorage]);
+
+  useEffect(() => {
+    setLocalStorage();
+  }, [count]);
+
+  function setSessionStorage() {
+    if (useSessionStorage) {
+      sessionStorage.setItem("allergies", JSON.stringify(allergyObjects));
+    } else if (!useSessionStorage) {
+      sessionStorage.removeItem("allergies");
+    }
+  }
+
+  useEffect(() => {
+    setSessionStorage();
+  }, [useSessionStorage]);
+
+  useEffect(() => {
+    setSessionStorage();
+  }, [count]);
 
   const [isAlertShown, setIsAlertShown] = useState(false);
 
