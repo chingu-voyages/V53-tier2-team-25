@@ -98,8 +98,8 @@ const LandingPage = () => {
             src={background}
             className="relative  sm:bg-cover md: lg:hidden"
           ></img>
-          <div className="absolute  inset-0  flex flex-col  sm:bottom-20  items-center justify-center  lg:hidden">
-            <p className="md:block sm:block  sm:text-4xl  text-[#f17528] text-5xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-semibold sm:mx-3 lg:hidden text-shadow-white ">
+          <div className="absolute  inset-0 md:gap-y-6 flex flex-col  sm:bottom-20  items-center justify-center  lg:hidden">
+            <p className="md:block sm:block  sm:text-4xl  text-[#f17528] text-5xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10 sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-semibold sm:mx-3 lg:hidden text-shadow-white ">
               Building a menu just got easier!
             </p>
             <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-3 sm:mt-[3px]   md:mt-9">
