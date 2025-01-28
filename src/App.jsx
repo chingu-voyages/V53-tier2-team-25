@@ -7,6 +7,8 @@ import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
 
+import AllergyPage from "./pages/AllergyPage.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,8 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/calendar-page",
-    element: 
-    (
+    element: (
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">
@@ -37,9 +38,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
   return <RouterProvider router={router} />;
-
 }
 
 export default App;

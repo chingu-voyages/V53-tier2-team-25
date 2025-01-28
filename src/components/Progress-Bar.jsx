@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CalendarPage from "../pages/Calendar-Page.jsx";
+import AllergyPage from "../pages/AllergyPage.jsx";
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -101,7 +102,9 @@ const ProgressBar = () => {
       {/* Display Calendar or other step content */}
       <div>
         {currentStep === 1 && <CalendarPage nextStep={nextStep} />}
-        {currentStep === 2 && <div>Step 2 Content</div>}
+        {/* {currentStep === 2 && <div>Step 2 Content</div>} */}
+        {currentStep === 2 && <AllergyPage />}
+
         {currentStep === 3 && <div>Step 3 Content</div>}
       </div>
     </div>
