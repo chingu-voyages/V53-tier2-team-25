@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin'); 
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -60,6 +62,20 @@ export default {
     },
   },
   plugins: [require("tailwindcss-textshadow")],
+  plugins: [
+    require('tailwindcss-textshadow'),
+    plugin(function({ addComponents, theme }) {
+      addComponents({
+        '.card-style_tw-config': {
+          height: '231px',
+          width: '206px',
+          border: `1px solid ${theme('colors.greenDark')}`,
+          listStyleType: 'none',
+          borderRadius: theme('borderRadius.custom'),
+        },
+      });
+    }),
+  ],
   screens: {
     sm: "640px", // Mobile devices start here
     md: "768px", // Tablets start here
