@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "../components/allergycomponents/Container";
 
-export default function AllergyPage() {
+export default function AllergyPage({ nextStep, backStep }) {
   const [allergyObjects, setAllergyObjects] = useState([
     {
       id: "Gluten-Free",
@@ -77,6 +77,8 @@ export default function AllergyPage() {
     <div>
       <div className="justify-self-center mt-16">
         <Container
+          nextStep={nextStep}
+          backStep={backStep}
           handleClick={handleClick}
           allergyObjects={allergyObjects}
           selectAll={selectAll}
@@ -90,11 +92,3 @@ export default function AllergyPage() {
     </div>
   );
 }
-
-// click cont should set the local storage if chose save
-// otherwise session storage
-// click continue currently console logs the section items
-// add back button to previous step
-// add links stuff for progress bar? - maybe add new card for someone
-// add continue button
-// setup links with the calendar stuff for navigating

@@ -11,6 +11,12 @@ const ProgressBar = () => {
     }
   };
 
+  const backStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   return (
     <div className="p-4 mt-9 font-raleway">
       {/* Progress Bar */}
@@ -102,8 +108,9 @@ const ProgressBar = () => {
       {/* Display Calendar or other step content */}
       <div>
         {currentStep === 1 && <CalendarPage nextStep={nextStep} />}
-        {/* {currentStep === 2 && <div>Step 2 Content</div>} */}
-        {currentStep === 2 && <AllergyPage />}
+        {currentStep === 2 && (
+          <AllergyPage nextStep={nextStep} backStep={backStep} />
+        )}
 
         {currentStep === 3 && <div>Step 3 Content</div>}
       </div>
