@@ -39,6 +39,12 @@ export default function Container({
     }
   }
 
+  function checkClickedAllSix() {
+    if (count === 6) {
+      setIsAllOptionSelected(true);
+    }
+  }
+
   useEffect(() => {
     setCount(0);
     countSelection();
@@ -47,6 +53,7 @@ export default function Container({
   useEffect(() => {
     checkIfZero();
     checkIfNotAll();
+    checkClickedAllSix();
   }, [count]);
 
   function checkCount() {
@@ -100,6 +107,7 @@ export default function Container({
         <CheckBoxContinue
           readyToSave={readyToSave}
           allergyObjects={allergyObjects}
+          count={count}
         />
       </div>
 
