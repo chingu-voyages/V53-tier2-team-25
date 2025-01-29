@@ -14,6 +14,8 @@ export default function Container({
   isAllOptionSelected,
   setIsAllOptionSelected,
   handleClick,
+  nextStep,
+  backStep,
 }) {
   const [readyToSave, setReadyToSave] = useState(false);
   const [count, setCount] = useState(0);
@@ -108,13 +110,17 @@ export default function Container({
           readyToSave={readyToSave}
           allergyObjects={allergyObjects}
           count={count}
+          nextStep={nextStep}
         />
       </div>
 
-      <div className="text-center mt-6">
-        <div className="underline raleway-font text-sm">
+      <div className="text-center mt-4">
+        <button
+          onClick={() => backStep()}
+          className="underline raleway-font text-sm"
+        >
           Back To Week Selection
-        </div>
+        </button>
       </div>
     </div>
   );

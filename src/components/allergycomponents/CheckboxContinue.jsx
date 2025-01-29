@@ -1,10 +1,12 @@
 import alerticon from "../../assets/images/alerticon.png";
 import { useEffect, useState } from "react";
+import { Switch } from "@headlessui/react";
 
 export default function CheckBoxContinue({
   readyToSave,
   allergyObjects,
   count,
+  nextStep,
 }) {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -94,9 +96,7 @@ export default function CheckBoxContinue({
 
   const continueColor = isContinueDisabled ? "bg-mediumGray" : "bg-textOrange";
 
-  const continueBorder = isAlertShown
-    ? "border-alertColor"
-    : "border-mediumGray";
+  const continueBorder = isAlertShown ? "border-alertColor" : "";
 
   const alertMessage = (
     <div className="text-alertColor justify-self-center mt-4 font-semibold flex items-center">
@@ -107,11 +107,11 @@ export default function CheckBoxContinue({
     </div>
   );
 
-  const continueStyle = `${continueColor} border ${continueBorder} py-4 px-2 text-xl font-bold rounded-custom10 w-[281px] h-[56px]`;
+  const continueStyle = `${continueColor} border ${continueBorder} text-black font-semibold p-2   raleway-font rounded-custom px-20`;
 
   function clickContinue() {
     if (!isContinueDisabled) {
-      console.log(allergyObjects);
+      nextStep();
     } else if (isContinueDisabled) {
       setIsAlertShown(true);
     }
@@ -135,18 +135,21 @@ export default function CheckBoxContinue({
 
   const checkboxStyle = `w-4 h-4 appearance-none border-2 ${checkboxBorder} rounded ${checkBoxPointer} checked:bg-[#636363]`;
 
+  const sliderMark = isChecked ? "✓" : "";
+
   return (
     <div>
-      <div className="flex justify-center">
-        <input
-          type="checkbox"
+      <div className="flex items-center justify-center">
+        <Switch
           checked={isChecked}
-          onChange={handleChange}
-          disabled={isCheckboxDisabled}
-          className={checkboxStyle}
-        />
-
-        <div className="ml-2 text-sm">Save selections</div>
+          onChange={setIsChecked}
+          className="mr-2 group inline-flex h-8 w-16 items-center rounded-full bg-gray-500 transition data-[checked]:bg-selectAllGreen"
+        >
+          <span className="flex justify-center size-6 translate-x-1 rounded-full bg-neutralLight transition group-data-[checked]:translate-x-9">
+            <p className="font-bold text-selectAllGreen">{sliderMark}</p>
+          </span>
+        </Switch>
+        <div className="ml-2 font-medium">Save selections</div>
       </div>
 
       <div className="mt-4">
