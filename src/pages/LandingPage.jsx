@@ -30,18 +30,18 @@ const LandingPage = () => {
                 className=" lg:block lg:w-[673px]lg: h-[348px] "
                 src={DesktopHeroImage}
               ></img>
-              <div className="hidden lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
-                <p className="hidden lg:block lg:text-[#f17528] lg:text-5xl lg:font-poppins lg:text-center lg:font-semibold lg:text-accent">
+              <div className=" lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
+                <p className="hidden lg:block lg:text-[#f17528] lg:text-4xl lg:font-poppins lg:text-left ml-12 lg:font-semibold lg:text-accent">
                   Building a menu just got easier!
                 </p>
-                <p className="hidden lg:block text-center font-raleway mt-5 lg:px-7">
+                <p className="hidden lg:block text-left ml-5 font-raleway mt-5 lg:px-7">
                   In 3 quick steps, we’ll make you a delicious, inclusive menu
                   for your hungry staff.
                 </p>
                 <div className="flex justify-center aligh-center">
                   <Link to="/calendar-page">
-                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:py-[16px] lg:px-[8px] lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
-                      Create weekly Menu
+                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
+                      Create Weekly Menu
                     </button>
                   </Link>
                 </div>
@@ -98,18 +98,18 @@ const LandingPage = () => {
             src={background}
             className="relative  sm:bg-cover md: lg:hidden"
           ></img>
-          <div className="absolute  inset-0  flex flex-col  sm:bottom-40 md:bottom-20 items-center justify-center  lg:hidden">
-            <p className="md:block   text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10  sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-bold  sm:mx-3 lg:hidden text-shadow-white ">
+          <div className="absolute  inset-0 md:gap-y-6 flex flex-col  sm:bottom-20  items-center justify-center  lg:hidden">
+            <p className="md:block sm:block  sm:text-4xl  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10 sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-semibold sm:mx-3 lg:hidden text-shadow-white ">
               Building a menu just got easier!
             </p>
-            <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-3 sm:mt-[3px]   md:mt-9">
+            <p className="block lg:hidden  text-center md:text-2xl  px-10   md:px-40 sm:text-center sm:font-raleway mt-3 sm:mt-[5px]   md:mt-9">
               In 3 quick steps, we’ll make you a delicious, inclusive menu for
               your hungry staff.
             </p>
             <div className="flex justify-center aligh-center">
               <Link component={CalendarPage} to="/calendar-page">
                 <button className="block lg-hidden bg-[#f17528] font-bold  py-[10px] px-[8px] sm:py-[16px] sm:px-[8px]  md:text-2xl md:mt-7  md:py-[15px] md:px-[18px] my-3 text-l lg:font-inter lg:text-text rounded-lg">
-                  Create weekly Menu
+                  Create Weekly Menu
                 </button>
               </Link>
             </div>
