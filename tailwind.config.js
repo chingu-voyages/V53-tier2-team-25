@@ -20,6 +20,8 @@ export default {
         neutralLight: "#FFFBF1",
         mediumGray: "#ADADAD",
         alertColor: "#CE5C67",
+        greenDark: "#528540",
+        greenLight: "#ACD084",
       },
       textShadow: {
         white: "0 0 5px white, 0 0 10px white, 0 0 15px white",
