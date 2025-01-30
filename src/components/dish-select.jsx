@@ -1,9 +1,6 @@
-import ProgressBarDishSelect from "./dish-select_progress-bar";
-
 const DishSelect = () => {
   return (
     <div className='dish_select'>
-        <ProgressBarDishSelect />
         <div className='dish_select--header mt-7 mb-10 flex justify-center w-full font-bold'>
             <h1 className="font-[600] text-[24px] snap-center leading-[30px]" >Change or remove dishes based on your preferences</h1>
         </div>
