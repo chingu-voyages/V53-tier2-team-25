@@ -70,7 +70,7 @@ export default {
       addComponents({
         '.card-style_tw-config': {
           height: '231px',
-          width: '206px',
+          width: '200px',
           border: `1px solid ${theme('colors.greenDark')}`,
           listStyleType: 'none',
           borderRadius: theme('borderRadius.custom'),
