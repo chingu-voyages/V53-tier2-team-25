@@ -87,8 +87,8 @@ const ProgressBar = () => {
             <div
               className={`w-10 h-10 rounded-full border-8 ${
                 currentStep === 3
-                  ? "bg-[#528540] border-[#528540]" // Step 3 (current step)
-                  : "bg-[#fffbf1] border-gray-300" // Step 3 (not started)
+                  ? "bg-[#fffbf1] border-[#528540]"
+                  : "bg-[#fffbf1] border-gray-300" 
               }`}
             ></div>
             <div className="absolute mt-10 text-center">
