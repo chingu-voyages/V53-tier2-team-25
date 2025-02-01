@@ -243,11 +243,11 @@ const CalendarPage = ({ nextStep }) => {
         <div className="flex justify-center mt-3 raleway-font ">
           <button
             onClick={() => setShowCustomInput(!showCustomInput)}
-            className="bg-lightGreen text-white py-2 raleway-font px-2 outline-2 text-shadow-outline rounded text-sm font-semibold "
+            className="bg-lightGreen text-customBlack py-2 raleway-font px-2 outline-2 text-shadow-outline rounded text-sm font-semibold "
          
           >
             {showCustomInput ? "Hide Manual Input" : "Add Manually"}
-            <FontAwesomeIcon className="ml-1 text-white" icon={faPen} />  
+            <FontAwesomeIcon className="ml-1 text-customBlack" icon={faPen} />  
           </button>
         </div>
 
@@ -291,7 +291,7 @@ const CalendarPage = ({ nextStep }) => {
 
             <button
               onClick={handleCustomWeekChange}
-              className="mt-3 sm:mt-0  bg-lightGreen text-white py-2 px-2 text-sm rounded ml-2 font-semibold"
+              className="mt-3 sm:mt-0  bg-lightGreen text-customBlack py-2 px-2 text-sm rounded ml-2 font-semibold"
             >
               Set Custom Week
             </button>
