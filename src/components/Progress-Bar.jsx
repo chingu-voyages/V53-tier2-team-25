@@ -18,8 +18,7 @@ const ProgressBar = () => {
   };
 
   return (
-    <div className="p-4 mt-9 font-raleway">
-      {/* Progress Bar */}
+    <div className="p-4 mt-4 font-raleway">
       <div className="flex items-center justify-center mb-6">
         {/* Step 1 */}
         <div className="flex items-center">
