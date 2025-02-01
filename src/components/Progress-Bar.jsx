@@ -46,7 +46,7 @@ const ProgressBar = () => {
           {/* Line to Step 2 */}
           <div
             className={`h-1 ${
-              currentStep >= 2 ? "bg-[#528540]" : "bg-gray-300"
+              currentStep >= 2 ? "bg-[#528540]" : "border-2 border-dashed border-gray-400"
             }  w-24 sm:w-48 md:w-56 lg:w-56 xl:w-64`}
           ></div>
         </div>
@@ -76,8 +76,9 @@ const ProgressBar = () => {
           {/* Line to Step 3 */}
           <div
             className={`h-1 ${
-              currentStep >= 3 ? "bg-[#528540]" : "bg-gray-300"
+              currentStep >= 3 ? "bg-[#528540]" : "border-2 border-dashed border-gray-400"
             }  w-24 sm:w-48 md:w-56 lg:w-56 xl:w-64`}
+            
           ></div>
         </div>
 
