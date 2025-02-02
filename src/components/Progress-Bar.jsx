@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CalendarPage from "../pages/Calendar-Page.jsx";
 import AllergyPage from "../pages/AllergyPage.jsx";
+import DishSelectPage from "../pages/DishSelectPage.jsx";
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -46,7 +47,9 @@ const ProgressBar = () => {
           {/* Line to Step 2 */}
           <div
             className={`h-1 ${
-              currentStep >= 2 ? "bg-[#528540]" : "border-2 border-dashed border-gray-400"
+              currentStep >= 2
+                ? "bg-[#528540]"
+                : "border-2 border-dashed border-gray-400"
             }  w-24 sm:w-48 md:w-56 lg:w-56 xl:w-64`}
           ></div>
         </div>
@@ -76,9 +79,10 @@ const ProgressBar = () => {
           {/* Line to Step 3 */}
           <div
             className={`h-1 ${
-              currentStep >= 3 ? "bg-[#528540]" : "border-2 border-dashed border-gray-400"
+              currentStep >= 3
+                ? "bg-[#528540]"
+                : "border-2 border-dashed border-gray-400"
             }  w-24 sm:w-48 md:w-56 lg:w-56 xl:w-64`}
-            
           ></div>
         </div>
 
@@ -89,7 +93,7 @@ const ProgressBar = () => {
               className={`w-10 h-10 rounded-full border-8 ${
                 currentStep === 3
                   ? "bg-[#fffbf1] border-[#528540]"
-                  : "bg-[#fffbf1] border-gray-300" 
+                  : "bg-[#fffbf1] border-gray-300"
               }`}
             ></div>
             <div className="absolute mt-10 text-center">
@@ -112,7 +116,7 @@ const ProgressBar = () => {
           <AllergyPage nextStep={nextStep} backStep={backStep} />
         )}
 
-        {currentStep === 3 && <div>Step 3 Content</div>}
+        {currentStep === 3 && <DishSelectPage />}
       </div>
     </div>
   );
