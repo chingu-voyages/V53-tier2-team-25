@@ -21,8 +21,8 @@ const DishSelect = () => {
         throw new Error(`Response status: ${response.status}`);
       }
       const jsonResponse = await response.json();
-      const randomMeal = jsonResponse.meal;
-      console.log("random Meal", jsonResponse);
+      const randomMeal = jsonResponse.meals[0];
+      console.log("Arandom Meal", randomMeal);
     } catch (error) {
       console.error(error.message);
     }
@@ -35,11 +35,14 @@ const DishSelect = () => {
           Change or remove dishes based on your preferences
         </h1>
       </div>
-      {daysInAWeek.map((day, index) => {
-        <DishOfTheDayCard day={day} />;
-      })}
+      <div className="flex flex-wrap gap-5 justify-stretch align-middle justify-items-stretch">
+        {daysInAWeek.map((day, index) => {
+          return <DishOfTheDayCard day={day} />;
+        })}
+      </div>
     </div>
   );
+
 };
 
 export default DishSelect;
