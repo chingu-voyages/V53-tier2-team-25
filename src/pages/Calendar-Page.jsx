@@ -3,16 +3,16 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../styles/calendar-page.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { faPen } from "@fortawesome/free-solid-svg-icons"; 
-
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 const CalendarPage = ({ nextStep }) => {
   const [selectedWeek, setSelectedWeek] = useState([]);
   const [daysOff, setDaysOff] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -33,7 +33,7 @@ const CalendarPage = ({ nextStep }) => {
     );
   };
 
-   const isCurrentDay = (date) => {
+  const isCurrentDay = (date) => {
     const today = new Date();
     const isToday =
       date.getFullYear() === today.getFullYear() &&
@@ -146,28 +146,26 @@ const CalendarPage = ({ nextStep }) => {
     const end = new Date(endDate);
 
     const currentDate = new Date();
-  
 
     if (start > end) {
-      setMessage("It looks like the start date is after the end date. Please adjust it.");
+      setMessage(
+        "It looks like the start date is after the end date. Please adjust it."
+      );
       setIsModalOpen(true);
       return;
     }
-
-
 
     if (start < currentDate || end < currentDate) {
       setMessage("Please choose a week that's not in the past.");
       setIsModalOpen(true);
       return;
     }
-  
 
     const weekRange = getWeekRange(start);
     setSelectedWeek(weekRange);
     setDaysOff([]);
     setMessage("Custom week selected successfully.");
-    setIsModalOpen(true);
+    setIsSuccessModalOpen(true);
   };
 
   const handleRefresh = () => {
@@ -215,6 +213,7 @@ const CalendarPage = ({ nextStep }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsSuccessModalOpen(false);
   };
 
   return (
@@ -244,14 +243,13 @@ const CalendarPage = ({ nextStep }) => {
           <button
             onClick={() => setShowCustomInput(!showCustomInput)}
             className="bg-lightGreen text-customBlack py-2 raleway-font px-2 outline-2 text-shadow-outline rounded text-sm font-semibold "
-         
           >
             {showCustomInput ? "Hide Manual Input" : "Add Manually"}
-            <FontAwesomeIcon className="ml-1 text-customBlack" icon={faPen} />  
+            <FontAwesomeIcon className="ml-1 text-customBlack" icon={faPen} />
           </button>
         </div>
 
-       {showCustomInput && (
+        {showCustomInput && (
           <div className="mt-4 flex flex-col sm:flex-row items-center justify-center">
             <div
               style={{
@@ -272,11 +270,10 @@ const CalendarPage = ({ nextStep }) => {
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
                 className="p-1 border rounded  placeholder-sm"
-                style={{ width: "100px" }} 
+                style={{ width: "100px" }}
               />
             </div>
             ➔
-
             <h3 className="text-sm mt-1 sm:mt-0 raleway-font font-semibold mx-2">
               Sunday
             </h3>
@@ -286,9 +283,8 @@ const CalendarPage = ({ nextStep }) => {
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               className="p-1 border rounded  placeholder-sm"
-              style={{ width: "100px" }} 
+              style={{ width: "100px" }}
             />
-
             <button
               onClick={handleCustomWeekChange}
               className="mt-3 sm:mt-0  bg-lightGreen text-customBlack py-2 px-2 text-sm rounded ml-2 font-semibold"
@@ -342,23 +338,20 @@ const CalendarPage = ({ nextStep }) => {
               return "selected";
             }
             if (isToday) {
-              className += " current-day"; 
+              className += " current-day";
             }
-            return className.trim();;
+            return className.trim();
           }}
         />
 
-    {/* 
-
-      still figuring out if refresh button is needed
         <div className="absolute bottom-2">
           <FontAwesomeIcon
             onClick={handleRefresh}
             className="bg-[#528540] p-1 mt-1 p-1 rounded-full text-white cursor-pointer"
-            icon={faRotateRight}
+            icon={faRefresh}
             size="2"
           />
-        </div> */}
+        </div>
       </div>
 
       <div className="mt-6 flex align-center justify-center">
@@ -383,6 +376,26 @@ const CalendarPage = ({ nextStep }) => {
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
             <p className="text-center text-lg font-semibold mb-4">Alert 🚨</p>
+            <p className="text-center">{message}</p>
+            <div className="mt-4 text-center">
+              <button
+                onClick={closeModal}
+                className="bg-orange-500 text-white px-4 py-2 rounded-lg"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isSuccessModalOpen && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <p className="text-center text-lg font-semibold mb-4">
+              {" "}
+              Success ✅{" "}
+            </p>
             <p className="text-center">{message}</p>
             <div className="mt-4 text-center">
               <button
