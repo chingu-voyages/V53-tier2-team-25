@@ -1,21 +1,24 @@
-export default async function getRandomMeal() {
+export default async function getRandomMeal(filterBy) {
+  let completeURL;
+  console.log("filter by", filterBy);
   try {
-    const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/random.php"
-    );
-    console.log("** response", response);
+    const urlGenerator = () => {
+      const baseURL = "https://www.themealdb.com/api/json/v1/1/random.php";
+      const filterByFull = filterBy ? `?i=${filterBy}` : "";
+      completeURL = baseURL + filterByFull;
+      return completeURL;
+    };
+    const urlToFetch = urlGenerator();
+    const response = await fetch(urlToFetch);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const jsonResponse = await response.json();
     // jsonResponse is an object containing an array with just one element being that random meal
     const randomMeal = jsonResponse.meals[0];
-    console.log("typeof", typeof randomMeal);
-    console.log("A random Meal", randomMeal);
     //destructiring it here
     const { idMeal, strIngridient1, strIngridient2, strIngridient3 } =
       randomMeal;
-    console.log("idMeal", idMeal);
   } catch (error) {
     console.error(error.message);
   }

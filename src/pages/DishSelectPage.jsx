@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import getRandomMeal from "../util/randomMealAPI";
 
 const DishSelectPage = () => {
-  useEffect(getRandomMeal, []);
+  useEffect(() => {
+    getRandomMeal("cucumber");
+  }, []);
   return <button>Get a random meal</button>;
 };
 
