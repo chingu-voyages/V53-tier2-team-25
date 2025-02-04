@@ -6,6 +6,7 @@ import Footer from "./components/footer.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
+import DishSelect from "./components/dish-select.jsx";
 
 import AllergyPage from "./pages/AllergyPage.jsx";
 
@@ -35,6 +36,20 @@ const router = createBrowserRouter([
       </div>
     ),
   },
+  {
+    path: "/dish-select",
+    element: 
+    (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
+          <MenuCreationBlock />
+          <DishSelect />
+        </main>
+        <Footer />
+      </div>
+    ),
+  }
 ]);
 
 function App() {

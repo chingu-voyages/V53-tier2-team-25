@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CalendarPage from "../pages/Calendar-Page.jsx";
 import AllergyPage from "../pages/AllergyPage.jsx";
+import DishSelect from "./dish-select.jsx";
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -112,7 +113,7 @@ const ProgressBar = () => {
           <AllergyPage nextStep={nextStep} backStep={backStep} />
         )}
 
-        {currentStep === 3 && <div>Step 3 Content</div>}
+        {currentStep === 3 && <DishSelect />}
       </div>
     </div>
   );
