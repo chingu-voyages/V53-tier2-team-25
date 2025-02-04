@@ -6,7 +6,7 @@ import Footer from "./components/footer.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ProgressBar from "./components/Progress-Bar.jsx";
 import MenuCreationBlock from "./components/menu-creation-block.jsx";
-import DishSelect from "./components/dish-select.jsx";
+import DishSelect from "./components/day-on.jsx";
 
 import AllergyPage from "./pages/AllergyPage.jsx";
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/calendar-page",
+    path: "/menu-creation",
     element: (
       <div className="min-h-screen flex flex-col">
         <Header />
