@@ -98,7 +98,7 @@ export default function Container({
         />
       </div>
 
-      <div className="flex flexwrap justify-center px-4 md:px-16 lg:px-40">
+      <div className="flex flex-wrap justify-center w-full max-w-4xl px-4 md:px-16 lg:px-32 gap-4 md:gap-6">
         <ButtonContainer
           allergyObjects={allergyObjects}
           handleClick={handleClick}
