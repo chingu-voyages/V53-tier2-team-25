@@ -1,24 +1,23 @@
-export default async function getRandomMeal(filterBy) {
+export default async function getRandomMeal(allergies, numberOfDays) {
+  const API_KEY = "253d5c95a95a42ca9e8e04e7f977715c";
   let completeURL;
-  console.log("filter by", filterBy);
+  let listOfIds = [];
+  let resultsAll;
   try {
-    const urlGenerator = () => {
-      const baseURL = "https://www.themealdb.com/api/json/v1/1/random.php";
-      const filterByFull = filterBy ? `?i=${filterBy}` : "";
-      completeURL = baseURL + filterByFull;
-      return completeURL;
-    };
-    const urlToFetch = urlGenerator();
+    // get recipes for numberOfDays accomodating allergies
+    const urlToFetch = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${numberOfDays}&intolerances=${allergies}`;
     const response = await fetch(urlToFetch);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+
     const jsonResponse = await response.json();
-    // jsonResponse is an object containing an array with just one element being that random meal
-    const randomMeal = jsonResponse.meals[0];
-    //destructiring it here
-    const { idMeal, strIngridient1, strIngridient2, strIngridient3 } =
-      randomMeal;
+    console.log("jsonResponse", jsonResponse);
+
+    const resultFull = jsonResponse.results.map((result) => {
+      console.log("result", result);
+      const { id, title, image } = result;
+      //preparing a list of Ids so we can make a bulk call to get ingredients
+      console.log("id", id, "listOfIds", listOfIds.push(id));
+      return result;
+    });
   } catch (error) {
     console.error(error.message);
   }

@@ -3,7 +3,7 @@ import getRandomMeal from "../util/randomMealAPI";
 
 const DishSelectPage = () => {
   useEffect(() => {
-    getRandomMeal("cucumber");
+    getRandomMeal("nut", 2);
   }, []);
   return <button>Get a random meal</button>;
 };
