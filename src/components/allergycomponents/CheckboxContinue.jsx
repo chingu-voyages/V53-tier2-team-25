@@ -7,12 +7,24 @@ export default function CheckBoxContinue({
   allergyObjects,
   count,
   nextStep,
+  priorSaved,
 }) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState();
 
   const [isCheckboxDisabled, setIsCheckboxDisabled] = useState(true);
-
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+
+  function checkForSaveToggle() {
+    if (priorSaved === true) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }
+
+  useEffect(() => {
+    checkForSaveToggle();
+  }, [priorSaved]);
 
   function handleChange() {
     setIsChecked(!isChecked);
@@ -43,54 +55,21 @@ export default function CheckBoxContinue({
     checkIfCanContinue();
   }, [isCheckboxDisabled]);
 
-  const [useLocalStorage, setUseLocalStorage] = useState(false);
-  const [useSessionStorage, setUseSessionStorage] = useState(true);
-
-  function checkStorageType() {
-    if (!isChecked) {
-      setUseLocalStorage(false);
-      setUseSessionStorage(true);
-    } else if (isChecked) {
-      setUseLocalStorage(true);
-      setUseSessionStorage(false);
-    }
+  function saveSessionStorage() {
+    sessionStorage.setItem("allergies", JSON.stringify(allergyObjects));
   }
 
   useEffect(() => {
-    checkStorageType();
-  }, [isChecked]);
+    saveSessionStorage();
+  }, [count]);
 
-  function setLocalStorage() {
-    if (useLocalStorage) {
+  function updateLocalStorage() {
+    if (isChecked) {
       localStorage.setItem("allergies", JSON.stringify(allergyObjects));
-    } else if (!useLocalStorage) {
+    } else if (!isChecked) {
       localStorage.removeItem("allergies");
     }
   }
-
-  useEffect(() => {
-    setLocalStorage();
-  }, [useLocalStorage]);
-
-  useEffect(() => {
-    setLocalStorage();
-  }, [count]);
-
-  function setSessionStorage() {
-    if (useSessionStorage) {
-      sessionStorage.setItem("allergies", JSON.stringify(allergyObjects));
-    } else if (!useSessionStorage) {
-      sessionStorage.removeItem("allergies");
-    }
-  }
-
-  useEffect(() => {
-    setSessionStorage();
-  }, [useSessionStorage]);
-
-  useEffect(() => {
-    setSessionStorage();
-  }, [count]);
 
   const [isAlertShown, setIsAlertShown] = useState(false);
 
@@ -111,6 +90,8 @@ export default function CheckBoxContinue({
 
   function clickContinue() {
     if (!isContinueDisabled) {
+      console.log(isChecked);
+      updateLocalStorage();
       nextStep();
     } else if (isContinueDisabled) {
       setIsAlertShown(true);
@@ -149,10 +130,10 @@ export default function CheckBoxContinue({
             <p className="font-bold text-selectAllGreen">{sliderMark}</p>
           </span>
         </Switch>
-        <div className="ml-2 font-medium">Save selections</div>
+        <div className="ml-2 font-medium">Save preferences</div>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 flex justify-center">
         <button className={continueStyle} onClick={() => clickContinue()}>
           Continue
         </button>

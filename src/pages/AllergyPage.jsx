@@ -1,40 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "../components/allergycomponents/Container";
+import allergyObjectsData from "../allergies";
 
 export default function AllergyPage({ nextStep, backStep }) {
-  const [allergyObjects, setAllergyObjects] = useState([
-    {
-      id: "Gluten-Free",
-      name: "Gluten-Free",
-      isSelected: false,
-    },
-    {
-      id: "Egg-Free",
-      name: "Egg-Free",
-      isSelected: false,
-    },
-    {
-      id: "Milk-Free",
-      name: "Milk-Free",
-      isSelected: false,
-    },
-    {
-      id: "Shellfish-Free",
-      name: "Shellfish-Free",
-      isSelected: false,
-    },
-    {
-      id: "Soy-Free",
-      name: "Soy-Free",
-      isSelected: false,
-    },
-    {
-      id: "Tree Nut-Free",
-      name: "Tree Nut-Free",
-      isSelected: false,
-    },
-  ]);
+  const [allergyObjects, setAllergyObjects] = useState(allergyObjectsData);
+
+  const [priorSaved, setPriorSaved] = useState(false);
+
+  function checkForLocalStorage() {
+    let savedItems = JSON.parse(localStorage.getItem("allergies"));
+    if (savedItems === null) {
+      return;
+    } else if (savedItems !== null) {
+      setAllergyObjects(savedItems);
+      setPriorSaved(true);
+    }
+  }
+
+  useEffect(() => {
+    checkForLocalStorage();
+  }, []);
 
   function handleClick(id) {
     setAllergyObjects((prev) =>
@@ -77,6 +63,7 @@ export default function AllergyPage({ nextStep, backStep }) {
     <div>
       <div className="justify-self-center mt-16">
         <Container
+          priorSaved={priorSaved}
           nextStep={nextStep}
           backStep={backStep}
           handleClick={handleClick}
