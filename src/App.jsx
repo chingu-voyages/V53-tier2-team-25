@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/calendar-page",
+    path: "/calendar-page",//menu creation
     element: (
       <div className="min-h-screen flex flex-col">
         <Header />
