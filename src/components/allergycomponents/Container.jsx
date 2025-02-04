@@ -16,6 +16,7 @@ export default function Container({
   handleClick,
   nextStep,
   backStep,
+  priorSaved,
 }) {
   const [readyToSave, setReadyToSave] = useState(false);
   const [count, setCount] = useState(0);
@@ -107,6 +108,7 @@ export default function Container({
 
       <div className="mt-8 flex justify-center">
         <CheckBoxContinue
+          priorSaved={priorSaved}
           readyToSave={readyToSave}
           allergyObjects={allergyObjects}
           count={count}
