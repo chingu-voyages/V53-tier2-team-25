@@ -58,10 +58,10 @@ const ProgressBar = () => {
             <div
               className={`w-10 h-10 rounded-full border-8 ${
                 currentStep === 2
-                  ? "bg-[#fffbf1] border-[#528540]" // Step 2 (current step)
+                  ? "bg-[#fffbf1] border-[#528540]" 
                   : currentStep > 2
-                  ? "bg-[#528540] border-[#528540]" // Step 2 (completed step)
-                  : "bg-[#fffbf1] border-gray-300" // Step 2 (not started)
+                  ? "bg-[#528540] border-[#528540]" 
+                  : "bg-[#fffbf1] border-gray-300" 
               }`}
             ></div>
             <div className="absolute mt-12 text-center">
@@ -74,7 +74,6 @@ const ProgressBar = () => {
               </p>
             </div>
           </div>
-          {/* Line to Step 3 */}
           <div
             className={`h-1 ${
               currentStep >= 3 ? "bg-[#528540]" : "border-2 border-dashed border-gray-400"
@@ -106,7 +105,6 @@ const ProgressBar = () => {
         </div>
       </div>
 
-      {/* Display Calendar or other step content */}
       <div>
         {currentStep === 1 && <CalendarPage nextStep={nextStep} />}
         {currentStep === 2 && (

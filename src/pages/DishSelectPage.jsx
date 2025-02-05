@@ -37,9 +37,9 @@ const DishSelect = ({ backStep }) => {
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type }) =>
+        {daysData.map(({ day, type }, index) =>
           type === "on" ? (
-            <DayOnCard key={day} day={day} />
+            <DayOnCard key={day} day={day} index={index} />
           ) : (
             <DayOffCard key={day} day={day} />
           )
