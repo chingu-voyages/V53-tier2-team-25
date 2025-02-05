@@ -28,7 +28,7 @@ const DishSelect = ({ backStep }) => {
     setDaysData(updatedDays);
   }, []);
 
-  return (flex-grow-0"
+  return (
     <div>
       <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
         <h1 className="font-[600] text-[24px] snap-center leading-[30px] mt-10">

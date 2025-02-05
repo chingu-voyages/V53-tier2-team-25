@@ -13,7 +13,7 @@ const DayOffCard = ({ day }) => {
         Day Off
       </div>
 
-      <div className="flex-grow-0 flex flex-col justify-end items-center w-full bg-[#ACD084] p-2 sm:p-4">
+      <div className="flex-grow flex flex-col justify-end items-center w-full bg-[#ACD084] p-2 sm:p-4">
         <button className="bg-[#528540] text-xs sm:text-sm text-white rounded-lg w-32 sm:w-40 flex items-center justify-center py-1 sm:py-2">
           Select Dish
           <FontAwesomeIcon icon={faPlus} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1] ml-1" />
