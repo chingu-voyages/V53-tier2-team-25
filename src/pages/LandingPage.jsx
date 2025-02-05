@@ -39,12 +39,8 @@ const LandingPage = () => {
                   for your hungry staff.
                 </p>
                 <div className="flex justify-center aligh-center">
-                
-<<<<<<< HEAD
+                  <Link to="/menu-creation">
                     <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-5 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
-=======
-                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
->>>>>>> development
                       Create Weekly Menu
                     </button>
                   </Link>
@@ -111,10 +107,8 @@ const LandingPage = () => {
               your hungry staff.
             </p>
             <div className="flex justify-center aligh-center">
-<<<<<<< HEAD
 
               <Link component={CalendarPage} to="/menu-creation">
->>>>>>> development
                 <button className="block lg-hidden bg-[#f17528] font-bold  py-[10px] px-[8px] sm:py-[16px] sm:px-[8px]  md:text-2xl md:mt-7  md:py-[15px] md:px-[18px] my-3 text-l lg:font-inter lg:text-text rounded-lg">
                   Create Weekly Menu
                 </button>
