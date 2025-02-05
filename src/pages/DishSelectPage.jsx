@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DayOnCard from "../components/day-on.jsx";
 import DayOffCard from "../components/day-off.jsx";
+import mealsFilter from "../mealsFilter";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -28,6 +29,11 @@ const DishSelect = ({ backStep }) => {
     setDaysData(updatedDays);
   }, []);
 
+  const allergiesInfo = sessionStorage.getItem("allergies");
+  const daysOn = localStorage.getItem("daysOn");
+  console.log("daysOn", daysOn.length);
+  console.log("allegiesInfo", allergiesInfo);
+  const filteredMeals = mealsFilter(allergiesInfo);
   return (
     <div>
       <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
@@ -44,7 +50,6 @@ const DishSelect = ({ backStep }) => {
             <DayOffCard key={day} day={day} />
           )
         )}
-        
       </div>
       <div className="text-center m-7">
         <a

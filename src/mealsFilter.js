@@ -1,9 +1,10 @@
-import { allergies } from "/src/allergies.js";
-import { apiResponse } from "/src/apiResponse.json";
+import allergyObjectsData from "/src/allergies.js";
+import apiResponse from "/src/apiResponse";
 
 const mealsFilter = (allergies, numberOfDays) => {
-  console.log("apiResponse", apiResponse);
-  const result = apiResponse.map((eachItem) => {
+  const result = apiResponse.recipes.map((eachItem) => {
     console.log("eachItem", eachItem);
   });
 };
+
+export default mealsFilter;
