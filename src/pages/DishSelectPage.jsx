@@ -28,7 +28,7 @@ const DishSelect = ({ backStep }) => {
     setDaysData(updatedDays);
   }, []);
 
-  return (
+  return (flex-grow-0"
     <div>
       <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
         <h1 className="font-[600] text-[24px] snap-center leading-[30px] mt-10">
@@ -36,7 +36,7 @@ const DishSelect = ({ backStep }) => {
         </h1>
       </div>
 
-      <div className="flex flex-wrap gap-7 justify-center">
+      <div className="flex flex-wrap gap-7 justify-center items-stretch">
         {daysData.map(({ day, type }) =>
           type === "on" ? (
             <DayOnCard key={day} day={day} />
@@ -44,6 +44,7 @@ const DishSelect = ({ backStep }) => {
             <DayOffCard key={day} day={day} />
           )
         )}
+        
       </div>
       <div className="text-center m-7">
         <a
