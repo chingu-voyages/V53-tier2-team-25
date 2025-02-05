@@ -1,21 +1,26 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const DayOff = ({day}) => {
+const DayOffCard = ({ day }) => {
   return (
-    <div className="day-off-wrapper flex flex-col justify-between h-full">
-        <div className='card-header: card-data flex justify-center p-2 border-b-2 border-[#528540] bg-[#ACD084]'>
-            <h2 className='font-bold'>{day}</h2>
-        </div>
-      
-        <div className="card-data bg-[#ACD084] flex justify-center items-center h-full font-bold text-[20px]">
-            <h1>Day Off</h1>
-        </div>
-      
-        <div className="card-footer: flex justify-center h-10 w-full p-2 bg-[#ACD084]">
-            <button className='bg-[#528540] text-white rounded-lg w-40'>Select Dish +</button>
-        </div>
+    <div className="bg-[#ACD084] shadow-lg rounded-lg overflow-hidden flex flex-col w-[150px] sm:w-[265px] h-auto sm:h-[360px] h-[360px]">
+      <div className="p-2 sm:p-3 text-center text-sm sm:text-xl font-semibold border-b-2 border-[#528540] bg-[#ACD084]">
+        {day}
+      </div>
+
+      <div className="w-full bg-[#ACD084] flex justify-center items-center h-[100px] sm:h-[150px] font-bold text-base sm:text-[20px]">
+        Day Off
+      </div>
+
+      <div className="flex-grow flex flex-col justify-end items-center w-full bg-[#ACD084] p-2 sm:p-4">
+        <button className="bg-[#528540] text-xs sm:text-sm text-white rounded-lg w-32 sm:w-40 flex items-center justify-center py-1 sm:py-2">
+          Select Dish
+          <FontAwesomeIcon icon={faPlus} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1] ml-1" />
+        </button>
+      </div>
     </div>
   );
 };
 
-export default DayOff;
+export default DayOffCard;

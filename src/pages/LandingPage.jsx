@@ -19,7 +19,7 @@ const LandingPage = () => {
           style={{
             backgroundImage:
               "url('https://i.postimg.cc/Kj1zbMQN/Landing-Page-Background.png')",
-            minHeight: "90vh",
+            minHeight: "88vh",
             minWidth: "80vw",
           }}
         >
@@ -31,16 +31,16 @@ const LandingPage = () => {
                 src={DesktopHeroImage}
               ></img>
               <div className=" lg:block xl:block flex flex-col items-center justify-center px-10 mt-10">
-                <p className="hidden lg:block lg:text-[#f17528] lg:text-4xl lg:font-poppins lg:text-left ml-12 lg:font-semibold lg:text-accent">
+                <p className="hidden lg:block lg:text-[#f17528] lg:text-4xl lg:font-poppins lg:text-left lg:font-semibold lg:text-accent lg:text-center">
                   Building a menu just got easier!
                 </p>
-                <p className="hidden lg:block text-left ml-5 font-raleway mt-5 lg:px-7">
+                <p className="hidden lg:block text-left ml-5 font-raleway mt-5 lg:px-7 lg:text-center">
                   In 3 quick steps, we’ll make you a delicious, inclusive menu
                   for your hungry staff.
                 </p>
                 <div className="flex justify-center aligh-center">
                   <Link to="/menu-creation">
-                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-3 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
+                    <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-5 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
                       Create Weekly Menu
                     </button>
                   </Link>
@@ -107,6 +107,7 @@ const LandingPage = () => {
               your hungry staff.
             </p>
             <div className="flex justify-center aligh-center">
+
               <Link component={CalendarPage} to="/menu-creation">
                 <button className="block lg-hidden bg-[#f17528] font-bold  py-[10px] px-[8px] sm:py-[16px] sm:px-[8px]  md:text-2xl md:mt-7  md:py-[15px] md:px-[18px] my-3 text-l lg:font-inter lg:text-text rounded-lg">
                   Create Weekly Menu
