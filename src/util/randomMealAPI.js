@@ -1,5 +1,7 @@
+import API_KEY From '/.env'
+
 export default async function getRandomMeal(allergies, numberOfDays) {
-  const API_KEY = "253d5c95a95a42ca9e8e04e7f977715c";
+  
   let completeURL;
   let listOfIds = [];
   let resultsAll;
