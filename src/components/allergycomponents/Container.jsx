@@ -16,6 +16,7 @@ export default function Container({
   handleClick,
   nextStep,
   backStep,
+  priorSaved,
 }) {
   const [readyToSave, setReadyToSave] = useState(false);
   const [count, setCount] = useState(0);
@@ -98,7 +99,7 @@ export default function Container({
         />
       </div>
 
-      <div className="w-3/4 justify-self-center flex">
+      <div className="flex flex-wrap justify-center w-full max-w-4xl px-4 md:px-16 lg:px-32 gap-4 md:gap-6">
         <ButtonContainer
           allergyObjects={allergyObjects}
           handleClick={handleClick}
@@ -107,6 +108,7 @@ export default function Container({
 
       <div className="mt-8 flex justify-center">
         <CheckBoxContinue
+          priorSaved={priorSaved}
           readyToSave={readyToSave}
           allergyObjects={allergyObjects}
           count={count}

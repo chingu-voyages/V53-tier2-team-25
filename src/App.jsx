@@ -38,8 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dish-select",
-    element: 
-    (
+    element: (
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">
@@ -49,7 +48,7 @@ const router = createBrowserRouter([
         <Footer />
       </div>
     ),
-  }
+  },
 ]);
 
 function App() {

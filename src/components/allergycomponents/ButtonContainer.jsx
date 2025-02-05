@@ -8,7 +8,7 @@ export default function ButtonContainer({ allergyObjects, handleClick }) {
   });
 
   return (
-      <div className="flex flex-wrap justify-center mt-4 mb-6">
+      <div className="flex flex-wrap justify-center items-center w-full  mt-4 mb-6">
         {buttonElements}
         </div>
     
