@@ -15,6 +15,7 @@ const defaultDays = [
 
 const DishSelect = ({ backStep }) => {
   const [daysData, setDaysData] = useState(defaultDays);
+  let storedDaysOn;
 
   useEffect(() => {
     const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
@@ -29,11 +30,11 @@ const DishSelect = ({ backStep }) => {
     setDaysData(updatedDays);
   }, []);
 
-  const allergiesInfo = sessionStorage.getItem("allergies");
-  const daysOn = localStorage.getItem("daysOn");
-  console.log("daysOn", daysOn.length);
-  console.log("allegiesInfo", allergiesInfo);
-  const filteredMeals = mealsFilter(allergiesInfo);
+  const allergies = JSON.parse(sessionStorage.getItem("allergies"));
+  const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
+
+  const filteredMeals = mealsFilter(allergies, numberOfDishes);
+
   return (
     <div>
       <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
