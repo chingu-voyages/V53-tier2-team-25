@@ -31,15 +31,15 @@ const DishSelect = ({ backStep }) => {
   return (
     <div>
       <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
-        <h1 className="font-[600] text-[24px] snap-center leading-[30px] mt-10">
+        <h1 className="font-[600] text-[24px] snap-center text-center leading-[30px] mt-10">
           Change or remove dishes based on your preferences
         </h1>
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type }) =>
+        {daysData.map(({ day, type }, index) =>
           type === "on" ? (
-            <DayOnCard key={day} day={day} />
+            <DayOnCard key={day} day={day} index={index} />
           ) : (
             <DayOffCard key={day} day={day} />
           )

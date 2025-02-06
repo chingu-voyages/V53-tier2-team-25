@@ -1,10 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import PlaceHolderImage1 from "../assets/images/Placeholderimage1.png";
+import PlaceHolderImage2 from "../assets/images/Placeholderimage2.png";
+import PlaceHolderImage3 from "../assets/images/Placeholderimage3.png";
+import PlaceHolderImage4 from "../assets/images/Placeholderimage4.png";
 
-const DayOnCard = ({ day }) => {
+const placeholderImages = [
+  PlaceHolderImage1,
+  PlaceHolderImage2,
+  PlaceHolderImage3,
+  PlaceHolderImage4
+];
+
+const DayOnCard = ({ day, index }) => {
+  const placeholderImage = placeholderImages[index % placeholderImages.length];
+
   return (
-    <div className="relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[150px] sm:w-[265px] h-auto sm:h-[360px] border-2 border-[#528540]">
-
+    <div className="relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[150px] sm:w-[265px]  w-[160px]  h-[250px] sm:h-[360px] border-2 border-[#528540]">
       <button className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500">
         <FontAwesomeIcon icon={faTimes} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1]" />
       </button>
@@ -14,7 +26,14 @@ const DayOnCard = ({ day }) => {
       </div>
 
       <div className="px-4 sm:px-7 bg-[#fffbf1]">
-        <div className="w-full bg-gray-400 h-[100px] sm:h-[150px] rounded-lg"></div>
+        <div
+          className="w-full bg-cover h-[100px] sm:h-[150px] rounded-lg"
+          style={{
+            backgroundImage: `url(${placeholderImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
       </div>
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
@@ -26,7 +45,7 @@ const DayOnCard = ({ day }) => {
         <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
           Chicken, Lettuce, Dressing
         </p>
-        <p className="text-xs sm:text-sm text-[#528540]">Read More</p>
+        <p className="text-xs sm:text-sm text-[#528540] mb-1">Read More</p>
 
         <button className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-orange-700 self-center">
           Change Dish
