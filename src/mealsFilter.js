@@ -11,7 +11,6 @@ const mealsFilter = (allergies, numberOfDays) => {
   //Combined all allergy tags into 2D array
   let allAllergyTags = allergies.map((allergy) => {
     if (allergy.isSelected) {
-      console.log("allergy.allergyTag", allergy.allergyTag);
       return allergy.allergyTag;
     }
   });
@@ -28,11 +27,14 @@ const mealsFilter = (allergies, numberOfDays) => {
     ({ ingredients }) => {
       const areIngredientsAllergyCausing = ingredients.filter(
         (oneIngredient) => {
+          const ingredientAllergyMatch = flattenedAllergyTags.includes(
+            oneIngredient.toLowerCase()
+          );
           console.log(
             `Does ${oneIngredient} match any of allergies`,
-            flattenedAllergyTags.includes(oneIngredient.toLowerCase())
+            ingredientAllergyMatch
           );
-          return flattenedAllergyTags.includes(oneIngredient.toLowerCase());
+          return ingredientAllergyMatch;
         }
       );
       console.log(
@@ -45,19 +47,6 @@ const mealsFilter = (allergies, numberOfDays) => {
   );
 
   console.log("selected Recipes", selectedRecipes);
-
-  // console.log("selected Recipes", selectedRecipes);
-
-  // const result = apiResponse.recipes.map((eachItem) => {
-  //   console.log("eachItem.ingredients", eachItem.ingredients);
-  //   const recipeToReturn = eachItem.ingredients.map(
-  //     (singleIngredient) => {
-  //         console.log("singleIngredient", singleIngredient)
-  //         return !allAllergyTags.some((tag) => {
-  //           tag == singleIngredient;
-  //         }
-  //     }
-  // })
 }
 
 export default mealsFilter;
