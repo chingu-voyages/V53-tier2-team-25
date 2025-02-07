@@ -2,7 +2,7 @@ const allergyObjectsData = [
   {
     id: "Gluten-Free",
     name: "Gluten-Free",
-    allergyTag: ["wheat", "bread", "flour", "dough"],
+    allergyTag: ["wheat", "bread", "flour", "dough", "pasta"],
     isSelected: false,
   },
   {
@@ -32,7 +32,7 @@ const allergyObjectsData = [
   {
     id: "Tree Nut-Free",
     name: "Tree Nut-Free",
-    allergyTag: ["almond", "cashew", "nut", "pecan"],
+    allergyTag: ["almond", "cashew", "nut", "pecan", "peanut"],
     isSelected: false,
   },
 ];

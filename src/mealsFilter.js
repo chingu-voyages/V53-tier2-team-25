@@ -21,32 +21,39 @@ const mealsFilter = (allergies, numberOfDays) => {
   //flattens the 2D Array into single array of all tags
   const flattenedAllergyTags = [].concat(...allergyTagsWithoutUndefined);
 
-  // console.log("flattenedAllergyTags", flattenedAllergyTags);
+ console.log("flattenedAllergyTags", flattenedAllergyTags);
 
-  const selectedRecipes = apiResponse.recipes.filter(
-    ({ ingredients }) => {
-      const areIngredientsAllergyCausing = ingredients.filter(
-        (oneIngredient) => {
-          const ingredientAllergyMatch = flattenedAllergyTags.includes(
-            oneIngredient.toLowerCase()
-          );
-          console.log(
-            `Does ${oneIngredient} match any of allergies`,
-            ingredientAllergyMatch
-          );
-          return ingredientAllergyMatch;
-        }
-      );
-      console.log(
-        "areIngredientsAllergyCausing",
-        areIngredientsAllergyCausing.length
-      );
-      return areIngredientsAllergyCausing.length == 0 ? true : false;
-    }
-    //now that we have list of ingredients we map over them
-  );
+ const selectedRecipes = apiResponse.recipes.filter(({ ingredients }) => {
+   const areIngredientsAllergyCausing = ingredients.filter((oneIngredient) => {
+     const exactIngredient = oneIngredient.toLowerCase().split(",")[0];
+     console.log("exactInredient", exactIngredient);
+     const ingredientAllergyMatch = flattenedAllergyTags.map(
+       (eachAllergyTag) => {
+         const regex = new RegExp(`\\b${eachAllergyTag}\\b`, "i");
+         console.log("regex", regex);
+         return regex.test(exactIngredient);
+       }
+     );
+     // flattenedAllergyTags.includes(exactIngredient);
+     //  console.log(
+     //    `Does ${exactIngredient} match any of allergies`,
+     //    ingredientAllergyMatch.some(
+     //      (allergyCausing) => allergyCausing == true
+     //    )
+     //  );
+     return ingredientAllergyMatch.some(
+       (allergyCausing) => allergyCausing == true
+     );
+   });
+   console.log(
+     "areIngredientsAllergyCausing",
+     !!areIngredientsAllergyCausing.length
+   );
+   return !!areIngredientsAllergyCausing.length;
+ });
 
   console.log("selected Recipes", selectedRecipes);
+  return selectedRecipes;
 }
 
 export default mealsFilter;
