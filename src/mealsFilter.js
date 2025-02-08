@@ -16,41 +16,36 @@ const mealsFilter = (allergies, numberOfDays) => {
   });
 
   // filters out the undefined entries
-  const allergyTagsWithoutUndefined = allAllergyTags.filter((tag) => !!tag);
+  const allergyTagsWithoutUndefined =
+    allAllergyTags.length > 0 ? allAllergyTags.filter((tag) => !!tag) : [];
 
   //flattens the 2D Array into single array of all tags
   const flattenedAllergyTags = [].concat(...allergyTagsWithoutUndefined);
 
- console.log("flattenedAllergyTags", flattenedAllergyTags);
-
- const selectedRecipes = apiResponse.recipes.filter(({ ingredients }) => {
-   const areIngredientsAllergyCausing = ingredients.filter((oneIngredient) => {
-     const exactIngredient = oneIngredient.toLowerCase().split(",")[0];
-     console.log("exactInredient", exactIngredient);
-     const ingredientAllergyMatch = flattenedAllergyTags.map(
-       (eachAllergyTag) => {
-         const regex = new RegExp(`\\b${eachAllergyTag}\\b`, "i");
-         console.log("regex", regex);
-         return regex.test(exactIngredient);
-       }
-     );
-     // flattenedAllergyTags.includes(exactIngredient);
-     //  console.log(
-     //    `Does ${exactIngredient} match any of allergies`,
-     //    ingredientAllergyMatch.some(
-     //      (allergyCausing) => allergyCausing == true
-     //    )
-     //  );
-     return ingredientAllergyMatch.some(
-       (allergyCausing) => allergyCausing == true
-     );
-   });
-   console.log(
-     "areIngredientsAllergyCausing",
-     !!areIngredientsAllergyCausing.length
-   );
-   return !!areIngredientsAllergyCausing.length;
- });
+  const selectedRecipes = apiResponse.recipes.filter(
+    ({ id, name, ingredients }) => {
+      const areIngredientsAllergyCausing = ingredients.filter(
+        (oneIngredient) => {
+          const exactIngredient = oneIngredient.toLowerCase().split(",")[0];
+          console.log("exactInredient", exactIngredient);
+          const ingredientAllergyMatch =
+            flattenedAllergyTags.length > 0
+              ? flattenedAllergyTags.map((eachAllergyTag) => {
+                  const regex = new RegExp(`\\b${eachAllergyTag}\\b`, "i");
+                  return regex.test(exactIngredient);
+                })
+              : [];
+          return ingredientAllergyMatch.length > 0
+            ? ingredientAllergyMatch.some(
+                (allergyCausing) => allergyCausing == true
+              )
+            : false;
+        }
+      );
+      console.log(`Is ${name} selected`, !areIngredientsAllergyCausing.length);
+      return !areIngredientsAllergyCausing.length;
+    }
+  );
 
   console.log("selected Recipes", selectedRecipes);
   return selectedRecipes;
