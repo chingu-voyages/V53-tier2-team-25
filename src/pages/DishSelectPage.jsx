@@ -15,37 +15,61 @@ const defaultDays = [
 const DishSelect = ({ backStep }) => {
   const [daysData, setDaysData] = useState(defaultDays);
 
+  const toggleDayType = (day, meal = null) => {
+    setDaysData((prev) => {
+      const updatedDays = prev.map((item) =>
+        item.day === day
+          ? { ...item, type: item.type === "on" ? "off" : "on", meal: item.type === "on" ? null : meal }
+          : item
+      );
+  
+      localStorage.setItem("daysOn", JSON.stringify(updatedDays.filter((d) => d.type === "on")));
+      localStorage.setItem("daysOff", JSON.stringify(updatedDays.filter((d) => d.type === "off")));
+  
+      return updatedDays;
+    });
+  };
+  
+
   useEffect(() => {
     const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
     const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-
+  
     const updatedDays = defaultDays.map(({ day, type }) => {
-      const isOn = storedDaysOn.some((d) => d.dayOfWeek === day);
-      const isOff = storedDaysOff.some((d) => d.dayOfWeek === day);
+      const isOn = storedDaysOn.some((d) => d.day === day);
+      const isOff = storedDaysOff.some((d) => d.day === day);
       return { day, type: isOn ? "on" : isOff ? "off" : type };
     });
-
+  
     setDaysData(updatedDays);
   }, []);
+  
 
   return (
     <div>
-      <div className="dish_select--header p-6 mb-10 flex justify-center w-full font-bold">
+      <div className=" p-6 mb-5 flex justify-center w-full font-bold">
         <h1 className="font-[600] text-[24px] snap-center text-center leading-[30px] mt-10">
           Change or remove dishes based on your preferences
         </h1>
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type }, index) =>
+        {daysData.map(({ day, type, meal }, index) =>
           type === "on" ? (
-            <DayOnCard key={day} day={day} index={index} />
+            <DayOnCard
+              key={day}
+              day={day}
+              meal={meal}
+              index={index}
+              onClick={() => toggleDayType(day)}
+              onClose={() => toggleDayType(day)} 
+            />
           ) : (
-            <DayOffCard key={day} day={day} />
+            <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
           )
         )}
-        
       </div>
+
       <div className="text-center m-7">
         <a
           className="underline raleway-font text-sm cursor-pointer"

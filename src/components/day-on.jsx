@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import PlaceHolderImage1 from "../assets/images/Placeholderimage1.png";
@@ -12,12 +13,27 @@ const placeholderImages = [
   PlaceHolderImage4
 ];
 
-const DayOnCard = ({ day, index }) => {
+const DayOnCard = ({ day, index, onClick, onClose }) => {
+  const [isDayOff, setIsDayOff] = useState(false); 
   const placeholderImage = placeholderImages[index % placeholderImages.length];
 
+  
+  const handleDayOff = () => {
+    onClose(day); 
+  };
+
   return (
-    <div className="relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[150px] sm:w-[265px]  w-[160px]  h-[250px] sm:h-[360px] border-2 border-[#528540]">
-      <button className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500">
+    <div
+      className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
+        isDayOff
+          ? "bg-[#f4f4f4] border-[#d3d3d3]" 
+          : "border-[#528540]" 
+      }`}
+    >
+      <button
+        onClick={handleDayOff}
+        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500"
+      >
         <FontAwesomeIcon icon={faTimes} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1]" />
       </button>
 
