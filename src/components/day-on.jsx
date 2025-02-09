@@ -33,7 +33,7 @@ const DayOnCard = ({ day, index, meals }) => {
         <div
           className="w-full bg-cover h-[100px] sm:h-[150px] rounded-lg"
           style={{
-            backgroundImage: `url(${placeholderImage})`,
+            backgroundImage: `url(${image})` || `url(${placeholderImage} )`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
