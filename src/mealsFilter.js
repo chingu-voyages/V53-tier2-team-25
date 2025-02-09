@@ -1,7 +1,7 @@
 import allergyObjectsData from "/src/allergies.js";
 import apiResponse from "/src/apiResponse";
 
-const mealsFilter = (allergies, numberOfDays) => {
+const mealsFilter = (allergies) => {
   // step 1 : knowing selected allergies with tags
   // steps 2: combine all the tags in one array
   // step 3: iterate over each recipe
@@ -49,6 +49,6 @@ const mealsFilter = (allergies, numberOfDays) => {
 
   console.log("selected Recipes", selectedRecipes);
   return selectedRecipes;
-}
+};
 
 export default mealsFilter;

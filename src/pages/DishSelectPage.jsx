@@ -15,6 +15,8 @@ const defaultDays = [
 
 const DishSelect = ({ backStep }) => {
   const [daysData, setDaysData] = useState(defaultDays);
+
+  let filteredMeals;
   let storedDaysOn;
 
   useEffect(() => {
@@ -31,9 +33,9 @@ const DishSelect = ({ backStep }) => {
   }, []);
 
   const allergies = JSON.parse(sessionStorage.getItem("allergies"));
-  const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
+  // const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
 
-  const filteredMeals = mealsFilter(allergies, numberOfDishes);
+  filteredMeals = mealsFilter(allergies);
 
   return (
     <div>
@@ -44,13 +46,19 @@ const DishSelect = ({ backStep }) => {
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type }, index) =>
-          type === "on" ? (
-            <DayOnCard key={day} day={day} index={index} />
+        {daysData.map(({ day, type }, index) => {
+          // console.log("meals", meals);
+          return type === "on" ? (
+            <DayOnCard
+              key={day}
+              day={day}
+              index={index}
+              meals={filteredMeals[index]}
+            />
           ) : (
             <DayOffCard key={day} day={day} />
-          )
-        )}
+          );
+        })}
       </div>
       <div className="text-center m-7">
         <a
