@@ -8,46 +8,33 @@ const mealsFilter = (allergies) => {
   // step 4: filter (any) out the recipes that MATCH any ONE allergy causing tag
   // step 5: return the recipes that don't match any of the allergy tags (combined array)
 
-  //Combined all allergy tags into 2D array
-  let allAllergyTags = allergies.map((allergy) => {
-    if (allergy.isSelected) {
-      return allergy.allergyTag;
-    }
-  });
+  // calculating flattened allergy tags right here instead of outside (steps 1-2)
 
-  // filters out the undefined entries
-  const allergyTagsWithoutUndefined =
-    allAllergyTags.length > 0 ? allAllergyTags.filter((tag) => !!tag) : [];
-
-  //flattens the 2D Array into single array of all tags
-  const flattenedAllergyTags = [].concat(...allergyTagsWithoutUndefined);
+  const flattenedAllergyTags = allergies
+    .filter((allergy) => allergy.isSelected)
+    .map((allergy) => allergy.allergyTag.map((tag) => tag.toLowerCase()))
+    .flat();
 
   const selectedRecipes = apiResponse.recipes.filter(
     ({ id, name, ingredients }) => {
-      const areIngredientsAllergyCausing = ingredients.filter(
-        (oneIngredient) => {
-          const exactIngredient = oneIngredient.toLowerCase().split(",")[0];
-          console.log("exactInredient", exactIngredient);
-          const ingredientAllergyMatch =
-            flattenedAllergyTags.length > 0
-              ? flattenedAllergyTags.map((eachAllergyTag) => {
-                  const regex = new RegExp(`\\b${eachAllergyTag}\\b`, "i");
-                  return regex.test(exactIngredient);
-                })
-              : [];
-          return ingredientAllergyMatch.length > 0
-            ? ingredientAllergyMatch.some(
-                (allergyCausing) => allergyCausing == true
-              )
-            : false;
-        }
-      );
-      console.log(`Is ${name} selected`, !areIngredientsAllergyCausing.length);
-      return !areIngredientsAllergyCausing.length;
+      const hasNoAllergyIngredients = !ingredients.some((ingredient) => {
+        const cleanedIngredient = ingredient
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9\s]/g, "");
+        return flattenedAllergyTags.some((allergyTag) => {
+          const regex = new RegExp(`\\b${allergyTag}\\b`, "i");
+          return regex.test(cleanedIngredient);
+        });
+      });
+
+      // if (hasNoAllergyIngredients) {
+      //   console.log(`Meal without allergies: ${name}`, ingredients);
+      // }
+
+      return hasNoAllergyIngredients;
     }
   );
-
-  console.log("selected Recipes", selectedRecipes);
+  // console.log("selected Recipes", selectedRecipes);
   return selectedRecipes;
 };
 
