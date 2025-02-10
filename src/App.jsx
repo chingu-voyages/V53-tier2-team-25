@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         <main className="flex-grow">
           <MenuCreationBlock />
           <ProgressBar />
-        </main>
+\        </main>
         <Footer />
       </div>
     ),

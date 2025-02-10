@@ -18,6 +18,7 @@ const DishSelect = ({ backStep }) => {
 
   let filteredMeals;
   let storedDaysOn;
+  
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
       const updatedDays = prev.map((item) =>

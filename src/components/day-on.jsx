@@ -10,37 +10,32 @@ const placeholderImages = [
   PlaceHolderImage1,
   PlaceHolderImage2,
   PlaceHolderImage3,
-  PlaceHolderImage4
+  PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose }) => {
-  const [isDayOff, setIsDayOff] = useState(false); 
+const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
+  const [isDayOff, setIsDayOff] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
   const { id, name, image, ingredients, caloriesPerServing } = meals;
 
-  
   const handleDayOff = () => {
-    onClose(day); 
-  };
-
-  
-  const handleDayOff = () => {
-    onClose(day); 
+    onClose(day);
   };
 
   return (
     <div
       className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
-        isDayOff
-          ? "bg-[#f4f4f4] border-[#d3d3d3]" 
-          : "border-[#528540]" 
+        isDayOff ? "bg-[#f4f4f4] border-[#d3d3d3]" : "border-[#528540]"
       }`}
     >
       <button
         onClick={handleDayOff}
         className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500"
       >
-        <FontAwesomeIcon icon={faTimes} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1]" />
+        <FontAwesomeIcon
+          icon={faTimes}
+          className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1]"
+        />
       </button>
 
       <div className="bg-[#fffbf1] p-2 sm:p-3 text-center text-sm sm:text-xl font-semibold">
@@ -58,16 +53,17 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
         ></div>
       </div>
 
+      {/* <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
+            {caloriesPerServing}
+          </h4> */}
+
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
-          <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">{name}</h4>
-          <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
-            {caloriesPerServing}
-          </h4>
+          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
         </div>
 
         <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
-          {ingredients}
+          {ingredients?.slice(0, 2).join(", ")}
         </p>
         <p className="text-xs sm:text-sm text-[#528540] mb-1">Read More</p>
 
