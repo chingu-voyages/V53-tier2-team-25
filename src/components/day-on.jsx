@@ -5,6 +5,7 @@ import PlaceHolderImage1 from "../assets/images/Placeholderimage1.png";
 import PlaceHolderImage2 from "../assets/images/Placeholderimage2.png";
 import PlaceHolderImage3 from "../assets/images/Placeholderimage3.png";
 import PlaceHolderImage4 from "../assets/images/Placeholderimage4.png";
+import MoreInfoModal from "./MoreInfoModal";
 
 const placeholderImages = [
   PlaceHolderImage1,
@@ -21,6 +22,8 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
   const handleDayOff = () => {
     onClose(day);
   };
+
+  const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
 
   return (
     <div
@@ -65,7 +68,24 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
         <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
           {ingredients?.slice(0, 2).join(", ")}
         </p>
-        <p className="text-xs sm:text-sm text-[#528540] mb-1">Read More</p>
+
+        <button
+          className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
+          onClick={() => setIsMoreInfoOpen(true)}
+        >
+          Read More
+        </button>
+
+        <MoreInfoModal
+          isOpen={isMoreInfoOpen}
+          setIsMoreInfoOpen={setIsMoreInfoOpen}
+          name={name}
+          id={id}
+          ingredients={ingredients}
+          day={day}
+          caloriesPerServing={caloriesPerServing}
+          image={image}
+        />
 
         <button className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-orange-700 self-center">
           Change Dish
