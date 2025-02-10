@@ -52,6 +52,13 @@ const DishSelect = ({ backStep }) => {
   const allergies = JSON.parse(sessionStorage.getItem("allergies"));
   // const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
 
+  const getRandomMealindex = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+  const randomMealIndex = defaultDays
+    .filter((singleDay) => singleDay.type == "on")
+    .map((defaultDay) => getRandomMealindex(1, 50));
+
   filteredMeals = mealsFilter(allergies);
 
   return (
@@ -63,21 +70,25 @@ const DishSelect = ({ backStep }) => {
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type, meal }, index) =>
-          type === "on" ? (
+        {daysData.map(({ day, type, meal }, index) => {
+          const mealIndex = randomMealIndex[index];
+
+          return type === "on" ? (
             <DayOnCard
               key={day}
               day={day}
               meal={meal}
               index={index}
-              meals={filteredMeals[index]}
+              meals={
+                index <= randomMealIndex.length ? filteredMeals[mealIndex] : []
+              }
               onClick={() => toggleDayType(day)}
-              onClose={() => toggleDayType(day)} 
+              onClose={() => toggleDayType(day)}
             />
           ) : (
             <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
-          )
-        )}
+          );
+        })}
       </div>
 
       <div className="text-center m-7">
