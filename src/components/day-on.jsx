@@ -23,6 +23,11 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
     onClose(day); 
   };
 
+  
+  const handleDayOff = () => {
+    onClose(day); 
+  };
+
   return (
     <div
       className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
