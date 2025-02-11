@@ -8,50 +8,45 @@ import PlaceHolderImage4 from "../assets/images/Placeholderimage4.png";
 
 const placeholderMeals = [
   {
+    id: 1,
     image: PlaceHolderImage1,
     name: "Grilled Chicken Salad",
     ingredients: "Chicken, Lettuce, Dressing",
-    calories: "345cal",
+    caloriesPerServing: "345cal",
   },
   {
+    id: 2,
     image: PlaceHolderImage2,
     name: "Pasta Primavera",
     ingredients: "Pasta, Vegetables, Parmesan",
-    calories: "410cal",
+    caloriesPerServing: "410cal",
   },
   {
+    id: 3,
     image: PlaceHolderImage3,
     name: "Steak & Veggies",
     ingredients: "Steak, Broccoli, Carrots",
-    calories: "500cal",
+    caloriesPerServing: "500cal",
   },
   {
+    id: 4,
     image: PlaceHolderImage4,
     name: "Vegan Bowl",
     ingredients: "Quinoa, Avocado, Beans",
-    calories: "320cal",
+    caloriesPerServing: "320cal",
   },
 ];
 
-const handleDayOff = () => {
-  setIsDayOff(true);
-  onClick(day);
-};
-
-const handleDayOn = () => {
-  setIsDayOff(false);
-  onClose(day);
-};
-
-const MealSelectionPopup = ({ day, onClose, onSelectMeal }) => {
+const ChangeDishPopup = ({ day, onClose, onSelectMeal }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
-    style={{
-      msOverflowStyle: 'none', /* IE and Edge */
-      scrollbarWidth: 'none', /* Firefox */
-    }}
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
+      style={{
+        msOverflowStyle: "none",
+        scrollbarWidth: "none",
+      }}
     >
-      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto ">
+      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto shadow-lg">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
           onClick={onClose}
@@ -60,28 +55,26 @@ const MealSelectionPopup = ({ day, onClose, onSelectMeal }) => {
         </button>
 
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-center">
-          Select Your Meal for {day}
+          Change your meal for {day}
         </h2>
 
-        <div className="flex flex-col gap-4 ">
-          {placeholderMeals.map((meal, index) => (
+        <div className="flex flex-col gap-4">
+          {placeholderMeals.map((meal) => (
             <div
-              key={index}
-              className="flex items-center bg-[#FFFBF1] rounded-lg p-3 shadow-md shadow-md shadow-[#528540]" 
+              key={meal.id}
+              className="flex items-center bg-[#FFFBF1] rounded-lg p-3 shadow-md shadow-[#528540]"
             >
               <img
-                src={meal.image}
+                src={meal.image} 
                 alt={meal.name}
                 className="w-24 h-24 rounded-lg"
               />
 
               <div className="ml-4 flex-grow">
                 <div className="flex gap-4">
-                  <h3 className="text-md sm:text-lg font-semibold">
-                    {meal.name}
-                  </h3>
+                  <h3 className="text-md sm:text-lg font-semibold">{meal.name}</h3>
                   <p className="text-sm font-bold text-green-700">
-                    {meal.calories}
+                    {meal.caloriesPerServing}
                   </p>
                 </div>
                 <p className="text-sm text-gray-600">{meal.ingredients}</p>
@@ -92,12 +85,12 @@ const MealSelectionPopup = ({ day, onClose, onSelectMeal }) => {
                   Read More
                 </button>
               </div>
-              
+
               <button
-                className="ml-auto bg-[#528540] text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
-                onClick={() => onSelectMeal(meal)}
+                className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
+                onClick={() => onSelectMeal(meal)} 
               >
-                Select
+                Change Dish
               </button>
             </div>
           ))}
@@ -107,4 +100,4 @@ const MealSelectionPopup = ({ day, onClose, onSelectMeal }) => {
   );
 };
 
-export default MealSelectionPopup;
+export default ChangeDishPopup;
