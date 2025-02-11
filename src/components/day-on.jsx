@@ -14,10 +14,11 @@ const placeholderImages = [
   PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
+const DayOnCard = ({ day, index, onClick, onClose }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
-  const { id, name, image, ingredients, caloriesPerServing } = meals;
+  //console.log(meals ? "meals" : "no meals");
+  // const { id, name, image, ingredients, caloriesPerServing } = meals;
 
   const handleDayOff = () => {
     onClose(day);
@@ -49,7 +50,8 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
         <div
           className="w-full bg-cover h-[100px] sm:h-[150px] rounded-lg"
           style={{
-            backgroundImage: `url(${image})` || `url(${placeholderImage} )`,
+            // backgroundImage: `url(${image})` || `url(${placeholderImage} )`,
+            backgroundImage: `url(${placeholderImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -65,9 +67,9 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
           <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
         </div>
 
-        <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
+        {/* <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
           {ingredients?.slice(0, 2).join(", ")}
-        </p>
+        </p> */}
 
         <button
           className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
@@ -76,7 +78,7 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
           Read More
         </button>
 
-        <MoreInfoModal
+        {/* <MoreInfoModal
           isOpen={isMoreInfoOpen}
           setIsMoreInfoOpen={setIsMoreInfoOpen}
           name={name}
@@ -85,7 +87,7 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
           day={day}
           caloriesPerServing={caloriesPerServing}
           image={image}
-        />
+        /> */}
 
         <button className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-orange-700 self-center">
           Change Dish
