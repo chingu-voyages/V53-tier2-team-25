@@ -19,7 +19,9 @@ export default function MoreInfoModal({
   caloriesPerServing,
   day,
 }) {
-  const ingredientsDisplay = ingredients.join(", ");
+  const ingredientsDisplay = Array.isArray(ingredients)
+    ? ingredients.join(", ")
+    : [];
 
   return (
     <div className="">
