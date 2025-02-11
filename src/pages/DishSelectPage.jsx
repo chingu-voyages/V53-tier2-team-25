@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DayOnCard from "../components/day-on.jsx";
 import DayOffCard from "../components/day-off.jsx";
-import mealsFilter from "../mealsFilter";
+import filteredRecipes from "../mealsFilter";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -15,44 +15,94 @@ const defaultDays = [
 
 const DishSelect = ({ backStep }) => {
   const [daysData, setDaysData] = useState(defaultDays);
+  const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   let filteredMeals;
   let storedDaysOn;
-  
+
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
       const updatedDays = prev.map((item) =>
         item.day === day
-          ? { ...item, type: item.type === "on" ? "off" : "on", meal: item.type === "on" ? null : meal }
+          ? {
+              ...item,
+              type: item.type === "on" ? "off" : "on",
+              meal: item.type === "on" ? null : meal,
+            }
           : item
       );
-  
-      localStorage.setItem("daysOn", JSON.stringify(updatedDays.filter((d) => d.type === "on")));
-      localStorage.setItem("daysOff", JSON.stringify(updatedDays.filter((d) => d.type === "off")));
-  
+
+      localStorage.setItem(
+        "daysOn",
+        JSON.stringify(updatedDays.filter((d) => d.type === "on"))
+      );
+      localStorage.setItem(
+        "daysOff",
+        JSON.stringify(updatedDays.filter((d) => d.type === "off"))
+      );
+
       return updatedDays;
     });
   };
-  
 
   useEffect(() => {
     const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
     const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-  
+
     const updatedDays = defaultDays.map(({ day, type }) => {
       const isOn = storedDaysOn.some((d) => d.day === day);
       const isOff = storedDaysOff.some((d) => d.day === day);
       return { day, type: isOn ? "on" : isOff ? "off" : type };
     });
-  
+
     setDaysData(updatedDays);
   }, []);
-  
 
   const allergies = JSON.parse(sessionStorage.getItem("allergies"));
-  // const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
+  const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
 
-  filteredMeals = mealsFilter(allergies);
+  useEffect(() => {
+    const fetchSelectedRecipes = async () => {
+      try {
+        setLoading(true);
+        const selectedRecipes = await filteredRecipes(allergies);
+        setMeals(selectedRecipes);
+
+        if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
+          console.log("No recipes available");
+          setLoading(false);
+          return;
+        }
+
+        setDaysData((prev) => {
+          const usedIndices = new Set(); // Track used indices to ensure unique meals
+          return prev.map((eachDayData) => {
+            if (eachDayData.type === "on") {
+              let randomIndex;
+              do {
+                randomIndex = Math.floor(
+                  Math.random() * selectedRecipes.length
+                );
+              } while (usedIndices.has(randomIndex)); // Ensure unique index
+              usedIndices.add(randomIndex);
+              return {
+                ...eachDayData,
+                meal: selectedRecipes[randomIndex],
+              };
+            }
+            return eachDayData;
+          });
+        });
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to fetch recipes");
+        setLoading(false);
+      }
+    };
+    fetchSelectedRecipes();
+  }, []);
 
   return (
     <div>
@@ -63,21 +113,24 @@ const DishSelect = ({ backStep }) => {
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {daysData.map(({ day, type, meal }, index) =>
-          type === "on" ? (
-            <DayOnCard
-              key={day}
-              day={day}
-              meal={meal}
-              index={index}
-              meals={filteredMeals[index]}
-              onClick={() => toggleDayType(day)}
-              onClose={() => toggleDayType(day)} 
-            />
-          ) : (
-            <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
-          )
-        )}
+        {Array.isArray(daysData)
+          ? daysData.map((eachDay, index) => {
+              const { day, type, meal } = eachDay;
+              console.log("eachDay", eachDay);
+              return type === "on" ? (
+                <DayOnCard
+                  key={day}
+                  day={day}
+                  meal={meal}
+                  index={index}
+                  onClick={() => toggleDayType(day)}
+                  onClose={() => toggleDayType(day)}
+                />
+              ) : (
+                <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
+              );
+            })
+          : []}
       </div>
 
       <div className="text-center m-7">

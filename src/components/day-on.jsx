@@ -14,11 +14,12 @@ const placeholderImages = [
   PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
+const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
-  const { id, name, image, ingredients, caloriesPerServing } = meals;
-
+  const { id, name, ingredients, image, caloriesPerServing } =
+    typeof meal !== "undefined" && meal;
+  console.log("meal in DaysOnCard", meal);
   const handleDayOff = () => {
     onClose(day);
   };
@@ -57,8 +58,8 @@ const DayOnCard = ({ day, index, onClick, onClose, meals }) => {
       </div>
 
       {/* <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
-            {caloriesPerServing}
-          </h4> */}
+        {caloriesPerServing}
+      </h4> */}
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
