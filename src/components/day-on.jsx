@@ -14,12 +14,12 @@ const placeholderImages = [
   PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose }) => {
+const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
-  //console.log(meals ? "meals" : "no meals");
-  // const { id, name, image, ingredients, caloriesPerServing } = meals;
-
+  const { id, name, ingredients, image, caloriesPerServing } =
+    typeof meal !== "undefined" && meal;
+  console.log("meal in DaysOnCard", meal);
   const handleDayOff = () => {
     onClose(day);
   };
@@ -50,8 +50,7 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
         <div
           className="w-full bg-cover h-[100px] sm:h-[150px] rounded-lg"
           style={{
-            // backgroundImage: `url(${image})` || `url(${placeholderImage} )`,
-            backgroundImage: `url(${placeholderImage})`,
+            backgroundImage: `url(${image})` || `url(${placeholderImage} )`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -59,17 +58,17 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
       </div>
 
       {/* <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
-            {caloriesPerServing}
-          </h4> */}
+        {caloriesPerServing}
+      </h4> */}
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
           <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
         </div>
 
-        {/* <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
+        <p className="text-xs sm:text-sm text-gray-700 h-[20px] sm:h-[30px] overflow-hidden">
           {ingredients?.slice(0, 2).join(", ")}
-        </p> */}
+        </p>
 
         <button
           className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
@@ -78,7 +77,7 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
           Read More
         </button>
 
-        {/* <MoreInfoModal
+        <MoreInfoModal
           isOpen={isMoreInfoOpen}
           setIsMoreInfoOpen={setIsMoreInfoOpen}
           name={name}
@@ -87,7 +86,7 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
           day={day}
           caloriesPerServing={caloriesPerServing}
           image={image}
-        /> */}
+        />
 
         <button className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-orange-700 self-center">
           Change Dish
