@@ -15,7 +15,7 @@ const placeholderImages = [
   PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose }) => {
+const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const [mealData, setMealData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,91 +24,9 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
 
   const placeholderImage = placeholderImages[index % placeholderImages.length];
-
-  const extractIngredients = (meal) => {
-    const ingredients = [];
-    for (let i = 1; i <= 20; i++) {
-      const ingredient = meal[`strIngredient${i}`];
-      if (ingredient) {
-        ingredients.push(ingredient);
-      }
-    }
-    return ingredients;
-  };
-  
-
-  const containsAllergens = (ingredients, allergens) => {
-    const flattenedAllergyTags = allergens
-      .filter((allergy) => allergy.isSelected)
-      .flatMap((allergy) => allergy.allergyTag.map((tag) => tag.toLowerCase()));
-  
-    if (flattenedAllergyTags.length === 0) {
-        return false;
-    }
-
-    return ingredients.some((ingredient) => {
-      const cleanedIngredient = ingredient
-        .toLowerCase()
-        .replace(/[^a-zA-Z\s]/g, "") 
-        .split(/\s+/); 
-
-      return flattenedAllergyTags.some((allergyTag) => {
-        if (cleanedIngredient.includes(allergyTag)) {
-          console.log(`❌ Allergen Found: ${allergyTag} in ${ingredient}`);
-          return true; 
-        }
-        return false; 
-      });
-    });
-};
-  
-  
-
-  useEffect(() => {
-    const fetchRandomMeal = async () => {
-      try {
-        setLoading(true);
-        let meal;
-        let safeMealFound = false;
-
-        const storedAllergens = sessionStorage.getItem("allergens");
-        const allergenList = storedAllergens ? JSON.parse(storedAllergens) : [];
-
-        while (!safeMealFound) {
-          const response = await fetch(
-            "https://www.themealdb.com/api/json/v1/1/random.php"
-          );
-          const data = await response.json();
-
-          if (data.meals && data.meals.length > 0) {
-            meal = data.meals[0];
-            const ingredients = extractIngredients(meal);
-
-            if (!containsAllergens(ingredients, allergenList)) {
-              safeMealFound = true;
-              setMealData(meal);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching meal:", err);
-        setError("Failed to fetch meal data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRandomMeal();
-  }, []);
-
-  const ingredients = mealData ? extractIngredients(mealData) : [];
-  const { strMeal: name, strMealThumb: image } = mealData || {};
-
-  const handleSelectMeal = (meal) => {
-    setMealData(meal);
-    setShowPopup(false);
-  };
-
+  const { id, name, ingredients, image, caloriesPerServing } =
+    typeof meal !== "undefined" && meal;
+  console.log("meal in DaysOnCard", meal);
   const handleDayOff = () => {
     onClose(day);
   };
@@ -143,6 +61,10 @@ const DayOnCard = ({ day, index, onClick, onClose }) => {
           }}
         ></div>
       </div>
+
+      {/* <h4 className="text-sm sm:text-lg font-bold mb-1 sm:mb-2">
+        {caloriesPerServing}
+      </h4> */}
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         {loading ? (

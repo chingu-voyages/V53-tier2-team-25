@@ -1,25 +1,36 @@
 import {
-    Dialog,
-    DialogBackdrop,
-    DialogPanel,
-  } from "@headlessui/react";
-  import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-  import { faTimes } from "@fortawesome/free-solid-svg-icons";
-  
-  export default function MoreInfoModal({
-    name,
-    id,
-    ingredients,
-    isOpen,
-    setIsMoreInfoOpen,
-    image,
-    caloriesPerServing,
-    day,
-  }) {
-    const ingredientsDisplay = ingredients.join(", ");
-  
-    return (
-      <Dialog open={isOpen} as="div" className="relative z-10" onClose={() => setIsMoreInfoOpen(false)}>
+  Button,
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+export default function MoreInfoModal({
+  name,
+  id,
+  ingredients,
+  isOpen,
+  setIsMoreInfoOpen,
+  image,
+  caloriesPerServing,
+  day,
+}) {
+  const ingredientsDisplay = Array.isArray(ingredients)
+    ? ingredients.join(", ")
+    : [];
+
+  return (
+    <div className="">
+      <Dialog
+        open={isOpen}
+        as="div"
+        className="relative z-10 focus:outline-none"
+        onClose={close}
+      >
         <DialogBackdrop className="fixed inset-0 bg-black/30">
           <div className="fixed inset-10 z-10 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center">
@@ -56,4 +67,3 @@ import {
       </Dialog>
     );
   }
-  
