@@ -51,10 +51,10 @@ Currently, two official plugins are available:
 - Brianna Bierod: [LinkedIn](https://www.linkedin.com/in/brebierod-uxdesign/)
 
 **Product Owner**
-- Viral: [LinkedIn](https://linkedin.com/in/liaccountname)
+- Viral Barot: [LinkedIn](https://linkedin.com/in/accountname)
 
 **Scrum Master**
-- Christel: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Christel: [LinkedIn](https://linkedin.com/in/accountname)
 
 **Voyage Guide**
-- Andresc : [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Andres Benitez: [LinkedIn](https://linkedin.com/alcb1310)
