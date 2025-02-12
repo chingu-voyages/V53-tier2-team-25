@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DayOnCard from "../components/day-on.jsx";
 import DayOffCard from "../components/day-off.jsx";
 import filteredRecipes from "../mealsFilter";
+import MealSelectionPopup from "../components/mealSelectionPopup.jsx";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -18,9 +19,10 @@ const DishSelect = ({ backStep }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  let filteredMeals;
-  let storedDaysOn;
+  const [selectedDay, setSelectedDay] = useState(null);
+  const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
+  const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
+  let usedIndices = [];
 
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
@@ -42,15 +44,11 @@ const DishSelect = ({ backStep }) => {
         "daysOff",
         JSON.stringify(updatedDays.filter((d) => d.type === "off"))
       );
-
       return updatedDays;
     });
   };
 
   useEffect(() => {
-    const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
-    const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-
     const updatedDays = defaultDays.map(({ day, type }) => {
       const isOn = storedDaysOn.some((d) => d.day === day);
       const isOff = storedDaysOff.some((d) => d.day === day);
@@ -68,7 +66,8 @@ const DishSelect = ({ backStep }) => {
       try {
         setLoading(true);
         const selectedRecipes = await filteredRecipes(allergies);
-        setMeals(selectedRecipes);
+        console.log("Fetched Recipes:", selectedRecipes); // Debugging
+        setMeals(selectedRecipes); // Set fetched meals to state
 
         if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
           console.log("No recipes available");
@@ -77,16 +76,15 @@ const DishSelect = ({ backStep }) => {
         }
 
         setDaysData((prev) => {
-          const usedIndices = new Set(); // Track used indices to ensure unique meals
+          let randomIndex = Math.floor(Math.random() * selectedRecipes.length);
           return prev.map((eachDayData) => {
             if (eachDayData.type === "on") {
-              let randomIndex;
-              do {
+              while (usedIndices.includes(randomIndex)) {
                 randomIndex = Math.floor(
                   Math.random() * selectedRecipes.length
                 );
-              } while (usedIndices.has(randomIndex)); // Ensure unique index
-              usedIndices.add(randomIndex);
+              }
+              usedIndices.push(randomIndex);
               return {
                 ...eachDayData,
                 meal: selectedRecipes[randomIndex],
@@ -111,20 +109,23 @@ const DishSelect = ({ backStep }) => {
           Change or remove dishes based on your preferences
         </h1>
       </div>
-
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
         {Array.isArray(daysData)
           ? daysData.map((eachDay, index) => {
               const { day, type, meal } = eachDay;
-              console.log("eachDay", eachDay);
               return type === "on" ? (
                 <DayOnCard
                   key={day}
                   day={day}
                   meal={meal}
+                  allMeals={meals}
                   index={index}
-                  onClick={() => toggleDayType(day)}
+                  onClick={() => {
+                    setSelectedDay(day);
+                    toggleDayType(day);
+                  }}
                   onClose={() => toggleDayType(day)}
+                  usedIndices={usedIndices}
                 />
               ) : (
                 <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
@@ -132,7 +133,25 @@ const DishSelect = ({ backStep }) => {
             })
           : []}
       </div>
-
+      ;
+      {selectedDay && (
+        <MealSelectionPopup
+          day={selectedDay}
+          onClose={() => setSelectedDay(null)}
+          onSelectMeal={(selectedMeal) => {
+            setDaysData((prev) =>
+              prev.map((dayData) =>
+                dayData.day === selectedDay
+                  ? { ...dayData, meal: selectedMeal }
+                  : dayData
+              )
+            );
+            setSelectedDay(null);
+            console.log("Meals being passed to Popup:", meals);
+          }}
+          meals={meals}
+        />
+      )}
       <div className="text-center m-7">
         <a
           className="underline raleway-font text-sm cursor-pointer"

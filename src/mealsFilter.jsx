@@ -4,7 +4,6 @@ const filteredRecipes = async (allergies) => {
   try {
     const response = await fetch(BASE_URL);
     const apiResponse = await response.json();
-    console.log("apiResponse", apiResponse);
     const flattenedAllergyTags = allergies
       .filter((allergy) => allergy.isSelected)
       .map((allergy) =>
@@ -28,7 +27,6 @@ const filteredRecipes = async (allergies) => {
       return hasNoAllergyIngredients;
     });
 
-    console.log("selected Recipes", selectedRecipes);
     return selectedRecipes;
   } catch (error) {
     console.error("Error fetching or filtering meals:", error);
