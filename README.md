@@ -14,6 +14,12 @@ This project focuses on developing a menu scheduling application that allows man
 **Live Version**
 [Link to PlatePal App](https://platepal2.netlify.app/)
 
+**From the repo**
+   1. Clone this project locally
+   2. Run `npm install` in your bash/command line
+   3. Run `npm run dev` in your bash/command line
+   4. Install additional dependencies (see below)
+
 ### Dependencies
  - FontAwesome
  - HeadlessUI
