@@ -121,7 +121,7 @@ const DishSelect = ({ backStep }) => {
                   meal={meal}
                   index={index}
                   onClick={() => {
-                    setSelectedDay(day); // Store the day selected for meal change
+                    setSelectedDay(day); 
                     toggleDayType(day);
                   }}
                   onClose={() => toggleDayType(day)}
@@ -149,7 +149,7 @@ const DishSelect = ({ backStep }) => {
             console.log("Meals being passed to Popup:", meals);
 
           }}
-          meals={meals} // Pass meals to the popup
+          meals={meals} 
            
         />
 
