@@ -26,11 +26,18 @@ const DayOffCard = ({ day, toggleDayType,meal }) => {
           onClick={() => setShowPopup(true)}
         >
           Select Dish
-          <FontAwesomeIcon icon={faPlus} className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1] ml-1" />
+          <FontAwesomeIcon
+            icon={faPlus}
+            className="w-3 h-3 sm:w-4 sm:h-4 text-[#fffbf1] ml-1"
+          />
         </button>
       </div>
       {showPopup && (
-        <MealSelectionPopup onClose={() => setShowPopup(false)} onSelectMeal={handleSelectMeal} />
+        <MealSelectionPopup
+          onClose={() => setShowPopup(false)}
+          onSelectMeal={handleSelectMeal}
+          meals={meals}
+        />
       )}
     </div>
   );

@@ -2,8 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const MealSelectionPopup = ({ day, onClose, onSelectMeal, meals = [] }) => {
+const MealSelectionPopup = ({ day, onClose, meals }) => {
   console.log("Meals in Popup:", meals);
+  console.log("inside Meal selection pop up");
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

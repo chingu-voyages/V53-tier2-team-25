@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DayOnCard from "../components/day-on.jsx";
 import DayOffCard from "../components/day-off.jsx";
 import filteredRecipes from "../mealsFilter";
+import MealSelectionPopup from "../components/mealSelectionPopup.jsx";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -19,6 +20,9 @@ const DishSelect = ({ backStep }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
+  const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
+  let usedIndices = [];
 
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
@@ -40,15 +44,11 @@ const DishSelect = ({ backStep }) => {
         "daysOff",
         JSON.stringify(updatedDays.filter((d) => d.type === "off"))
       );
-
       return updatedDays;
     });
   };
 
   useEffect(() => {
-    const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
-    const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-
     const updatedDays = defaultDays.map(({ day, type }) => {
       const isOn = storedDaysOn.some((d) => d.day === day);
       const isOff = storedDaysOff.some((d) => d.day === day);
@@ -76,14 +76,15 @@ const DishSelect = ({ backStep }) => {
         }
 
         setDaysData((prev) => {
-          const usedIndices = new Set();
+          let randomIndex = Math.floor(Math.random() * selectedRecipes.length);
           return prev.map((eachDayData) => {
             if (eachDayData.type === "on") {
-              let randomIndex;
-              do {
-                randomIndex = Math.floor(Math.random() * selectedRecipes.length);
-              } while (usedIndices.has(randomIndex));
-              usedIndices.add(randomIndex);
+              while (usedIndices.includes(randomIndex)) {
+                randomIndex = Math.floor(
+                  Math.random() * selectedRecipes.length
+                );
+              }
+              usedIndices.push(randomIndex);
               return {
                 ...eachDayData,
                 meal: selectedRecipes[randomIndex],
@@ -101,7 +102,6 @@ const DishSelect = ({ backStep }) => {
     fetchSelectedRecipes();
   }, []);
 
-
   return (
     <div>
       <div className=" p-6 mb-5 flex justify-center w-full font-bold">
@@ -109,7 +109,6 @@ const DishSelect = ({ backStep }) => {
           Change or remove dishes based on your preferences
         </h1>
       </div>
-
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
         {Array.isArray(daysData)
           ? daysData.map((eachDay, index) => {
@@ -119,12 +118,14 @@ const DishSelect = ({ backStep }) => {
                   key={day}
                   day={day}
                   meal={meal}
+                  allMeals={meals}
                   index={index}
                   onClick={() => {
-                    setSelectedDay(day); 
+                    setSelectedDay(day);
                     toggleDayType(day);
                   }}
                   onClose={() => toggleDayType(day)}
+                  usedIndices={usedIndices}
                 />
               ) : (
                 <DayOffCard key={day} day={day} toggleDayType={toggleDayType} />
@@ -132,7 +133,7 @@ const DishSelect = ({ backStep }) => {
             })
           : []}
       </div>
-
+      ;
       {selectedDay && (
         <MealSelectionPopup
           day={selectedDay}
@@ -147,15 +148,10 @@ const DishSelect = ({ backStep }) => {
             );
             setSelectedDay(null);
             console.log("Meals being passed to Popup:", meals);
-
           }}
-          meals={meals} 
-           
+          meals={meals}
         />
-
       )}
-
-
       <div className="text-center m-7">
         <a
           className="underline raleway-font text-sm cursor-pointer"

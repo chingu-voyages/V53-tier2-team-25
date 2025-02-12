@@ -6,6 +6,7 @@ import PlaceHolderImage2 from "../assets/images/Placeholderimage2.png";
 import PlaceHolderImage3 from "../assets/images/Placeholderimage3.png";
 import PlaceHolderImage4 from "../assets/images/Placeholderimage4.png";
 import MoreInfoModal from "./MoreInfoModal";
+import ChangeDishPopup from "./ChangeDishPopup";
 
 const placeholderImages = [
   PlaceHolderImage1,
@@ -14,14 +15,29 @@ const placeholderImages = [
   PlaceHolderImage4,
 ];
 
-const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
+const DayOnCard = ({
+  day,
+  index,
+  onClick,
+  onClose,
+  meal,
+  allMeals,
+  usedIndices,
+}) => {
   const [isDayOff, setIsDayOff] = useState(false);
+  const [changeDish, setChangeDish] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
   const { id, name, ingredients = [], image, caloriesPerServing } = meal || {};
   console.log("meal in DaysOnCard", meal);
-  
+  console.log("All meals", allMeals);
+  console.log("usedIndices in daysOnCard", usedIndices);
+
   const handleDayOff = () => {
     onClose(day);
+  };
+
+  const clickHandler = (e) => {
+    setChangeDish(true);
   };
 
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
@@ -63,7 +79,8 @@ const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
         </div>
 
         <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">
-        {Array.isArray(ingredients) && ingredients.slice(0, 2).join(", ") || "No Ingredients"}
+          {(Array.isArray(ingredients) && ingredients.slice(0, 2).join(", ")) ||
+            "No Ingredients"}
         </p>
 
         <button
@@ -84,10 +101,21 @@ const DayOnCard = ({ day, index, onClick, onClose, meal }) => {
           image={image}
         />
 
-        <button className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-[#39582C] self-center">
+        <button
+          className="text-xs sm:text-sm px-2 sm:px-3 py-1 mt-1 sm:mt-2 bg-[#528540] text-white rounded-md hover:bg-[#39582C] self-center"
+          onClick={clickHandler}
+        >
           Change Dish
         </button>
       </div>
+      {changeDish && (
+        <ChangeDishPopup
+          day={day}
+          onClose={onClose}
+          mealInUse={meal}
+          allMeals={allMeals}
+        />
+      )}
     </div>
   );
 };
