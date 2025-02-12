@@ -51,7 +51,7 @@ Currently, two official plugins are available:
 - Brianna Bierod: [LinkedIn](https://www.linkedin.com/in/brebierod-uxdesign/)
 
 **Product Owner**
-- Viral Barot: [LinkedIn](https://linkedin.com/in/accountname)
+- Viral Barot: [LinkedIn](linkedin.com/in/viral-barot-mba)
 
 **Scrum Master**
 - Christel: [LinkedIn](https://linkedin.com/in/accountname)
