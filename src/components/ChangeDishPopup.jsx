@@ -40,11 +40,13 @@ const placeholderMeals = [
 const ChangeDishPopup = ({
   day,
   onClose,
+  onSelectMeal,
   mealInUse,
   allMeals,
   usedIndices,
 }) => {
   console.log("mealInUse", mealInUse);
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
@@ -104,9 +106,9 @@ const ChangeDishPopup = ({
                     Change Dish
                   </button>
                 }
-                {meal.id == mealInUse.id && (
+                {/* {meal.id == mealInUse.id && (
                   <button className="bg-gray-400"> In use </button>
-                )}
+                )} */}
               </div>
             );
           })}

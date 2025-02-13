@@ -1,14 +1,45 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import MealSelectionPopup from "./mealSelectionPopup.jsx";
+import PlaceHolderImage1 from "../assets/images/Placeholderimage1.png";
+import PlaceHolderImage2 from "../assets/images/Placeholderimage2.png";
+import PlaceHolderImage3 from "../assets/images/Placeholderimage3.png";
+import PlaceHolderImage4 from "../assets/images/Placeholderimage4.png";
+import MealSelectionPopup from "./mealSelectionPopup";
 
-const DayOffCard = ({ day, toggleDayType,meal }) => {
+const placeholderImages = [
+  PlaceHolderImage1,
+  PlaceHolderImage2,
+  PlaceHolderImage3,
+  PlaceHolderImage4,
+];
+
+const DayOffCard = ({
+  day,
+  toggleDayType,
+  meal,
+  allMeals,
+  usedIndices,
+  index,
+}) => {
   const [showPopup, setShowPopup] = useState(false);
+  const placeholderImage = placeholderImages[index % placeholderImages.length];
+
+  console.log("All meals", allMeals);
 
 
-  const handleSelectMeal = (meal) => {
-    toggleDayType( day,meal); 
+  const handleSelectMeal = (selectedMeal) => {
+    console.log("Selected Meal:", selectedMeal); 
+    toggleDayType(day, selectedMeal);
+    setShowPopup(false);
+  };
+
+
+  const clickHandler = (e) => {
+    setChangeDish(true);
+  };
+
+  const handleClosePopup = () => {
     setShowPopup(false);
   };
 
@@ -34,14 +65,15 @@ const DayOffCard = ({ day, toggleDayType,meal }) => {
       </div>
       {showPopup && (
         <MealSelectionPopup
-          onClose={() => setShowPopup(false)}
+          day={day}
+          onClose={handleClosePopup}
+          allMeals={allMeals}
           onSelectMeal={handleSelectMeal}
-          meals={meals}
+          meal={meal}
         />
       )}
     </div>
   );
 };
-
 
 export default DayOffCard;
