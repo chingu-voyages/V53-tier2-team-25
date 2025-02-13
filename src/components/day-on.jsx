@@ -23,6 +23,7 @@ const DayOnCard = ({
   meal,
   allMeals,
   usedIndices,
+  updateMealForDay,
 }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const [changeDish, setChangeDish] = useState(false);
@@ -34,6 +35,16 @@ const DayOnCard = ({
 
   const handleDayOff = () => {
     onClose(day);
+  };
+
+  const handleSelectMeal = (selectedMeal) => {
+    console.log("Selected Meal:", selectedMeal);
+    updateMealForDay(day, selectedMeal);
+    setChangeDish(false);
+  };
+
+  const handleClosePopup = () => {
+    setChangeDish(false);
   };
 
   const clickHandler = (e) => {
@@ -111,9 +122,10 @@ const DayOnCard = ({
       {changeDish && (
         <ChangeDishPopup
           day={day}
-          onClose={onClose}
           mealInUse={meal}
           allMeals={allMeals}
+          onClose={handleClosePopup}
+          onSelectMeal={handleSelectMeal}
         />
       )}
     </div>
@@ -121,4 +133,3 @@ const DayOnCard = ({
 };
 
 export default DayOnCard;
-
