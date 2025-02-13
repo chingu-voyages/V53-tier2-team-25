@@ -49,16 +49,6 @@ const DishSelect = ({ backStep }) => {
     });
   };
 
-  const updateMealForDay = (day, newMeal) => {
-    setDaysData((prev) =>
-      prev.map((item) =>
-        item.day === day && item.type === "on"
-          ? { ...item, meal: newMeal }
-          : item
-      )
-    );
-  };
-
   useEffect(() => {
     const updatedDays = defaultDays.map(({ day, type }) => {
       const isOn = storedDaysOn.some((d) => d.day === day);
@@ -146,10 +136,6 @@ const DishSelect = ({ backStep }) => {
                     meal={meal}
                     allMeals={meals}
                     index={index}
-                    onClick={() => setSelectedDay(day)}
-                    updateMealForDay={updateMealForDay}
-                    onClose={() => toggleDayType(day)}
-                    toggleDayType={toggleDayType}
                     onClick={() => {
                       setSelectedDay(day);
                       toggleDayType(day);
@@ -162,59 +148,11 @@ const DishSelect = ({ backStep }) => {
                     key={day}
                     day={day}
                     toggleDayType={toggleDayType}
-                    allMeals={meals}
-                    index={index}
-                    usedIndices={usedIndices}
-                    meal={meal}
                   />
                 );
               })
             : []}
         </div>
-        <div className="mt-4 flex justify-center">
-          <button
-            className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
-            onClick={() => reactToPrintFunction()}
-          >
-            Download Menu
-          </button>
-        </div>
-  
-        <div className="text-center m-7">
-          <a
-            className="underline raleway-font text-sm cursor-pointer"
-            onClick={backStep}
-          >
-            Back to Allergies
-          </a>
-        </div>
-      <div className="flex flex-wrap gap-7 justify-center items-stretch">
-        {Array.isArray(daysData)
-          ? daysData.map((eachDay, index) => {
-              const { day, type, meal } = eachDay;
-              return type === "on" ? (
-                <DayOnCard
-                  key={day}
-                  day={day}
-                  meal={meal}
-                  allMeals={meals}
-                  index={index}
-                  onClick={() => setSelectedDay(day)}
-                  updateMealForDay={updateMealForDay}
-                  onClose={() => toggleDayType(day)}
-                  toggleDayType={toggleDayType}
-                  usedIndices={usedIndices}
-                />
-              ) : (
-                <DayOffCard
-                  key={day}
-                  day={day}
-                  toggleDayType={toggleDayType}
-                  allMeals={meals}
-                  index={index}
-                  usedIndices={usedIndices}
-                  meal={meal}
-                />
 
         {selectedDay && (
           <MealSelectionPopup
@@ -235,17 +173,6 @@ const DishSelect = ({ backStep }) => {
           />
         )}
       </div>
-      ;
-      <div className="text-center m-7">
-        <a
-          className="underline raleway-font text-sm cursor-pointer"
-          onClick={backStep}
-        >
-          Back to Allergies
-        </a>
-      </div>
-    </div>
-    </div>
 
       <div>
         <div className=" mt-4 flex justify-center">
