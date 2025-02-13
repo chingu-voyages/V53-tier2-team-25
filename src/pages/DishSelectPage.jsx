@@ -183,7 +183,47 @@ const DishSelect = ({ backStep }) => {
             Back to Allergies
           </a>
         </div>
+      <div className="flex flex-wrap gap-7 justify-center items-stretch">
+        {Array.isArray(daysData)
+          ? daysData.map((eachDay, index) => {
+              const { day, type, meal } = eachDay;
+              return type === "on" ? (
+                <DayOnCard
+                  key={day}
+                  day={day}
+                  meal={meal}
+                  allMeals={meals}
+                  index={index}
+                  onClick={() => setSelectedDay(day)}
+                  updateMealForDay={updateMealForDay}
+                  onClose={() => toggleDayType(day)}
+                  toggleDayType={toggleDayType}
+                  usedIndices={usedIndices}
+                />
+              ) : (
+                <DayOffCard
+                  key={day}
+                  day={day}
+                  toggleDayType={toggleDayType}
+                  allMeals={meals}
+                  index={index}
+                  usedIndices={usedIndices}
+                  meal={meal}
+                />
+              );
+            })
+          : []}
       </div>
+      ;
+      <div className="text-center m-7">
+        <a
+          className="underline raleway-font text-sm cursor-pointer"
+          onClick={backStep}
+        >
+          Back to Allergies
+        </a>
+      </div>
+    </div>
     </div>
   );
 };
