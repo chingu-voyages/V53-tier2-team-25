@@ -133,9 +133,9 @@ const DishSelect = ({ backStep }) => {
 
       <div
         ref={contentRef}
-        className="flex flex-wrap gap-7 justify-center items-stretch"
+        className="justify-self-center flex flex-wrap gap-7 justify-center max-w-[1200px] "
       >
-        <div className="flex flex-wrap gap-7 justify-center items-stretch">
+        <div className="flex flex-wrap gap-7  justify-center  ">
           {Array.isArray(daysData)
             ? daysData.map((eachDay, index) => {
                 const { day, type, meal } = eachDay;
@@ -150,6 +150,11 @@ const DishSelect = ({ backStep }) => {
                     updateMealForDay={updateMealForDay}
                     onClose={() => toggleDayType(day)}
                     toggleDayType={toggleDayType}
+                    onClick={() => {
+                      setSelectedDay(day);
+                      toggleDayType(day);
+                    }}
+                    onClose={() => toggleDayType(day)}
                     usedIndices={usedIndices}
                   />
                 ) : (
@@ -210,9 +215,25 @@ const DishSelect = ({ backStep }) => {
                   usedIndices={usedIndices}
                   meal={meal}
                 />
+
+        {selectedDay && (
+          <MealSelectionPopup
+            day={selectedDay}
+            onClose={() => setSelectedDay(null)}
+            onSelectMeal={(selectedMeal) => {
+              setDaysData((prev) =>
+                prev.map((dayData) =>
+                  dayData.day === selectedDay
+                    ? { ...dayData, meal: selectedMeal }
+                    : dayData
+                )
               );
-            })
-          : []}
+              setSelectedDay(null);
+              console.log("Meals being passed to Popup:", meals);
+            }}
+            meals={meals}
+          />
+        )}
       </div>
       ;
       <div className="text-center m-7">
@@ -224,6 +245,27 @@ const DishSelect = ({ backStep }) => {
         </a>
       </div>
     </div>
+    </div>
+
+      <div>
+        <div className=" mt-4 flex justify-center">
+          <button
+            className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
+            onClick={() => reactToPrintFunction()}
+          >
+            Download Menu
+          </button>
+        </div>
+
+        <div className="text-center m-4">
+          <a
+            className="underline raleway-font text-sm cursor-pointer"
+            onClick={backStep}
+          >
+            Back to Allergies
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
