@@ -48,13 +48,13 @@ Currently, two official plugins are available:
 
 ### Special Thanks 
 **Designer**
-- Brianna Bierod: [LinkedIn](https://www.linkedin.com/in/brebierod-uxdesign/)
+- Brianna Bierod
 
 **Product Owner**
-- Viral Barot: [LinkedIn](linkedin.com/in/viral-barot-mba)
+- Viral Barot
 
 **Scrum Master**
-- Christel: [LinkedIn](https://linkedin.com/in/accountname)
+- Christel
 
 **Voyage Guide**
-- Andres Benitez: [LinkedIn](https://linkedin.com/alcb1310)
+- Andres Benitez
