@@ -166,6 +166,7 @@ const DishSelect = ({ backStep }) => {
               })
             : []}
         </div>
+      <div>
         <div className="mt-4 flex justify-center">
           <button
             className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
@@ -183,6 +184,7 @@ const DishSelect = ({ backStep }) => {
             Back to Allergies
           </a>
         </div>
+      </div>
       </div>
     </div>
   );
