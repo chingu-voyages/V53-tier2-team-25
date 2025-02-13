@@ -25,8 +25,6 @@ const DayOffCard = ({
   const [showPopup, setShowPopup] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
 
-  console.log("All meals", allMeals);
-
 
   const handleSelectMeal = (selectedMeal) => {
     console.log("Selected Meal:", selectedMeal); 

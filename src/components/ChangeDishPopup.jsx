@@ -45,7 +45,7 @@ const ChangeDishPopup = ({
   allMeals,
   usedIndices,
 }) => {
-  console.log("mealInUse", mealInUse);
+  console.log("allMeals in change dish", allMeals);
 
   return (
     <div
@@ -98,17 +98,18 @@ const ChangeDishPopup = ({
                     Read More
                   </button>
                 </div>
-                {
+                {meal.inUse ? (
+                  <button className="ml-auto w-xl bg-gray-400 text-xs  text-nowrap sm:text-sm  text-white px-5 py-1 rounded-md hover:bg-gray-600">
+                    In use
+                  </button>
+                ) : (
                   <button
-                    className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
+                    className="ml-auto bg-[#528540] text-xs text-nowrap sm:text-sm text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
                     onClick={() => onSelectMeal(meal)}
                   >
                     Change Dish
                   </button>
-                }
-                {/* {meal.id == mealInUse.id && (
-                  <button className="bg-gray-400"> In use </button>
-                )} */}
+                )}
               </div>
             );
           })}

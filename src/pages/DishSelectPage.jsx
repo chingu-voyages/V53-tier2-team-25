@@ -57,6 +57,15 @@ const DishSelect = ({ backStep }) => {
           : item
       )
     );
+    setMeals((prev) => {
+      const mealToUpdate = prev.find((eachMeal) => eachMeal.id == newMeal.id);
+      console.log("mealToUpdate", mealToUpdate);
+
+      return {
+        ...mealToUpdate,
+        inUse: !mealToUpdate.inUse,
+      };
+    });
   };
 
   useEffect(() => {
@@ -102,6 +111,15 @@ const DishSelect = ({ backStep }) => {
               };
             }
             return eachDayData;
+          });
+        });
+
+        setMeals((prev) => {
+          return prev.map((eachMeal) => {
+            return {
+              ...eachMeal,
+              inUse: usedIndices.includes(eachMeal.id),
+            };
           });
         });
         setLoading(false);
