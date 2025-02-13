@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import DayOnCard from "../components/day-on.jsx";
 import DayOffCard from "../components/day-off.jsx";
 import filteredRecipes from "../mealsFilter";
 import MealSelectionPopup from "../components/mealSelectionPopup.jsx";
+import { useReactToPrint } from "react-to-print";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -102,6 +103,9 @@ const DishSelect = ({ backStep }) => {
     fetchSelectedRecipes();
   }, []);
 
+  const contentRef = useRef(null);
+  const reactToPrintFunction = useReactToPrint({ contentRef });
+
   return (
     <div>
       <div className=" p-6 mb-5 flex justify-center w-full font-bold">
@@ -109,6 +113,18 @@ const DishSelect = ({ backStep }) => {
           Change or remove dishes based on your preferences
         </h1>
       </div>
+      <style type="text/css" media="print">
+        {
+          "\
+  @page { size: landscape; }\
+"
+        }
+      </style>
+
+      <div
+        ref={contentRef}
+        className="flex flex-wrap gap-7 justify-center items-stretch"
+      >
       <div className="flex flex-wrap gap-7 justify-center items-stretch">
         {Array.isArray(daysData)
           ? daysData.map((eachDay, index) => {
@@ -133,7 +149,14 @@ const DishSelect = ({ backStep }) => {
             })
           : []}
       </div>
-      ;
+      <div
+      className="mt-4 flex justify-center"
+      >
+              <button
+      className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
+onClick={() => reactToPrintFunction()}
+>Download Menu</button>
+      </div>
       {selectedDay && (
         <MealSelectionPopup
           day={selectedDay}
@@ -161,6 +184,7 @@ const DishSelect = ({ backStep }) => {
         </a>
       </div>
     </div>
+  </div>
   );
 };
 
