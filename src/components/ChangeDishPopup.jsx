@@ -67,6 +67,12 @@ const ChangeDishPopup = ({
 
         <div className="flex flex-col gap-4">
           {allMeals.map((meal) => {
+            console.log("meal.id", meal.id, mealInUse.id);
+            console.log("mealInUse.id", mealInUse.id);
+            {
+              meal.id == mealInUse.id &&
+                console.log("They match !", meal.id, mealInUse.id);
+            }
             return (
               <div
                 key={meal.id}
@@ -96,16 +102,18 @@ const ChangeDishPopup = ({
                     Read More
                   </button>
                 </div>
-                {
+
+                {meal.id == mealInUse.id ? (
+                  <button className="bg-gray-400 ml-auto text-xs sm:text-sm  text-white px-3 py-1 rounded-md">
+                    In use
+                  </button>
+                ) : (
                   <button
                     className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
                     onClick={() => onSelectMeal(meal)}
                   >
                     Change Dish
                   </button>
-                }
-                {meal.id == mealInUse.id && (
-                  <button className="bg-gray-400"> In use </button>
                 )}
               </div>
             );
