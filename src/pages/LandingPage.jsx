@@ -39,7 +39,7 @@ const LandingPage = () => {
                   for your hungry staff.
                 </p>
                 <div className="flex justify-center aligh-center">
-                  <Link to="/menu-creation">
+                  <Link to="/calendar">
                     <button className="hidden lg:block lg:bg-[#f17528] lg:w-[278px] lg:h-[56px] lg:font-bold lg:text-center lg:my-5 lg:text-xl lg:font-inter lg:text-text lg:rounded-lg">
                       Create Weekly Menu
                     </button>
@@ -108,7 +108,7 @@ const LandingPage = () => {
             </p>
             <div className="flex justify-center aligh-center">
 
-              <Link component={CalendarPage} to="/menu-creation">
+              <Link to="/calendar">
                 <button className="block lg-hidden bg-[#f17528] font-bold  py-[10px] px-[8px] sm:py-[16px] sm:px-[8px]  md:text-2xl md:mt-7  md:py-[15px] md:px-[18px] my-3 text-l lg:font-inter lg:text-text rounded-lg">
                   Create Weekly Menu
                 </button>
@@ -154,3 +154,6 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+
+

@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
- background-color: #fffbf1;
- font: Raleway;
+body {
+  background-color: #fffbf1;
+  font: Raleway;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  scrollbar-width: none; 
+}
+
+.container {
+  -ms-overflow-style: none;
+}

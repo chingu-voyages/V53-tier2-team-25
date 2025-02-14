@@ -20,11 +20,11 @@ const CalendarPage = ({ nextStep }) => {
 
   useEffect(() => {
     const today = new Date();
-    const currentWeek = getWeekRange(today);
-    setSelectedWeek(currentWeek);
+    const nextMonday = getNextMonday(today);
+    const nextWeek = getWeekRangeFromMonday(nextMonday);
+    setSelectedWeek(nextWeek);
     setDaysOff([]);
   }, []);
-
   const isSameDay = (date1, date2) => {
     return (
       date1.getFullYear() === date2.getFullYear() &&
@@ -78,7 +78,7 @@ const CalendarPage = ({ nextStep }) => {
   const handleDayClick = (date) => {
     const weekRange = getWeekRange(date);
     const today = new Date();
-    const startOfCurrentWeek = getStartOfWeek(today);
+    const startOfCurrentWeek = getNextMonday(today) ;
 
     if (date < startOfCurrentWeek) {
       setRefreshKey((prevKey) => prevKey + 1);
@@ -170,11 +170,33 @@ const CalendarPage = ({ nextStep }) => {
 
   const handleRefresh = () => {
     const today = new Date();
-    const currentWeek = getWeekRange(today);
-    setSelectedWeek(currentWeek);
+    const nextMonday = getNextMonday(today); 
+    const nextWeek = getWeekRangeFromMonday(nextMonday); 
+  
+    setSelectedWeek(nextWeek);
     setDaysOff([]);
     setRefreshKey((prevKey) => prevKey + 1);
   };
+  
+  const getNextMonday = (date) => {
+    const day = date.getDay();
+    const daysUntilNextMonday = day === 0 ? 1 : 8 - day; 
+    const nextMonday = new Date(date);
+    nextMonday.setDate(date.getDate() + daysUntilNextMonday);
+    return nextMonday;
+  };
+  
+  const getWeekRangeFromMonday = (monday) => {
+    const range = [];
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(monday);
+      day.setDate(monday.getDate() + i);
+      range.push(new Date(day));
+    }
+    return range;
+  };
+
+
 
   const handleContinue = () => {
     if (selectedWeek.length > 0) {

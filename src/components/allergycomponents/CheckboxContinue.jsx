@@ -90,7 +90,6 @@ export default function CheckBoxContinue({
 
   function clickContinue() {
     if (!isContinueDisabled) {
-      console.log(isChecked);
       updateLocalStorage();
       nextStep();
     } else if (isContinueDisabled) {
