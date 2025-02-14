@@ -55,7 +55,7 @@ const ChangeDishPopup = ({
         scrollbarWidth: "none",
       }}
     >
-      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] h-[99%] overflow-y-auto shadow-lg ">
+      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] justify-center md:h-[80%] lg:h-[99%] xl:h-[99%] overflow-y-auto shadow-lg ">
         <button
           className="absolute top-4 right-7 text-gray-500 hover:text-red-500"
           onClick={onClose}
