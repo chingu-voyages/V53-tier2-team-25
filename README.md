@@ -47,14 +47,6 @@ Currently, two official plugins are available:
 - Lindsay Allen: [GitHub](https://github.com/lkallen) / [LinkedIn](https://www.linkedin.com/in/lindsay-allen-54b46937/)
 
 ### Special Thanks 
-**Designer**
-- Brianna Bierod
+**Designer**: Brianna Bierod **Product Owner**: Viral Barot
 
-**Product Owner**
-- Viral Barot
-
-**Scrum Master**
-- Christel
-
-**Voyage Guide**
-- Andres Benitez
+**Scrum Master**: Christel **Voyage Guide**: Andres Benitez
