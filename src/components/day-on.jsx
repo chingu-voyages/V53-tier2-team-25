@@ -60,7 +60,7 @@ const DayOnCard = ({
     >
       <button
         onClick={handleDayOff}
-        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500"
+        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-green-200"
       >
         <FontAwesomeIcon
           icon={faTimes}
@@ -85,7 +85,9 @@ const DayOnCard = ({
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
-          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
+          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1 line-clamp-1">
+            {name}
+          </h4>
         </div>
 
         <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">

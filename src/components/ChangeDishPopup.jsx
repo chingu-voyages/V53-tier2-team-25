@@ -49,18 +49,18 @@ const ChangeDishPopup = ({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
+      className="fixed inset-0 flex items-center justify-center xl:justify-end xl:h-100vh bg-black bg-opacity-50 z-50  "
       style={{
         msOverflowStyle: "none",
         scrollbarWidth: "none",
       }}
     >
-      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto shadow-lg">
+      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] h-[99%] overflow-y-auto shadow-lg ">
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+          className="absolute top-4 right-7 text-gray-500 hover:text-red-500"
           onClick={onClose}
         >
-          <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
+          <FontAwesomeIcon icon={faTimes} className=" absolute w-5 h-5" />
         </button>
 
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-center">
@@ -68,28 +68,27 @@ const ChangeDishPopup = ({
         </h2>
 
         <div className="flex flex-col gap-4">
-          {allMeals.map((meal) => {
+          {allMeals?.map((meal) => {
+            const { id, name, image, caloriesPerServing, ingredients } = meal;
             return (
               <div
-                key={meal.id}
-                className="flex items-center bg-[#FFFBF1] rounded-lg p-3 shadow-md shadow-[#528540]"
+                key={id}
+                className={`flex items-center ${
+                  meal.inUse ? "bg-slate-300" : "bg-[#FFFBF1]"
+                } rounded-lg p-3 shadow-md shadow-[#528540]`}
               >
-                <img
-                  src={meal.image}
-                  alt={meal.name}
-                  className="w-24 h-24 rounded-lg"
-                />
+                <img src={image} alt={name} className="w-24 h-24 rounded-lg" />
                 <div className="ml-4 flex-grow">
                   <div className="flex gap-4">
-                    <h3 className="text-md sm:text-lg font-semibold">
-                      {meal.name}
+                    <h3 className="text-md sm:text-lg font-semibold line-clamp-1">
+                      {name}
                     </h3>
                     <p className="text-sm font-bold text-green-700">
-                      {meal.caloriesPerServing}
+                      {caloriesPerServing}
                     </p>
                   </div>
                   <p className="text-sm text-gray-600 line-clamp-1">
-                    {meal.ingredients}
+                    {ingredients}
                   </p>
                   <button
                     className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
@@ -99,7 +98,7 @@ const ChangeDishPopup = ({
                   </button>
                 </div>
                 {meal.inUse ? (
-                  <button className="ml-auto w-xl bg-gray-400 text-xs  text-nowrap sm:text-sm  text-white px-5 py-1 rounded-md hover:bg-gray-600">
+                  <button className="ml-auto w-xl bg-gray-400 text-xs  text-nowrap sm:text-sm  text-white px-5 py-1 rounded-md ">
                     In use
                   </button>
                 ) : (
