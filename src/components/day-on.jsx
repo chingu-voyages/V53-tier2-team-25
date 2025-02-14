@@ -29,7 +29,7 @@ const DayOnCard = ({
   const [changeDish, setChangeDish] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
   const { id, name, ingredients = [], image, caloriesPerServing } = meal || {};
-  console.log("all meals in day on", allMeals);
+
 
 
   const handleDayOff = () => {

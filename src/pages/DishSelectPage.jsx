@@ -18,12 +18,12 @@ const defaultDays = [
 const DishSelect = ({ backStep }) => {
   const [daysData, setDaysData] = useState(defaultDays);
   const [meals, setMeals] = useState([]);
+  const [usedIndices, setUsedIndices] = useState([]); // Ensure persistence
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
   const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-  let usedIndices = [];
 
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
@@ -95,16 +95,24 @@ const DishSelect = ({ backStep }) => {
           return;
         }
 
+        setMeals(selectedRecipes);
+
+        let used = []; // local array to keep track
         setDaysData((prev) => {
-          let randomIndex = Math.floor(Math.random() * selectedRecipes.length);
-          return prev.map((eachDayData) => {
+          console.log("in setDays data");
+
+          const updatedDays = prev.map((eachDayData) => {
             if (eachDayData.type === "on") {
-              while (usedIndices.includes(randomIndex)) {
+              console.log(`${eachDayData.day} is ON`);
+              let randomIndex;
+              do {
                 randomIndex = Math.floor(
                   Math.random() * selectedRecipes.length
                 );
-              }
-              usedIndices.push(randomIndex);
+              } while (usedIndices.includes(randomIndex));
+
+              used.push(randomIndex);
+
               return {
                 ...eachDayData,
                 meal: selectedRecipes[randomIndex],
@@ -112,22 +120,33 @@ const DishSelect = ({ backStep }) => {
             }
             return eachDayData;
           });
+          return updatedDays;
         });
 
-        setMeals((prev) => {
-          return prev.map((eachMeal) => {
+        console.log("Before setting usedIndices:", usedIndices);
+        setUsedIndices(used); // Persist the used indices
+
+        console.log("After setting usedIndices:", usedIndices);
+
+        setMeals((prevMealsArray) => {
+          console.log("usedIndices**", usedIndices);
+          const assignedMealsArray = prevMealsArray.map((eachMeal) => {
             return {
               ...eachMeal,
-              inUse: usedIndices.includes(eachMeal.id),
+              inUse: used.includes(eachMeal.id),
             };
           });
+          console.log("assignedMeals", assignedMealsArray);
+          return [...assignedMealsArray];
         });
+
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch recipes");
         setLoading(false);
       }
     };
+
     fetchSelectedRecipes();
   }, []);
 
@@ -157,6 +176,8 @@ const DishSelect = ({ backStep }) => {
           {Array.isArray(daysData)
             ? daysData.map((eachDay, index) => {
                 const { day, type, meal } = eachDay;
+                console.log("meal selected", meal);
+                console.log("all meals data in dish select", meals);
                 return type === "on" ? (
                   <DayOnCard
                     key={day}

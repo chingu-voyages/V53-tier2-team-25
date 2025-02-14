@@ -41,11 +41,14 @@ const ChangeDishPopup = ({
   day,
   onClose,
   onSelectMeal,
-  mealInUse,
   allMeals,
   usedIndices,
 }) => {
-  console.log("allMeals in change dish", allMeals);
+  const inUseMeals = allMeals.filter((eachMeal) => {
+    console.log(eachMeal.inUse);
+    return eachMeal.inUse;
+  });
+  console.log("inUseMeals", inUseMeals);
 
   return (
     <div
