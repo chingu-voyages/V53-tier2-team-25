@@ -55,13 +55,13 @@ const DayOnCard = ({
 
   return (
     <div
-      className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
+      className={`relative bg-[#fffbf1] shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
         isDayOff ? "bg-[#f4f4f4] border-[#d3d3d3]" : "border-[#528540]"
       }`}
     >
       <button
         onClick={handleDayOff}
-        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500"
+        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-400 border hover:bg-gray-900   "
       >
         <FontAwesomeIcon
           icon={faTimes}

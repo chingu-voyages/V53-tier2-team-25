@@ -55,14 +55,20 @@ const ChangeDishPopup = ({
         scrollbarWidth: "none",
       }}
     >
-      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto shadow-lg">
+      <style>
+        {`
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    `}
+      </style>
+      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[60%] max-h-[80%] overflow-y-auto shadow-lg hide-scrollbar">
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+          className="absolute top-2 right-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-400 border hover:bg-gray-900  flex items-center justify-center"
           onClick={onClose}
         >
-          <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
+          <FontAwesomeIcon icon={faTimes} className="w-5 h-5 text-[#fffbf1]" />
         </button>
-
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-center">
           Change your meal for {day}
         </h2>
@@ -82,23 +88,25 @@ const ChangeDishPopup = ({
 
                 <div className="ml-4 flex flex-col w-full sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className="text-md sm:text-lg font-semibold">
-                      {meal.name}
-                    </h3>
+                    <div className="flex items-center gap-2 md:gap-3 lg:gap-9">
+                      <h3 className="text-md sm:text-lg font-semibold ">
+                        {meal.name}
+                      </h3>
+                      <p className="text-sm text-[#528540] font-semibold">
+                        {meal.caloriesPerServing}
+                      </p>
+                    </div>
                     <p className="text-sm text-gray-600">
-                      {Array.isArray(meal.ingredients)
-                        ? meal.ingredients.slice(0, 2).join(", ")
-                        : meal.ingredients
-                            .split(", ")
-                            .slice(0, 2)
-                            .join(", ")}{" "}
-                      <button >...</button>
+                      {meal.ingredients
+                        .slice(0, window.innerWidth >= 768 ? 10 : 4)
+                        .join(", ")}{" "}
+                      <button>...</button>
                     </p>
                   </div>
 
                   <div>
                     <button
-                      className="mt-2  w-20  sm:mt-0 bg-[#528540] text-xs sm:text-sm text-white px-1 py-1 rounded-md hover:bg-[#39582C]"
+                      className="mt-2 w-22 sm:mt-0 bg-[#528540] text-xs sm:text-sm text-white px-2 py-1 pr-3 rounded-md hover:bg-[#f17528] whitespace-nowrap"
                       onClick={() => onSelectMeal(meal)}
                     >
                       Change Dish
