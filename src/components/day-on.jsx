@@ -61,7 +61,7 @@ const DayOnCard = ({
     >
       <button
         onClick={handleDayOff}
-        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-400 border hover:bg-gray-900   "
+        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:bg-gray-400"
       >
         <FontAwesomeIcon
           icon={faTimes}
