@@ -58,6 +58,7 @@ const DayOnCard = ({
 
   const clickHandler = (e) => {
     setChangeDish(true);
+    console.log(mealForDate)
   };
 
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);

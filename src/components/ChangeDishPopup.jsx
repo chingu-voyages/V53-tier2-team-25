@@ -49,14 +49,11 @@ const ChangeDishPopup = ({
   setMealsInUse,
   mealForDate,
 }) => {
-
-
   console.log("MEALS IN USE FROM POPUP COMPONENT: ", mealsInUse);
   console.log("MEALS REMAINING / NOT USED FROM POPUP: ", remainingMeals);
-
+  console.log(mealForDate.id);
   const [usedMealIds, setUsedMealIds] = useState([]);
 
- 
   function getUsedIds() {
     for (let i = 0; i < mealsInUse.length; i++) {
       setUsedMealIds((prev) => [...prev, mealsInUse[i].id]);
@@ -66,7 +63,6 @@ const ChangeDishPopup = ({
   useEffect(() => {
     getUsedIds();
   }, []);
-
 
   return (
     <div
@@ -135,8 +131,6 @@ const ChangeDishPopup = ({
                   </div>
                 </div>
 
-    
-
                 {usedMealIds.includes(meal.id) && (
                   <button
                     disabled={true}
@@ -153,8 +147,12 @@ const ChangeDishPopup = ({
                     onClick={() => {
                       onSelectMeal(meal);
 
-                      setMealsInUse((prev) => [...prev, meal])
-
+                      setMealsInUse((prev) => {
+                        const found = prev.find(
+                          (item) => item.id == mealForDate.id
+                        );
+                        console.log("FOUND", found);
+                      });
                     }}
                   >
                     Select Dish
