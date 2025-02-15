@@ -11,8 +11,8 @@ const defaultDays = [
   { day: "Wednesday", type: "on" },
   { day: "Thursday", type: "on" },
   { day: "Friday", type: "on" },
-  { day: "Saturday", type: "off" },
-  { day: "Sunday", type: "off" },
+  { day: "Saturday", type: "on" },
+  { day: "Sunday", type: "on" },
 ];
 
 const DishSelect = ({ backStep }) => {
@@ -62,7 +62,7 @@ const DishSelect = ({ backStep }) => {
   useEffect(() => {
     const updatedDays = defaultDays.map(({ day, type }) => {
       const isOn = storedDaysOn.some((d) => d.day === day);
-      const isOff = storedDaysOff.some((d) => d.day === day);
+      const isOff = storedDaysOff?.some((d) => d.day === day);
       return { day, type: isOn ? "on" : isOff ? "off" : type };
     });
 
@@ -166,25 +166,25 @@ const DishSelect = ({ backStep }) => {
               })
             : []}
         </div>
-      <div>
-        <div className="mt-4 flex justify-center">
-          <button
-            className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
-            onClick={() => reactToPrintFunction()}
-          >
-            Download Menu
-          </button>
-        </div>
+        <div>
+          <div className="mt-4 flex justify-center">
+            <button
+              className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
+              onClick={() => reactToPrintFunction()}
+            >
+              Download Menu
+            </button>
+          </div>
 
-        <div className="text-center m-7">
-          <a
-            className="underline raleway-font text-sm cursor-pointer"
-            onClick={backStep}
-          >
-            Back to Allergies
-          </a>
+          <div className="text-center m-7">
+            <a
+              className="underline raleway-font text-sm cursor-pointer"
+              onClick={backStep}
+            >
+              Back to Allergies
+            </a>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
