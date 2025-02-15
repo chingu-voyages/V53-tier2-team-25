@@ -86,7 +86,9 @@ const DayOnCard = ({
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
-          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
+          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1 line-clamp-1">
+            {name}
+          </h4>
         </div>
 
         <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">
