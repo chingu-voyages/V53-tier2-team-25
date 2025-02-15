@@ -57,12 +57,11 @@ const ChangeDishPopup = ({
     >
       <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto shadow-lg">
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+          className="absolute top-2 right-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-400 border hover:bg-gray-900  flex items-center justify-center"
           onClick={onClose}
         >
-          <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
+          <FontAwesomeIcon icon={faTimes} className="w-5 h-5 text-[#fffbf1]" />
         </button>
-
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-center">
           Change your meal for {day}
         </h2>
@@ -92,7 +91,7 @@ const ChangeDishPopup = ({
                             .split(", ")
                             .slice(0, 2)
                             .join(", ")}{" "}
-                      <button >...</button>
+                      <button>...</button>
                     </p>
                   </div>
 
