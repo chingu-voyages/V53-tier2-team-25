@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import PlaceHolderImage1 from "../assets/images/Placeholderimage1.png";
@@ -46,11 +46,27 @@ const ChangeDishPopup = ({
   usedIndices,
   remainingMeals,
   mealsInUse,
+  setMealsInUse,
+  mealForDate,
 }) => {
-  // console.log("mealInUse", mealInUse);
+
 
   console.log("MEALS IN USE FROM POPUP COMPONENT: ", mealsInUse);
   console.log("MEALS REMAINING / NOT USED FROM POPUP: ", remainingMeals);
+
+  const [usedMealIds, setUsedMealIds] = useState([]);
+
+ 
+  function getUsedIds() {
+    for (let i = 0; i < mealsInUse.length; i++) {
+      setUsedMealIds((prev) => [...prev, mealsInUse[i].id]);
+    }
+  }
+
+  useEffect(() => {
+    getUsedIds();
+  }, []);
+
 
   return (
     <div
@@ -118,6 +134,32 @@ const ChangeDishPopup = ({
                     </button>
                   </div>
                 </div>
+
+    
+
+                {usedMealIds.includes(meal.id) && (
+                  <button
+                    disabled={true}
+                    className="ml-auto bg-gray-400 text-xs sm:text-sm  text-white px-3 py-1 rounded-md "
+                    onClick={() => onSelectMeal(meal)}
+                  >
+                    In Use
+                  </button>
+                )}
+
+                {!usedMealIds.includes(meal.id) && (
+                  <button
+                    className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
+                    onClick={() => {
+                      onSelectMeal(meal);
+
+                      setMealsInUse((prev) => [...prev, meal])
+
+                    }}
+                  >
+                    Select Dish
+                  </button>
+                )}
               </div>
             );
           })}

@@ -27,12 +27,12 @@ const DayOnCard = ({
   mealForDate,
   remainingMeals,
   mealsInUse,
+  setMealsInUse,
 }) => {
   const [isDayOff, setIsDayOff] = useState(false);
   const [changeDish, setChangeDish] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
 
-  // const { id, name, ingredients = [], image, caloriesPerServing } = meal || {};
   const {
     id,
     name,
@@ -41,30 +41,16 @@ const DayOnCard = ({
     caloriesPerServing,
   } = mealForDate || {};
 
-  // console.log("meal in DaysOnCard", meal);
-  // console.log("All meals", allMeals);
-  // console.log("usedIndices in daysOnCard", usedIndices);
-  console.log("meal for date FROM DAY ON CARD: ", mealForDate);
-  // console.log('REMAINING MEALS from DAY ON CARD', remainingMeals)
-  // console.log('MEALS IN USE FROM DAY ON CARD', mealsInUse)
-
   const handleDayOff = () => {
     onClose(day);
   };
 
-  // ******HANDLE THE CLICK CHANGE DISH BUTTON ON CARD - ON SELECT MEAL
-  // ***************
-  // currently correctly logging what i click but need to change in the card itself
-
-  // also need to disable button for change if in used
-
   const handleSelectMeal = (selectedMeal) => {
-    console.log("Selected Meal:", selectedMeal);
     updateMealForDay(day, selectedMeal);
     setChangeDish(false);
   };
 
-  // **************************************************
+  const [mealToRemove, setMealToRemove] = useState();
 
   const handleClosePopup = () => {
     setChangeDish(false);
@@ -153,6 +139,8 @@ const DayOnCard = ({
           onSelectMeal={handleSelectMeal}
           remainingMeals={remainingMeals}
           mealsInUse={mealsInUse}
+          setMealsInUse={setMealsInUse}
+          mealForDate={mealForDate}
         />
       )}
     </div>

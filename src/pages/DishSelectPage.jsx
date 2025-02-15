@@ -242,6 +242,7 @@ const DishSelect = ({ backStep }) => {
                     mealForDate={mealForDate}
                     remainingMeals={remainingMeals}
                     mealsInUse={mealsInUse}
+                    setMealsInUse={setMealsInUse}
                   />
                 ) : (
                   <DayOffCard
