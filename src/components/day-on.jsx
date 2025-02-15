@@ -91,7 +91,7 @@ const DayOnCard = ({
           </h4>
         </div>
 
-        <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">
+        <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden truncate">
           {(Array.isArray(ingredients) && ingredients.slice(0, 2).join(", ")) ||
             "No Ingredients"}
         </p>
