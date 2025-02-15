@@ -33,6 +33,7 @@ const DayOnCard = ({
   console.log("All meals", allMeals);
   console.log("usedIndices in daysOnCard", usedIndices);
 
+
   const handleDayOff = () => {
     onClose(day);
   };
@@ -90,7 +91,8 @@ const DayOnCard = ({
         </div>
 
         <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">
-          {(Array.isArray(ingredients) && ingredients.slice(0, 2).join(", ")) ||
+          {(Array.isArray(ingredients) &&
+            ingredients.slice(0, 2).join(" , ")) ||
             "No Ingredients"}
         </p>
 

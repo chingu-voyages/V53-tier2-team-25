@@ -49,15 +49,15 @@ const ChangeDishPopup = ({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 "
+      className="fixed inset-0 flex items-center justify-center xl:justify-end bg-black bg-opacity-50 z-50 "
       style={{
         msOverflowStyle: "none",
         scrollbarWidth: "none",
       }}
     >
-      <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[50%] max-h-[80%] overflow-y-auto shadow-lg">
+      <div className="relative bg-[#FFFBF1] rounded-lg p-6 xl:w-[50%] sm:w-[70%] w-[90%] h-2/3 sm:h-[50%] lg:w-[50%]  md:h-[50%] lg:h-[99%] xl:h-[99%] overflow-y-auto shadow-lg">
         <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+          className="fixed top-5 right-7 text-gray-500 hover:text-red-500"
           onClick={onClose}
         >
           <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
@@ -67,45 +67,46 @@ const ChangeDishPopup = ({
           Change your meal for {day}
         </h2>
 
-        <div className="flex flex-col gap-4">
+        <div className="lg:flex lg:flex-col xl:flex xl:flex-col flex flex-row md:flex md:flex-row gap-4 h-52">
           {allMeals.map((meal) => {
+            const { id, name, image, ingredients, caloriesPerServing } = meal;
+            console.log("ingredients in change dish", ingredients.join(", "));
             return (
               <div
-                key={meal.id}
-                className="flex items-center bg-[#FFFBF1] rounded-lg p-3 shadow-md shadow-[#528540]"
+                key={id}
+                className="lg:flex lg:flex-row xl:flex xl:flex-row sm:flex sm:flex-col md:flex md:flex-col  items-center bg-[#FFFBF1] rounded-lg p-3 shadow-md shadow-[#528540] lg:min-h-35 md:min-h-25 md:justify-end sm:min-h-20 sm:justify-end"
               >
                 <img
-                  src={meal.image}
-                  alt={meal.name}
-                  className="w-24 h-24 rounded-lg"
+                  src={image}
+                  alt={name}
+                  className="xl:w-24 xl:h-24 lg:w-24 lg:h-15 md:size-25 md:justify-center sm:size-20 sm:justify-center rounded-lg py-4"
                 />
-                <div className="ml-4 flex-grow">
-                  <div className="flex gap-4">
-                    <h3 className="text-md sm:text-lg font-semibold">
-                      {meal.name}
+                <div className="ml-4 flex-grow md:m-2  ">
+                  <div className="flex gap-4 justify-between md:justify-stretch sm:justify-stretch">
+                    <h3 className="xl:text-lg lg:text-lg md:text-sm sm:text-sm font-semibold md:tracking-tighter sm:tracking-tighter sm:line-clamp-1 md:line-clamp-2 text-wrap">
+                      {name}
                     </h3>
-                    <p className="text-sm font-bold text-green-700">
-                      {meal.caloriesPerServing}
-                    </p>
+                    <span className="text-sm sm:text-xs font-bold text-green-700 mr-4 ">
+                      {caloriesPerServing}
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-600 line-clamp-1">
-                    {meal.ingredients}
+                  <p className="text-sm text-gray-600 sm:text-xs lg:pr-6 xl:pr:6 md:pr-1 text-wrap line-clamp-2 xl:tracking-wide lg:tracking-normal md:tracking-tight sm:tracking-tighter sm:line-clamp-1 lg:line-clamp-4 md:line-clamp-1">
+                    {ingredients.join(",")}
                   </p>
-                  <button
-                    className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
+                  {/* <button
+                    className="text-xs sm:invisible sm:text-sm text-[#528540] mb-1 flex xl:justify-start justify-right "
                     onClick={() => setIsMoreInfoOpen(true)}
                   >
                     Read More
-                  </button>
+                  </button> */}
                 </div>
-                {
-                  <button
-                    className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
-                    onClick={() => onSelectMeal(meal)}
-                  >
-                    Change Dish
-                  </button>
-                }
+                <button
+                  className=" bg-[#528540] text-xs  text-white px-3 py-1 rounded-md hover:bg-[#F17528] flex-shrink-0 "
+                  onClick={() => onSelectMeal(meal)}
+                >
+                  Select Dish
+                </button>
+
                 {/* {meal.id == mealInUse.id && (
                   <button className="bg-gray-400"> In use </button>
                 )} */}
