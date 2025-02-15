@@ -84,19 +84,19 @@ const LandingPage = () => {
       </div>
 
       {/* mobile and tablet screens */}
-      <div className="block  lg:hidden">
+      <div className="block lg:hidden">
         <img
           src={heroImage}
           className="  sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover md:hidden lg:hidden"
         ></img>
         <img
           src={tabletHeroImage}
-          className=" hidden md:block sm:size-15  md:w-full md:h-45 sm:bg-cover  md:bg-cover "
+          className=" hidden md:block   md:w-full md:h-45 sm:bg-cover  md:bg-cover "
         ></img>
-        <div className=" relative">
+        <div className=" relative  ">
           <img
             src={background}
-            className="  sm:bg-cover md: lg:hidden"
+            className="  sm:bg-cover md: lg:hidden" 
           ></img>
           <div className="absolute  inset-0 md:gap-y-6 flex flex-col  sm:bottom-20  items-center justify-center  lg:hidden">
             <p className="md:block sm:block  sm:text-4xl  text-[#f17528] text-4xl  sm:text-m md:text-6xl px-5  sm:px-8   md:px-10 sm:mt-[60px]  text-center   sm:font-poppins sm:text-center   font-bold sm:font-semibold sm:mx-3 lg:hidden text-shadow-white ">

@@ -79,36 +79,32 @@ const ChangeDishPopup = ({
                   alt={meal.name}
                   className="w-24 h-24 rounded-lg"
                 />
-                <div className="ml-4 flex-grow">
-                  <div className="flex gap-4">
+
+                <div className="ml-4 flex flex-col w-full sm:flex-row sm:items-center sm:justify-between">
+                  <div>
                     <h3 className="text-md sm:text-lg font-semibold">
                       {meal.name}
                     </h3>
-                    <p className="text-sm font-bold text-green-700">
-                      {meal.caloriesPerServing}
+                    <p className="text-sm text-gray-600">
+                      {Array.isArray(meal.ingredients)
+                        ? meal.ingredients.slice(0, 2).join(", ")
+                        : meal.ingredients
+                            .split(", ")
+                            .slice(0, 2)
+                            .join(", ")}{" "}
+                      <button >...</button>
                     </p>
                   </div>
-                  <p className="text-sm text-gray-600 line-clamp-1">
-                    {meal.ingredients}
-                  </p>
-                  <button
-                    className="text-xs sm:text-sm text-[#528540] mb-1 flex justify-start"
-                    onClick={() => setIsMoreInfoOpen(true)}
-                  >
-                    Read More
-                  </button>
+
+                  <div>
+                    <button
+                      className="mt-2  w-20  sm:mt-0 bg-[#528540] text-xs sm:text-sm text-white px-1 py-1 rounded-md hover:bg-[#39582C]"
+                      onClick={() => onSelectMeal(meal)}
+                    >
+                      Change Dish
+                    </button>
+                  </div>
                 </div>
-                {
-                  <button
-                    className="ml-auto bg-[#528540] text-xs sm:text-sm  text-white px-3 py-1 rounded-md hover:bg-[#39582C]"
-                    onClick={() => onSelectMeal(meal)}
-                  >
-                    Change Dish
-                  </button>
-                }
-                {/* {meal.id == mealInUse.id && (
-                  <button className="bg-gray-400"> In use </button>
-                )} */}
               </div>
             );
           })}
