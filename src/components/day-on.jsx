@@ -55,7 +55,7 @@ const DayOnCard = ({
 
   return (
     <div
-      className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
+      className={`relative bg-[#fffbf1] shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
         isDayOff ? "bg-[#f4f4f4] border-[#d3d3d3]" : "border-[#528540]"
       }`}
     >
