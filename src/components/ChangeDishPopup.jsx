@@ -44,8 +44,13 @@ const ChangeDishPopup = ({
   mealInUse,
   allMeals,
   usedIndices,
+  remainingMeals,
+  mealsInUse,
 }) => {
-  console.log("mealInUse", mealInUse);
+  // console.log("mealInUse", mealInUse);
+
+  console.log("MEALS IN USE FROM POPUP COMPONENT: ", mealsInUse);
+  console.log("MEALS REMAINING / NOT USED FROM POPUP: ", remainingMeals);
 
   return (
     <div

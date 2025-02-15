@@ -21,19 +21,19 @@ const DayOffCard = ({
   allMeals,
   usedIndices,
   index,
+  remainingMeals,
+  mealsInUse,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
   const placeholderImage = placeholderImages[index % placeholderImages.length];
 
-  console.log("All meals", allMeals);
-
+  // console.log("All meals", allMeals);
 
   const handleSelectMeal = (selectedMeal) => {
-    console.log("Selected Meal:", selectedMeal); 
+    console.log("Selected Meal:", selectedMeal);
     toggleDayType(day, selectedMeal);
     setShowPopup(false);
   };
-
 
   const clickHandler = (e) => {
     setChangeDish(true);
@@ -70,6 +70,8 @@ const DayOffCard = ({
           allMeals={allMeals}
           onSelectMeal={handleSelectMeal}
           meal={meal}
+          remainingMeals={remainingMeals}
+          mealsInUse={mealsInUse}
         />
       )}
     </div>

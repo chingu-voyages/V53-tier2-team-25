@@ -4,6 +4,7 @@ import DayOffCard from "../components/day-off.jsx";
 import filteredRecipes from "../mealsFilter";
 import MealSelectionPopup from "../components/mealSelectionPopup.jsx";
 import { useReactToPrint } from "react-to-print";
+import { use } from "react";
 
 const defaultDays = [
   { day: "Monday", type: "on" },
@@ -49,15 +50,21 @@ const DishSelect = ({ backStep }) => {
     });
   };
 
+  // **************UPDATE MEAL FOR DAY FUNCTION FOR POPUP
+  // *******************************************************
   const updateMealForDay = (day, newMeal) => {
     setDaysData((prev) =>
       prev.map((item) =>
         item.day === day && item.type === "on"
-          ? { ...item, meal: newMeal }
+          ? { ...item, mealForDate: newMeal }
           : item
       )
     );
   };
+
+  // NEED TO SEE IF I CAN UPDATE THE USED MEALS TO INCLUDE THE NEW MEAL PASSED IN ABOVE
+
+  // ********************************************************
 
   useEffect(() => {
     const updatedDays = defaultDays.map(({ day, type }) => {
@@ -72,46 +79,127 @@ const DishSelect = ({ backStep }) => {
   const allergies = JSON.parse(sessionStorage.getItem("allergies"));
   const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
 
-  useEffect(() => {
-    const fetchSelectedRecipes = async () => {
-      try {
-        setLoading(true);
-        const selectedRecipes = await filteredRecipes(allergies);
-        console.log("Fetched Recipes:", selectedRecipes); // Debugging
-        setMeals(selectedRecipes); // Set fetched meals to state
+  // ************ START CHANGES FROM HERE **********
 
-        if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
-          console.log("No recipes available");
-          setLoading(false);
-          return;
-        }
+  function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 
-        setDaysData((prev) => {
-          let randomIndex = Math.floor(Math.random() * selectedRecipes.length);
-          return prev.map((eachDayData) => {
-            if (eachDayData.type === "on") {
-              while (usedIndices.includes(randomIndex)) {
-                randomIndex = Math.floor(
-                  Math.random() * selectedRecipes.length
-                );
-              }
-              usedIndices.push(randomIndex);
-              return {
-                ...eachDayData,
-                meal: selectedRecipes[randomIndex],
-              };
-            }
-            return eachDayData;
-          });
-        });
+  const fetchSelectedRecipes = async () => {
+    try {
+      setLoading(true);
+      const selectedRecipes = await filteredRecipes(allergies);
+      // shuffle the selected recipes:
+      setMeals(shuffleArray(selectedRecipes));
+      if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
+        console.log("No recipes available");
         setLoading(false);
-      } catch (error) {
-        setError("Failed to fetch recipes");
-        setLoading(false);
+        return;
       }
-    };
+      setLoading(false);
+    } catch (error) {
+      setError("Failed to fetch recipes");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchSelectedRecipes();
   }, []);
+
+  const [mealsInUse, setMealsInUse] = useState([]);
+  const [idsInUse, setIdsInUse] = useState([]);
+  const [remainingMeals, setRemainingMeals] = useState([]);
+
+  function getNeededMeals() {
+    let counter = 0;
+    let dishLimit = numberOfDishes;
+    let mealsToAdd = [];
+    let mealIdsToAdd = [];
+    while (counter < dishLimit) {
+      mealsToAdd.push(meals[counter]);
+      mealIdsToAdd.push(meals[counter].id);
+      counter++;
+    }
+    if (counter >= dishLimit) {
+      setMealsInUse(mealsToAdd);
+      setIdsInUse(mealIdsToAdd);
+    }
+  }
+
+  function updateRemainingMeals() {
+    let counter = numberOfDishes;
+    let maxDishLimit = meals.length;
+    let leftovers = [];
+
+    while (counter < maxDishLimit) {
+      leftovers.push(meals[counter]);
+      counter++;
+    }
+    if (counter >= maxDishLimit) {
+      setRemainingMeals(leftovers);
+    }
+  }
+
+  useEffect(() => {
+    if (meals.length !== 0) {
+      getNeededMeals();
+    } else {
+      return;
+    }
+  }, [meals]);
+
+  useEffect(() => {
+    updateRemainingMeals();
+  }, [mealsInUse]);
+
+  useEffect(() => {
+    console.log("all incoming meals filtered and shuffled: ", meals);
+    // console.log("number of dishes needed for days on: ", numberOfDishes);
+    console.log("meals in use: ", mealsInUse);
+    console.log("remaining available meals: ", remainingMeals);
+  }, [remainingMeals]);
+
+  // *********************************************
+  // USE MEALS AND REMAINING AND UPDATE DAYS DATA
+  // *********************************************
+
+  // function updateDaysData() {
+  //   setDaysData((prev) => prev.map(day => {
+
+  //   }))
+  // }
+
+  // try to pass one meal
+  // change days on to all true bc i dont know how it was updated
+
+  function updateDaysDataWithMeal() {
+    let i = 0;
+
+    setDaysData((prev) =>
+      prev.map((date) => {
+        let mealForDate = mealsInUse[i];
+        i++;
+        return {
+          ...date,
+          mealForDate: mealForDate,
+        };
+      })
+    );
+  }
+
+  useEffect(() => {
+    updateDaysDataWithMeal();
+  }, [mealsInUse]);
+
+  // useEffect(() => {
+  //   console.log("days data: ", daysData);
+  // }, [daysData]);
+
+  // ***********************************************
+  // ***********************************************
+  // ***********************************************
+  // ***********************************************
 
   const contentRef = useRef(null);
   const reactToPrintFunction = useReactToPrint({ contentRef });
@@ -138,7 +226,7 @@ const DishSelect = ({ backStep }) => {
         <div className="flex flex-wrap gap-7 justify-center items-stretch">
           {Array.isArray(daysData)
             ? daysData.map((eachDay, index) => {
-                const { day, type, meal } = eachDay;
+                const { day, type, meal, mealForDate } = eachDay;
                 return type === "on" ? (
                   <DayOnCard
                     key={day}
@@ -151,6 +239,9 @@ const DishSelect = ({ backStep }) => {
                     onClose={() => toggleDayType(day)}
                     toggleDayType={toggleDayType}
                     usedIndices={usedIndices}
+                    mealForDate={mealForDate}
+                    remainingMeals={remainingMeals}
+                    mealsInUse={mealsInUse}
                   />
                 ) : (
                   <DayOffCard
@@ -161,30 +252,32 @@ const DishSelect = ({ backStep }) => {
                     index={index}
                     usedIndices={usedIndices}
                     meal={meal}
+                    remainingMeals={remainingMeals}
+                    mealsInUse={mealsInUse}
                   />
                 );
               })
             : []}
         </div>
-      <div>
-        <div className="mt-4 flex justify-center">
-          <button
-            className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
-            onClick={() => reactToPrintFunction()}
-          >
-            Download Menu
-          </button>
-        </div>
+        <div>
+          <div className="mt-4 flex justify-center">
+            <button
+              className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
+              onClick={() => reactToPrintFunction()}
+            >
+              Download Menu
+            </button>
+          </div>
 
-        <div className="text-center m-7">
-          <a
-            className="underline raleway-font text-sm cursor-pointer"
-            onClick={backStep}
-          >
-            Back to Allergies
-          </a>
+          <div className="text-center m-7">
+            <a
+              className="underline raleway-font text-sm cursor-pointer"
+              onClick={backStep}
+            >
+              Back to Allergies
+            </a>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
