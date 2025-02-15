@@ -11,8 +11,8 @@ const defaultDays = [
   { day: "Wednesday", type: "on" },
   { day: "Thursday", type: "on" },
   { day: "Friday", type: "on" },
-  { day: "Saturday", type: "off" },
-  { day: "Sunday", type: "off" },
+  { day: "Saturday", type: "on" },
+  { day: "Sunday", type: "on" },
 ];
 
 const DishSelect = ({ backStep }) => {
