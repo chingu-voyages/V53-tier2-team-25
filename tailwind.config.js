@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-const plugin = require('tailwindcss/plugin'); 
+const plugin = require("tailwindcss/plugin");
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -66,15 +65,15 @@ export default {
   },
   plugins: [require("tailwindcss-textshadow")],
   plugins: [
-    require('tailwindcss-textshadow'),
-    plugin(function({ addComponents, theme }) {
+    require("tailwindcss-textshadow"),
+    plugin(function ({ addComponents, theme }) {
       addComponents({
-        '.card-style_tw-config': {
-          height: '231px',
-          width: '200px',
-          border: `1px solid ${theme('colors.greenDark')}`,
-          listStyleType: 'none',
-          borderRadius: theme('borderRadius.custom'),
+        ".card-style_tw-config": {
+          height: "231px",
+          width: "200px",
+          border: `1px solid ${theme("colors.greenDark")}`,
+          listStyleType: "none",
+          borderRadius: theme("borderRadius.custom"),
         },
       });
     }),
@@ -86,15 +85,3 @@ export default {
     xl: "1280px", // Large desktops start here
   },
 };
-=======
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [ "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
->>>>>>> cceefc8 (feat: added some extra packages like tailwind.css font awesome. Started setting up routes and the progress has been set up)
