@@ -5,7 +5,7 @@ import filteredRecipes from "../mealsFilter";
 import MealSelectionPopup from "../components/mealSelectionPopup.jsx";
 import { useReactToPrint } from "react-to-print";
 
-const defaultDays = [
+const daysOfWeek = [
   { day: "Monday", type: "on" },
   { day: "Tuesday", type: "on" },
   { day: "Wednesday", type: "on" },
@@ -16,17 +16,44 @@ const defaultDays = [
 ];
 
 const DishSelect = ({ backStep }) => {
-  const [daysData, setDaysData] = useState(defaultDays);
+  const [activeDays, setActiveDays] = useState([]);
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
-  const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-  let usedIndices = [];
+  const [usedIndices, setUsedIndices] = useState([]);
+
+  useEffect(() => {
+    const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
+    const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
+
+    if (storedDaysOn.length === 0 && storedDaysOff.length === 0) {
+      setActiveDays(daysOfWeek);
+
+      localStorage.removeItem("daysOn");
+      localStorage.removeItem("daysOff");
+
+      localStorage.setItem("daysOn", JSON.stringify(daysOfWeek));
+      localStorage.setItem("daysOff", JSON.stringify([]));
+    } else {
+      const updatedDays = daysOfWeek.map(({ day }) => {
+        const storedDayOn = storedDaysOn.find((d) => d.day === day);
+        const storedDayOff = storedDaysOff.find((d) => d.day === day);
+
+        if (storedDayOn) {
+          return { ...storedDayOn, type: "on" };
+        } else if (storedDayOff) {
+          return { ...storedDayOff, type: "off" };
+        } else {
+          return { day, type: "on" };
+        }
+      });
+      setActiveDays(updatedDays);
+    }
+  }, []);
 
   const toggleDayType = (day, meal = null) => {
-    setDaysData((prev) => {
+    setActiveDays((prev) => {
       const updatedDays = prev.map((item) =>
         item.day === day
           ? {
@@ -37,20 +64,12 @@ const DishSelect = ({ backStep }) => {
           : item
       );
 
-      localStorage.setItem(
-        "daysOn",
-        JSON.stringify(updatedDays.filter((d) => d.type === "on"))
-      );
-      localStorage.setItem(
-        "daysOff",
-        JSON.stringify(updatedDays.filter((d) => d.type === "off"))
-      );
       return updatedDays;
     });
   };
 
   const updateMealForDay = (day, newMeal) => {
-    setDaysData((prev) =>
+    setActiveDays((prev) =>
       prev.map((item) =>
         item.day === day && item.type === "on"
           ? { ...item, meal: newMeal }
@@ -60,131 +79,124 @@ const DishSelect = ({ backStep }) => {
   };
 
   useEffect(() => {
-    const updatedDays = defaultDays.map(({ day, type }) => {
-      const isOn = storedDaysOn.some((d) => d.day === day);
-      const isOff = storedDaysOff.some((d) => d.day === day);
-      return { day, type: isOn ? "on" : isOff ? "off" : type };
-    });
-
-    setDaysData(updatedDays);
-  }, []);
-
-  const allergies = JSON.parse(sessionStorage.getItem("allergies"));
-  const numberOfDishes = JSON.parse(localStorage.getItem("daysOn")).length;
-
-  useEffect(() => {
     const fetchSelectedRecipes = async () => {
       try {
         setLoading(true);
+        const allergies = JSON.parse(sessionStorage.getItem("allergies")) || [];
         const selectedRecipes = await filteredRecipes(allergies);
-        console.log("Fetched Recipes:", selectedRecipes); // Debugging
-        setMeals(selectedRecipes); // Set fetched meals to state
 
         if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
-          console.log("No recipes available");
+          setError("No recipes available");
           setLoading(false);
           return;
         }
 
-        setDaysData((prev) => {
-          let randomIndex = Math.floor(Math.random() * selectedRecipes.length);
-          return prev.map((eachDayData) => {
-            if (eachDayData.type === "on") {
-              while (usedIndices.includes(randomIndex)) {
+        setMeals(selectedRecipes);
+
+        setActiveDays((prev) => {
+          const newUsedIndices = [];
+          const updatedDays = prev.map((dayData) => {
+            if (dayData.type === "on" && !dayData.meal) {
+              let randomIndex;
+              do {
                 randomIndex = Math.floor(
                   Math.random() * selectedRecipes.length
                 );
-              }
-              usedIndices.push(randomIndex);
+              } while (newUsedIndices.includes(randomIndex));
+
+              newUsedIndices.push(randomIndex);
               return {
-                ...eachDayData,
+                ...dayData,
                 meal: selectedRecipes[randomIndex],
               };
             }
-            return eachDayData;
+            return dayData;
           });
+
+          setUsedIndices(newUsedIndices);
+          return updatedDays;
         });
+
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch recipes");
         setLoading(false);
       }
     };
+
     fetchSelectedRecipes();
   }, []);
 
   const contentRef = useRef(null);
   const reactToPrintFunction = useReactToPrint({ contentRef });
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-      <div className=" p-6 mb-5 flex justify-center w-full font-bold">
+      <div className="p-6 mb-5 flex justify-center w-full font-bold">
         <h1 className="font-[600] text-[24px] snap-center text-center leading-[30px] mt-10">
           Change or remove dishes based on your preferences
         </h1>
       </div>
+
       <style type="text/css" media="print">
-        {
-          "\
-  @page { size: landscape; }\
-"
-        }
+        {"@page { size: landscape; }"}
       </style>
 
       <div
         ref={contentRef}
         className="flex flex-wrap gap-7 justify-center items-stretch"
       >
-        <div className="flex flex-wrap gap-7 justify-center items-stretch">
-          {Array.isArray(daysData)
-            ? daysData.map((eachDay, index) => {
-                const { day, type, meal } = eachDay;
-                return type === "on" ? (
-                  <DayOnCard
-                    key={day}
-                    day={day}
-                    meal={meal}
-                    allMeals={meals}
-                    index={index}
-                    onClick={() => setSelectedDay(day)}
-                    updateMealForDay={updateMealForDay}
-                    onClose={() => toggleDayType(day)}
-                    toggleDayType={toggleDayType}
-                    usedIndices={usedIndices}
-                  />
-                ) : (
-                  <DayOffCard
-                    key={day}
-                    day={day}
-                    toggleDayType={toggleDayType}
-                    allMeals={meals}
-                    index={index}
-                    usedIndices={usedIndices}
-                    meal={meal}
-                  />
-                );
-              })
-            : []}
-        </div>
-      <div>
-        <div className="mt-4 flex justify-center">
-          <button
-            className="bg-textOrange border text-black font-semibold p-2   raleway-font rounded-custom px-20"
-            onClick={() => reactToPrintFunction()}
-          >
-            Download Menu
-          </button>
-        </div>
-
-        <div className="text-center m-7">
-          <a
-            className="underline raleway-font text-sm cursor-pointer"
-            onClick={backStep}
-          >
-            Back to Allergies
-          </a>
-        </div>
+        {activeDays.map((eachDay, index) => {
+          const { day, type, meal } = eachDay;
+          return type === "on" ? (
+            <DayOnCard
+              key={day}
+              day={day}
+              meal={meal}
+              allMeals={meals}
+              index={index}
+              onClick={() => setSelectedDay(day)}
+              updateMealForDay={updateMealForDay}
+              onClose={() => toggleDayType(day)}
+              toggleDayType={toggleDayType}
+              usedIndices={usedIndices}
+            />
+          ) : (
+            <DayOffCard
+              key={day}
+              day={day}
+              toggleDayType={toggleDayType}
+              allMeals={meals}
+              index={index}
+              usedIndices={usedIndices}
+              meal={meal}
+            />
+          );
+        })}
       </div>
+
+      <div className="mt-4 flex flex-col items-center gap-4">
+        <button
+          className="bg-textOrange border text-black font-semibold p-2 raleway-font rounded-custom px-20"
+          onClick={reactToPrintFunction}
+        >
+          Download Menu
+        </button>
+
+        <a
+          className="underline raleway-font text-sm cursor-pointer"
+          onClick={backStep}
+        >
+          Back to Allergies
+        </a>
       </div>
     </div>
   );
