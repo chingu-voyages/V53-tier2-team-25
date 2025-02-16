@@ -64,7 +64,7 @@ const ChangeDishPopup = ({
       </style>
       <div className="relative bg-[#FFFBF1] rounded-lg p-6 w-[90%] sm:w-[70%] lg:w-[60%] max-h-[80%] overflow-y-auto shadow-lg hide-scrollbar">
         <button
-          className="absolute top-2 right-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-400 border hover:bg-gray-900  flex items-center justify-center"
+          className="absolute top-2 right-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 border hover:bg-gray-400  flex items-center justify-center"
           onClick={onClose}
         >
           <FontAwesomeIcon icon={faTimes} className="w-5 h-5 text-[#fffbf1]" />

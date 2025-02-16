@@ -41,7 +41,7 @@ export default function MoreInfoModal({
                 <div className="flex">
                   <div className="p-2 text-2xl w-full text-center">{day}</div>
                   <button
-                    className="w-8 h-8 rounded-full bg-gray-400 border hover:bg-gray-900 flex items-center justify-center"
+                    className="w-8 h-8 rounded-full bg-gray-300 border hover:bg-gray-400 flex items-center justify-center"
                     onClick={() => setIsMoreInfoOpen(false)}
                   >
                     <FontAwesomeIcon
