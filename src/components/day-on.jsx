@@ -55,13 +55,13 @@ const DayOnCard = ({
 
   return (
     <div
-      className={`relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
+      className={`relative bg-[#fffbf1] shadow-lg rounded-lg overflow-hidden flex flex-col w-[160px] sm:w-[265px] h-[250px] sm:h-[360px] border-2 ${
         isDayOff ? "bg-[#f4f4f4] border-[#d3d3d3]" : "border-[#528540]"
       }`}
     >
       <button
         onClick={handleDayOff}
-        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-300 border hover:text-red-500 hover:border-red-500"
+        className="absolute top-2 right-2 sm:right-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-400 border hover:bg-gray-900   "
       >
         <FontAwesomeIcon
           icon={faTimes}
@@ -86,10 +86,12 @@ const DayOnCard = ({
 
       <div className="bg-[#fffbf1] p-2 sm:p-4 flex flex-col">
         <div className="flex justify-between">
-          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1">{name}</h4>
+          <h4 className="text-xs sm:text-lg font-bold mb-1 sm:mb-1 line-clamp-1">
+            {name}
+          </h4>
         </div>
 
-        <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden">
+        <p className="text-xs sm:text-sm text-gray-700  h-[18px] sm:h-[25px] overflow-hidden truncate">
           {(Array.isArray(ingredients) && ingredients.slice(0, 2).join(", ")) ||
             "No Ingredients"}
         </p>
