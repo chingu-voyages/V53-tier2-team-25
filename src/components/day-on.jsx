@@ -22,7 +22,6 @@ const DayOnCard = ({
   onClose,
   meal,
   allMeals,
-  usedIndices,
   updateMealForDay,
   mealForDate,
   remainingMeals,
@@ -58,7 +57,7 @@ const DayOnCard = ({
 
   const clickHandler = (e) => {
     setChangeDish(true);
-    console.log(mealForDate)
+    console.log(mealForDate);
   };
 
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);

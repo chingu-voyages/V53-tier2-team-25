@@ -24,7 +24,7 @@ const DishSelect = ({ backStep }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const storedDaysOn = JSON.parse(localStorage.getItem("daysOn")) || [];
   const storedDaysOff = JSON.parse(localStorage.getItem("daysOff")) || [];
-  let usedIndices = [];
+
 
   const toggleDayType = (day, meal = null) => {
     setDaysData((prev) => {
@@ -53,12 +53,16 @@ const DishSelect = ({ backStep }) => {
   // **************UPDATE MEAL FOR DAY FUNCTION FOR POPUP
   // *******************************************************
   const updateMealForDay = (day, newMeal) => {
+    console.log("day, newmeal", day, newMeal);
     setDaysData((prev) =>
-      prev.map((item) =>
-        item.day === day && item.type === "on"
+      prev.map((item) => {
+        console.log("days data EACH", item);
+        console.log("day matching?", item.day === day);
+        console.log("RETURN VALUE", { ...item, mealForDate: newMeal });
+        return item.day === day && item.type === "on"
           ? { ...item, mealForDate: newMeal }
-          : item
-      )
+          : item;
+      })
     );
   };
 
@@ -176,16 +180,19 @@ const DishSelect = ({ backStep }) => {
   function updateDaysDataWithMeal() {
     let i = 0;
 
-    setDaysData((prev) =>
-      prev.map((date) => {
+    setDaysData((prev) => {
+      console.log("prev DAYS DATA", prev);
+      const newDaysData = prev.map((date) => {
         let mealForDate = mealsInUse[i];
         i++;
         return {
           ...date,
           mealForDate: mealForDate,
         };
-      })
-    );
+      });
+      console.log("newDaysData", newDaysData);
+      return newDaysData;
+    });
   }
 
   useEffect(() => {
@@ -227,6 +234,7 @@ const DishSelect = ({ backStep }) => {
           {Array.isArray(daysData)
             ? daysData.map((eachDay, index) => {
                 const { day, type, meal, mealForDate } = eachDay;
+                console.log("EACH DAY DATA IS IT WRONG ??", eachDay);
                 return type === "on" ? (
                   <DayOnCard
                     key={day}
@@ -238,7 +246,6 @@ const DishSelect = ({ backStep }) => {
                     updateMealForDay={updateMealForDay}
                     onClose={() => toggleDayType(day)}
                     toggleDayType={toggleDayType}
-                    usedIndices={usedIndices}
                     mealForDate={mealForDate}
                     remainingMeals={remainingMeals}
                     mealsInUse={mealsInUse}
@@ -251,7 +258,6 @@ const DishSelect = ({ backStep }) => {
                     toggleDayType={toggleDayType}
                     allMeals={meals}
                     index={index}
-                    usedIndices={usedIndices}
                     meal={meal}
                     remainingMeals={remainingMeals}
                     mealsInUse={mealsInUse}

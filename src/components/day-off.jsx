@@ -19,7 +19,6 @@ const DayOffCard = ({
   toggleDayType,
   meal,
   allMeals,
-  usedIndices,
   index,
   remainingMeals,
   mealsInUse,
