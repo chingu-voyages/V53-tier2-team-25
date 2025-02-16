@@ -117,7 +117,7 @@ const DishSelect = ({ backStep }) => {
   const reactToPrintFunction = useReactToPrint({ contentRef });
 
   return (
-    <div>
+    <div className="2xl:max-w-[1400px]  2xl:mx-auto">
       <div className=" p-6 mb-5 flex justify-center w-full font-bold">
         <h1 className="font-[600] text-[24px] snap-center text-center leading-[30px] mt-10">
           Change or remove dishes based on your preferences
