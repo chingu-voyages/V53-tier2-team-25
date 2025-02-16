@@ -1,5 +1,6 @@
-# Welcome to Plate Pal
 ![Platepal-Readme-Img](./src/assets/images/TabletHeroImage.png)
+
+# Welcome to Plate Pal
 This project focuses on developing a menu scheduling application that allows managers to create and share weekly menus for staff workers. The application ensures employees have clear visibility of the planned meals while addressing specific dietary restrictions and allergies.
 
 ## User Features
@@ -47,14 +48,15 @@ Currently, two official plugins are available:
 - Lindsay Allen: [GitHub](https://github.com/lkallen) / [LinkedIn](https://www.linkedin.com/in/lindsay-allen-54b46937/)
 
 ### Special Thanks 
+
 **Designer**
-- Brianna Bierod: [LinkedIn](https://www.linkedin.com/in/brebierod-uxdesign/)
+- Brianna Bierod
 
 **Product Owner**
-- Viral Barot: [LinkedIn](linkedin.com/in/viral-barot-mba)
+- Viral Barot
 
 **Scrum Master**
-- Christel: [LinkedIn](https://linkedin.com/in/accountname)
+- Christel
 
 **Voyage Guide**
-- Andres Benitez: [LinkedIn](https://linkedin.com/alcb1310)
+- Andres Benitez

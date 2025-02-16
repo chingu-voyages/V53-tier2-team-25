@@ -212,12 +212,12 @@ const CalendarPage = ({ nextStep }) => {
     const daysOn = selectedWeek
       .filter((date) => !daysOff.some((dayOff) => isSameDay(dayOff, date)))
       .map((date) => ({
-        dayOfWeek: formatDateWithDay(date).split(",")[0],
+        day: formatDateWithDay(date).split(",")[0],
         date: date.toLocaleDateString(),
       }));
 
     const daysOffFormatted = daysOff.map((date) => ({
-      dayOfWeek: formatDateWithDay(date).split(",")[0],
+      day: formatDateWithDay(date).split(",")[0],
       date: date.toLocaleDateString(),
     }));
 
