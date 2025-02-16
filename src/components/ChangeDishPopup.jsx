@@ -148,10 +148,22 @@ const ChangeDishPopup = ({
                       onSelectMeal(meal);
 
                       setMealsInUse((prev) => {
-                        const found = prev.find(
-                          (item) => item.id == mealForDate.id
+                        let trackIndex;
+                        const found = prev.find((item, index) => {
+                          trackIndex = index;
+                          return item.id == mealForDate.id;
+                        });
+                        console.log("old meal", found);
+                        console.log(" new meal", meal.id);
+                        const filterOutOldMeal = prev.filter(
+                          (item) => item.id !== found.id
                         );
-                        console.log("FOUND", found);
+                        console.log("filterOutOldMeal", filterOutOldMeal);
+                        console.log("new return value", [
+                          ...prev,
+                          (prev[trackIndex] = meal),
+                        ]);
+                        return [...prev, (prev[trackIndex] = meal)];
                       });
                     }}
                   >
