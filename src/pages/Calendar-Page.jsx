@@ -25,7 +25,7 @@ const CalendarPage = ({ nextStep }) => {
     if (isMobile) {
       const timer = setTimeout(() => {
         setIsTouchDisabled(false);
-      }, 1000); 
+      }, 600); 
 
       return () => clearTimeout(timer); 
     }
