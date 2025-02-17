@@ -9,6 +9,7 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 const CalendarPage = ({ nextStep }) => {
   const [selectedWeek, setSelectedWeek] = useState([]);
+  const [isTouchDisabled, setIsTouchDisabled] = useState(true); 
   const [daysOff, setDaysOff] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +18,19 @@ const CalendarPage = ({ nextStep }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [showCustomInput, setShowCustomInput] = useState(false);
+  const isMobile = window.innerWidth < 768;
+
+
+  useEffect(() => {
+    if (isMobile) {
+      const timer = setTimeout(() => {
+        setIsTouchDisabled(false);
+      }, 1000); 
+
+      return () => clearTimeout(timer); 
+    }
+  }, [isMobile]);
+
 
   useEffect(() => {
     const today = new Date();
@@ -32,6 +46,9 @@ const CalendarPage = ({ nextStep }) => {
       date1.getDate() === date2.getDate()
     );
   };
+
+  
+  
 
   const isCurrentDay = (date) => {
     const today = new Date();
@@ -75,17 +92,66 @@ const CalendarPage = ({ nextStep }) => {
     return range;
   };
 
+  const getNextMonday = (date) => {
+    const day = date.getDay();
+    const daysUntilNextMonday = day === 0 ? 1 : 8 - day; 
+    const nextMonday = new Date(date);
+    nextMonday.setDate(date.getDate() + daysUntilNextMonday);
+    return nextMonday;
+  };
+  
+  const getWeekRangeFromMonday = (monday) => {
+    const range = [];
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(monday);
+      day.setDate(monday.getDate() + i);
+      range.push(new Date(day));
+    }
+    return range;
+  };
+
+  const isBetweenTodayAndNextMonday = (day) => {
+    const today = new Date(); 
+    const nextMonday = getNextMonday(today);
+    
+    nextMonday.setHours(0, 0, 0, 0);  // Start of next Monday
+
+  
+    if (day > today && day < nextMonday) {
+      setRefreshKey((prevKey) => prevKey + 1);
+      setMessage("Selected week must be a future week ");
+      setIsModalOpen(true);
+      return true;
+    }
+  
+    return false;
+  };
+  
+   
+
+
   const handleDayClick = (date) => {
     const weekRange = getWeekRange(date);
     const today = new Date();
-    const startOfCurrentWeek = getNextMonday(today) ;
+    const startOfCurrentWeek = getStartOfWeek(today);
 
-    if (date < startOfCurrentWeek) {
+    if (isBetweenTodayAndNextMonday(date)) {
+      return;
+    }
+  
+    if ( date < today) {
       setRefreshKey((prevKey) => prevKey + 1);
       setMessage("Days from the past week are not available for selection.");
       setIsModalOpen(true);
       return;
     }
+
+    if (date > today && date < startOfCurrentWeek) {
+      setMessage(" Dates between today and the start of the current week.");
+      setIsModalOpen(true);
+      return;
+    }
+  
     if (selectedWeek.length === 0) {
       setSelectedWeek(weekRange);
     } else {
@@ -98,6 +164,7 @@ const CalendarPage = ({ nextStep }) => {
     }
   };
 
+  
   const toggleDayOff = (date) => {
     if (selectedWeek.some((selectedDate) => isSameDay(selectedDate, date))) {
       setDaysOff((prevDaysOff) => {
@@ -178,24 +245,6 @@ const CalendarPage = ({ nextStep }) => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
   
-  const getNextMonday = (date) => {
-    const day = date.getDay();
-    const daysUntilNextMonday = day === 0 ? 1 : 8 - day; 
-    const nextMonday = new Date(date);
-    nextMonday.setDate(date.getDate() + daysUntilNextMonday);
-    return nextMonday;
-  };
-  
-  const getWeekRangeFromMonday = (monday) => {
-    const range = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(monday);
-      day.setDate(monday.getDate() + i);
-      range.push(new Date(day));
-    }
-    return range;
-  };
-
 
 
   const handleContinue = () => {
@@ -341,6 +390,7 @@ const CalendarPage = ({ nextStep }) => {
       </div>
 
       <div className="relative flex justify-center items-center mt-6">
+      <div className={`calendar-container ${isTouchDisabled ? 'disabled' : ''}`}>
         <Calendar
           key={refreshKey}
           onClickDay={handleDayClick}
@@ -365,6 +415,7 @@ const CalendarPage = ({ nextStep }) => {
             return className.trim();
           }}
         />
+        </div>
 
         <div className="absolute bottom-2">
           <FontAwesomeIcon

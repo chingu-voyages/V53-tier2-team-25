@@ -183,7 +183,7 @@ const DishSelect = ({ backStep }) => {
         })}
       </div>
 
-      <div className="mt-4 flex flex-col items-center gap-4">
+      <div className="mt-10 flex flex-col items-center gap-4">
         <button
           className="bg-textOrange border text-black font-semibold p-2 raleway-font rounded-custom px-20"
           onClick={reactToPrintFunction}
