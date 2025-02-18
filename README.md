@@ -56,7 +56,7 @@ Currently, two official plugins are available:
 
 **Scrum Master**
 - Christel Carmen
-- Nile Pamphile
+- [Nile Pamphile](https://www.linkedin.com/in/nile-p-734406150/)
 
 **Voyage Guide**
 - Andres Benitez
