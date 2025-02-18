@@ -92,3 +92,12 @@
   background-color: #528540 !important; 
   color: white !important;
 }
+
+
+
+@media (max-width: 768px) {
+  .calendar-container.disabled {
+    pointer-events: none; 
+    opacity: 0.5; 
+  }
+}
