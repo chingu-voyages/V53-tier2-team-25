@@ -18,7 +18,6 @@ const daysOfWeek = [
 const DishSelect = ({ backStep }) => {
   const [activeDays, setActiveDays] = useState([]);
   const [meals, setMeals] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [usedIndices, setUsedIndices] = useState([]);
@@ -81,13 +80,11 @@ const DishSelect = ({ backStep }) => {
   useEffect(() => {
     const fetchSelectedRecipes = async () => {
       try {
-        setLoading(true);
         const allergies = JSON.parse(sessionStorage.getItem("allergies")) || [];
         const selectedRecipes = await filteredRecipes(allergies);
 
         if (!Array.isArray(selectedRecipes) || selectedRecipes.length === 0) {
           setError("No recipes available");
-          setLoading(false);
           return;
         }
 
@@ -116,11 +113,8 @@ const DishSelect = ({ backStep }) => {
           setUsedIndices(newUsedIndices);
           return updatedDays;
         });
-
-        setLoading(false);
       } catch (error) {
         setError("Failed to fetch recipes");
-        setLoading(false);
       }
     };
 
@@ -130,12 +124,15 @@ const DishSelect = ({ backStep }) => {
   const contentRef = useRef(null);
   const reactToPrintFunction = useReactToPrint({ contentRef });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-red-500 text-center">
+          <p className="text-lg font-semibold">Oops! Something went wrong</p>
+          <p className="text-sm mt-2">{error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
