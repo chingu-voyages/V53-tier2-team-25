@@ -52,10 +52,11 @@ Currently, two official plugins are available:
 - [Breanna Bierod](https://www.linkedin.com/in/brebierod-uxdesign/) 
 
 **Product Owner**
-- Viral Barot
+- [Viral Barot](https://www.linkedin.com/in/viral-barot-mba/)
 
 **Scrum Master**
-- Christel
+- Christel Carmen
+- Nile Pamphile
 
 **Voyage Guide**
 - Andres Benitez
