@@ -37,7 +37,6 @@ Currently, two official plugins are available:
 
 ## Our Team
 **Developers**
-- Deborah Lyra: [GitHub](https://github.com/DeborahLyra) / [LinkedIn](https://www.linkedin.com/in/deborah-prado-lyra-developer/)
 
 - Zephyrus Koryami(Sokuen Ryan) [GitHub](https://github.com/sokuenryan) / [LinkedIn](https://www.linkedin.com/in/sokuenryan/)
 
@@ -50,7 +49,7 @@ Currently, two official plugins are available:
 ### Special Thanks 
 
 **Designer**
-- Brianna Bierod
+- [Breanna Bierod](https://www.linkedin.com/in/brebierod-uxdesign/) 
 
 **Product Owner**
 - Viral Barot
